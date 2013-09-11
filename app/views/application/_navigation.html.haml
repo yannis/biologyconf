@@ -1,0 +1,21 @@
+%nav#nav{role: 'navigation'}
+  .l-wrapper
+    %ul#nav-main.l-all
+      %li#nav-search
+        %form#search{method: "get", action: "/#{I18n.locale}/search", role: 'search'}
+          = text_field_tag "q", '', {type: 'search', placeholder: t('navigation.search')}
+      - for nav in ["home", "research", "education", "headlines", "contact", "more"]
+        - controllers_and_actions.each do |key,value|
+          - if nav == value[:main_menu][:item_name]
+            %li
+              - text = "<span>#{value[:main_menu][:text]}</span><em>#{value[:main_menu][:sub_text]}</em>".html_safe
+              = link_to text, value[:main_menu][:path], accesskey: (value[:main_menu][:accesskey] ? value[:main_menu][:accesskey] : ''), title: value[:main_menu][:sub_text].gsub("<span class='amp'>&amp;</span>", '&'), id: "nav-#{nav}"
+      %li#nav-lang
+        - if session[:locale] == 'en'
+          = link_to_unless session[:locale] == 'fr', 'français' , {locale: 'fr'}, id: 'lang'
+        - else
+          = link_to_unless session[:locale] == 'en', 'english', {locale: 'en'}, id: 'lang'
+    %ul#nav-units.l-all
+      - cache [I18n.locale, 'nav-units'] do
+        = render partial: 'units/navigation_unit', collection: @nav_units
+  = link_to "<i class='icon-align-justify'></i><i class='icon-remove'></i><span>Menu</span>".html_safe, '#', id: 'nav-icon'

@@ -1,0 +1,91 @@
+- cache [I18n.locale, 'footer'] do
+  %footer#footer.group.m-wrapper.s-wrapper{:role => 'footer contentinfo'}
+    .l-wrapper
+      %section#footer-contact.m1.m1-padin.s1-padin
+        %h2#footer-contact-header= t "contact.address.title"
+        #footer-contact-content
+          #footer-address.vcard.group
+            %i.footer-icon.icon-pushpin
+            .footer-content
+              %span.fn.org
+                =raw t "contact.address.fn_org"
+                %br
+                = t "contact.address.university"
+              %br
+              %span.adr
+                %span.street-address Boulevard d’Yvoy 4
+                %br
+                %span.region{title: t("contact.address.adr.region.title")} CH
+                %span.postal-code 1205
+                %span.locality= t("contact.address.adr.locality")
+                %br
+                %span.country-name= t("contact.address.adr.country")
+          #footer-geo.group
+            %i.footer-icon.icon-globe
+            %span.geo.footer-content
+              / = t( "contact.address.geo.title")+':'
+              %span.latitude 46.198277
+              ;
+              %span.longitude 6.132919
+              %br
+              = t( "contact.address.geo.degrees")
+          #footer-maps.group
+            %i.footer-icon.icon-map-marker
+            %span.content.footer-content
+              = link_to t("contact.address.more_maps").html_safe, "/#{I18n.locale}/contact_and_directions"
+          #footer-phone.group
+            %i.footer-icon.icon-phone
+            %span.footer-content.tel +41 22 379 67 70
+          #footer-fax.group
+            %i.footer-icon.icon-print
+            %span.tel.footer-content
+              %span.type Fax
+              +41 22 379 67 70
+          #footer-email.group
+            %i.footer-icon.icon-envelope-alt
+            %span.footer-content.email
+              = mail_to(User.find_by_permalink('Corinne-Matthey').email, t('contact.address.email'), :encode => 'hex', :title => "email our office")
+          #footer-twitter.group
+            %i.footer-icon.icon-twitter
+            %span.footer-content.twitter
+              = link_to t( "contact.social.title"), "https://twitter.com/genevunige"
+          #footer-newsletter.group
+            %i.footer-icon.icon-envelope
+            .footer-content
+              = t "contact.newsletter.content"
+              = form_tag "http://kendo-geneve.us6.list-manage.com/subscribe/post" do
+                = hidden_field_tag :u, "4f7b9e68d3ac82a66a0fbd2d3"
+                = hidden_field_tag :id, "14a971faef"
+                / = label_tag 'EMAIL', t("contact..newsletter.placeholder")
+                .field.inline
+                  = email_field_tag 'EMAIL', nil, :required => true, :placeholder => t('contact..newsletter.placeholder')
+                  = button_tag t('contact..newsletter.button'), class: 'btn btn-primary'
+
+      %section#footer-links.m2.m2-pad.s1-padin
+        %h2#footer-links-header= t "footer.more-links.title"
+        %ul
+          %li
+            = link_to t('footer.contact_and_directions.text').html_safe, "/#{I18n.locale}/contact_and_directions", :title => t('footer.contact_and_directions.title')
+          %li
+            = link_to t('footer.directory.text').html_safe, users_path, :title => t('footer.directory.title')
+          %li
+            = link_to t('footer.more-links.historic.text'), "/#{I18n.locale}/history", :title => t('footer.more-links.historic.title')
+          %li
+            = link_to t('footer.services.text').html_safe, "/#{I18n.locale}/services", :title => t('footer.services.title')
+          %li
+            = link_to "Cycle de conférences “Débouchés en biologie”", "/#{I18n.locale}/seminars/debouches-en-biologie", :title => "Cycle de conférences “Débouchés en biologie”"
+          / %li
+          /   = link_to t('headlines.index.title')+" (#{t('footer.feed')})", headlines_url(:format => :rss), :title => t('headlines.index.title')+" (#{t('footer.feed')})"
+          / %li
+          /   = link_to t('footer.seminar_feed')+" (#{t('footer.feed')})", "http://bioseminars.unige.ch/seminars.rss?categories=2+13&internal=false&scope=future", :title => t('footer.seminar_feed')+" (#{t('footer.feed')})"
+          %li
+            = link_to "bioSeminars", "http://bioseminars.unige.ch", :title => t('footer.bioseminars.title')
+          - unless Job.active.blank?
+            %li
+              = link_to t('footer.jobs.text2', jobs_count: @jobs_count), jobs_path, :title => t('footer.jobs.title')
+          %li
+            = link_to t('footer.acknowledgements').html_safe, "/#{I18n.locale}/acknowledgements", :title => t('footer.acknowledgements')
+          %li
+            = link_to t('footer.internal').html_safe, "/#{I18n.locale}/internal-calendars", :title => t('footer.internal')
+          %li
+            = link_to "Guidelines for authors", "/#{I18n.locale}/guidelines_for_authors", title: "Guidelines for authors"

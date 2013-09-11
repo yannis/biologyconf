@@ -1,0 +1,153 @@
+.jumbotron
+  .container
+    %h1 biology14
+    %p the Swiss conference on organism biology
+    %p
+      %em
+        13th & 14th February 2014, Geneva, Switzeland
+    %p
+      = link_to "Register", "#register", class: "btn btn-primary btn-lg"
+#conference
+  .container
+    %header
+      %h2 Welcome
+    %p
+      Welcome to the website of the biology14 conference! The "biology" is the yearly joint congress of the Swiss Zoological Society, the Swiss Botanical Society, and the Swiss Systematics Society.
+    %p
+      One expected output of the meeting is to demonstrate the enthusiasm of researchers in Switzerland and neighboring countries for research activities in fields as divers as evolutionary biology, systematics, biodiversity, ecology, evo-devo, and many more…
+    %p
+      The conference provides opportunity for young scientists from Swiss Universities and Research Institutions to present their work in organismal biology.
+    %p
+      However, people from foreign universities or laymen are welcome to attend the conference too! A wide variety of different topics related to organismal biology will be covered, and there will be talks by invited speakers.
+    %p
+      We are looking forward to welcoming you in Geneva,
+      %br
+      %em The organizing committee
+
+#program
+  .container
+    %header
+      %h2 Program
+    %p
+      The biology14 conference starts Thursday morning (13 February) with registration and reception. Talks and poster presentations are scheduled from Thursday morning until Friday afternoon, with the conference dinner (“Darwin Dinner”) taking place on Thursday evening.
+    %p
+      The Darwin Dinner will take place in …………………………. in honor of Charles Darwin. An invited international speaker will enrich this evening with an entertaining talk and there will be ample opportunity for discussions, also with our invited keynote speakers.
+    %p
+      The night then continues in downtown Geneva.
+    %p
+      = link_to "/pdf_program", class: "btn btn-default btn-lg" do
+        %span.glyphicon.glyphicon-download
+        Download a PDF version of the program.
+
+    .row
+      - @grouped_events.each do |date, events|
+        .col-md-6
+          %table.table.table-striped
+            %thead
+              %tr
+                %td{colspan: 2}
+                  %h2
+                    = date.to_s(:day_month_year)
+            %tbody
+              - for event in events
+                %tr{class: event.table_classes}
+                  %th
+                    = event.start.to_s(:time_only)
+                    –
+                    = event.end.to_s(:time_only)
+                  %td
+                    = event.title
+
+
+  .container
+    %header
+      %h3 Keynote speakers
+#venue
+  .container
+    %header
+      %h2 Venue & Travel
+#registration
+  .container
+    %header
+      %h2 Registration
+    #registration-form
+      = form_for "registration", role: 'form', class: 'form-horizontal' do |f|
+        .row
+          .col-md-6
+            %fieldset.registration-form-details
+              %legend
+                Your details
+              .form-group
+                .row
+                  = f.label :first_name, class: "col-md-3 control-label"
+                  .col-md-9
+                    = f.text_field :first_name, class: "form-control", placeholder: "Enter first name"
+              .form-group
+                .row
+                  = f.label 'last_name', class: "col-md-3 control-label"
+                  .col-md-9
+                    = f.text_field 'last_name', class: "form-control", placeholder: "Enter last name"
+              .form-group
+                .row
+                  = f.label 'email', class: "col-md-3 control-label"
+                  .col-md-9
+                    = f.text_field 'email', class: "form-control", placeholder: "Enter email"
+          .col-md-6
+            %fieldset.registration-form-affiliation
+              %legend
+                Affiliation
+              .form-group
+                .row
+                  = f.label 'institute', class: "col-md-3 control-label"
+                  .col-md-9
+                    = f.text_field 'institute', class: "form-control", placeholder: "Enter yout institute name"
+              .form-group
+                .row
+                  = f.label 'address', class: "col-md-3 control-label"
+                  .col-md-9
+                    = f.text_field 'address', class: "form-control", placeholder: "Enter your institute street name and number"
+              .form-group
+                .row
+                  = f.label 'postal_code', class: "col-md-3 control-label"
+                  .col-md-9
+                    = f.text_field 'postal_code', class: "form-control", placeholder: "Enter your institute postal code"
+              .form-group
+                .row
+                  = f.label 'country', class: "col-md-3 control-label"
+                  .col-md-9
+                    = f.country_select "country"
+
+        = f.fields_for @abstract do |af|
+
+          %fieldset.registration-form-abstract
+            %legend Abstract
+            .form-group.row
+              = af.label 'talk', "Do you apply for a talk?", class: "col-md-3 control-label"
+              .col-md-9
+                = af.check_box 'talk', class: "form-control"
+            .form-group.row
+              = af.label 'title', class: "col-md-3 control-label"
+              .col-md-9
+                = af.text_field 'title', class: "form-control", placeholder: "Enter the title of your abstract"
+            .form-group.row
+              = af.label 'authors', class: "col-md-3 control-label"
+              .col-md-9
+                = af.text_area 'authors', class: "form-control", placeholder: "Enter the list of authors"
+            .form-group.row
+              = af.label 'body', class: "col-md-3 control-label"
+              .col-md-9
+                = af.text_area 'body', class: "form-control", placeholder: "Enter the body text of your abstract"
+        = f.submit "Send your registration",  class: "btn btn-primary"
+        .help-block
+          You're going to be redirected to a secured web page for payment
+
+#pace14
+  .container
+    %header
+      %h2 Pace14
+    %p
+      Swiss conservation biologists and restoration ecologists are pleased to invite you to the fourth edition of PACE, the yearly Swiss symposium on Plant and Animal Conservation Ecology, that will take place on Wednesday 12 February 2014, i.e. just before biology14. The major topic of this year meeting is “…………………………”. This one day symposium offers young scientists from Swiss universities and high technical schools the opportunity to present work in applied organismal ecology that bears specific relevance for biodiversity conservation.
+    %p
+      Further information under this link: PACE14
+    %p
+      Organizing committee: University of Geneva and the Swiss chapter of the Europe Section of the Society for Conservation Biology

@@ -1,0 +1,21 @@
+.navbar.navbar-inverse.navbar-fixed-top
+  .navbar-inner
+    .container
+      %button.btn.btn-navbar{type: 'button', data: {toggle: 'collapse', target: 'nav-collapse'}}
+        - 4.times do
+          %span.icon-bar
+      .nav-collapse
+        %ul.nav
+          - for nav in ["home", "research", "education", "headlines", "about_us", "more"]
+            - controllers_and_actions.each do |key,value|
+              - if nav == value[:main_menu][:item_name]
+                %li{class: "#{(value[:highlight_in_controller] && value[:highlight_in_controller].include?(request.path_parameters[:controller])) || (value[:highlight_in_path] && value[:highlight_in_path] == request.fullpath)  ? 'selected' : ''}"}
+                  - text = "<span>#{value[:main_menu][:text]}</span>".html_safe
+                  / - text = "<span>#{value[:main_menu][:text]}</span><em>#{value[:main_menu][:sub_text]}</em>".html_safe
+                  = link_to text, value[:main_menu][:path], id: "link_to_#{value[:main_menu][:text]}", accesskey: (value[:main_menu][:accesskey] ? value[:main_menu][:accesskey] : ''), title: value[:main_menu][:sub_text].gsub("<span class='amp'>&amp;</span>", '&'), id: value[:main_menu][:id]
+
+          %li#nav-lang
+            - if session[:locale] == 'en'
+              = link_to_unless session[:locale] == 'fr', 'français' , {locale: 'fr'}, id: 'lang'
+            - else
+              = link_to_unless session[:locale] == 'en', 'english', {locale: 'en'}, id: 'lang'

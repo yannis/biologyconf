@@ -1,0 +1,8 @@
+%header#header.s-wrapper
+  #logo{class: "logo-#{I18n.locale}"}
+    = link_to "gen/<span>ev</span>".html_safe, root_path
+  #title_and_breadcrumbs.m-wrapper.l-wrapper
+    #breadcrumbs.l-all= render_crumbs
+    %h1#title.l-all
+      =raw t 'layout.title'
+      %em=raw t 'layout.title_em'.html_safe

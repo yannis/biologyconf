@@ -79,17 +79,10 @@ Biology14::Application.configure do
   config.log_formatter = ::Logger::Formatter.new
 
 
+  config.action_mailer.default_url_options = { :host => 'stagingapp2.unige.ch' }
   config.action_mailer.raise_delivery_errors = false
   config.action_mailer.default :charset => "utf-8"
   config.action_mailer.perform_deliveries = true
   config.action_mailer.delivery_method = :smtp # or  or test  :sendmail :smtp
-  config.action_mailer.smtp_settings = {
-    :address => "mail.unige.ch",
-    :port => 25,
-    :domain => "mail.unige.ch"
-  }
-
-  # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
-  config.action_mailer.default_url_options = { :host => 'stagingapp2.unige.ch' }
 end

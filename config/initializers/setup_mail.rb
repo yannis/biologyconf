@@ -1,5 +1,3 @@
-# require 'development_mail_interceptor'
-
 ActionMailer::Base.delivery_method = :smtp
 ActionMailer::Base.smtp_settings = {
   :address => "outlook.unige.ch",
@@ -9,5 +7,3 @@ ActionMailer::Base.smtp_settings = {
   :password => 'bwxdc7',
   :authentication => :login
 }
-
-# ActionMailer::Base.register_interceptor(DevelopmentMailInterceptor) if Rails.env.development?

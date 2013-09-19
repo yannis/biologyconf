@@ -1,54 +1,57 @@
 
 - @title = "biology14 - the Swiss conference on organism biology"; title(@title)
-.jumbotron
-  .container
-    %h1 biology14
-    %p the Swiss conference on organism biology
-    %p
-      %em
-        13th & 14th February 2014, Geneva, Switzeland
-    %p
-      = link_to "Register", "#registration", class: "btn btn-primary btn-lg", data: {target: '#registration'}
-#conference
-  .container
-    %header
-      %h2 Welcome
-    %p
-      Welcome to the website of the biology14 conference! The "biology" is the yearly joint congress of the Swiss Zoological Society, the Swiss Botanical Society, and the Swiss Systematics Society.
-    %p
-      One expected output of the meeting is to demonstrate the enthusiasm of researchers in Switzerland and neighboring countries for research activities in fields as divers as evolutionary biology, systematics, biodiversity, ecology, evo-devo, and many more…
-    %p
-      The conference provides opportunity for young scientists from Swiss Universities and Research Institutions to present their work in organismal biology.
-    %p
-      However, people from foreign universities or laymen are welcome to attend the conference too! A wide variety of different topics related to organismal biology will be covered, and there will be talks by invited speakers.
-    %p
-      We are looking forward to welcoming you in Geneva,
-      %br
-      %em The organizing committee
-#program
-  .container
-    %header
-      %h2 Program
-    %p
-      The biology14 conference starts Thursday morning (13 February) with registration and reception. Talks and poster presentations are scheduled from Thursday morning until Friday afternoon, with the conference dinner (“Darwin Dinner”) taking place on Thursday evening.
-    %p
-      The Darwin Dinner will take place in …………………………. in honor of Charles Darwin. An invited international speaker will enrich this evening with an entertaining talk and there will be ample opportunity for discussions, also with our invited keynote speakers.
-    %p
-      The night then continues in downtown Geneva.
-    %p
-      = link_to "/pdf_program", class: "btn btn-default btn-lg" do
-        %span.glyphicon.glyphicon-download
-        Download the program as PDF
-    .row
-      = render 'events/program', events: @grouped_events
+- cache "home-header" do
+  .jumbotron
+    .container
+      %h1 biology14
+      %p the Swiss conference on organism biology
+      %p
+        %em
+          13th & 14th February 2014, Geneva, Switzeland
+      %p
+        = link_to "Register", "#registration", class: "btn btn-primary btn-lg", data: {target: '#registration'}
+  #conference
+    .container
+      %header
+        %h2 Welcome
+      %p
+        Welcome to the website of the biology14 conference! The "biology" is the yearly joint congress of the Swiss Zoological Society, the Swiss Botanical Society, and the Swiss Systematics Society.
+      %p
+        One expected output of the meeting is to demonstrate the enthusiasm of researchers in Switzerland and neighboring countries for research activities in fields as divers as evolutionary biology, systematics, biodiversity, ecology, evo-devo, and many more…
+      %p
+        The conference provides opportunity for young scientists from Swiss Universities and Research Institutions to present their work in organismal biology.
+      %p
+        However, people from foreign universities or laymen are welcome to attend the conference too! A wide variety of different topics related to organismal biology will be covered, and there will be talks by invited speakers.
+      %p
+        We are looking forward to welcoming you in Geneva,
+        %br
+        %em The organizing committee
+- cache "home-program" do
+  #program
+    .container
+      %header
+        %h2 Program
+      %p
+        The biology14 conference starts Thursday morning (13 February) with registration and reception. Talks and poster presentations are scheduled from Thursday morning until Friday afternoon, with the conference dinner (“Darwin Dinner”) taking place on Thursday evening.
+      %p
+        The Darwin Dinner will take place in …………………………. in honor of Charles Darwin. An invited international speaker will enrich this evening with an entertaining talk and there will be ample opportunity for discussions, also with our invited keynote speakers.
+      %p
+        The night then continues in downtown Geneva.
+      %p
+        = link_to "/pdf_program", class: "btn btn-default btn-lg" do
+          %span.glyphicon.glyphicon-download
+          Download the program as PDF
+      .row
+        = render 'events/program', events: @grouped_events
 
-  .container
-    %header
-      %h3 Keynote speakers
-#venue
-  .container
-    %header
-      %h2 Venue & Travel
+    .container
+      %header
+        %h3 Keynote speakers
+- cache "home-venue" do
+  #venue
+    .container
+      %header
+        %h2 Venue & Travel
 #registration
   .container
     %header
@@ -142,14 +145,14 @@
         = f.submit "Send your registration",  class: "btn btn-primary"
         .help-block
           You're going to be redirected to a secured web page for payment
-
-#pace14
-  .container
-    %header
-      %h2 Pace14
-    %p
-      Swiss conservation biologists and restoration ecologists are pleased to invite you to the fourth edition of PACE, the yearly Swiss symposium on Plant and Animal Conservation Ecology, that will take place on Wednesday 12 February 2014, i.e. just before biology14. The major topic of this year meeting is “…………………………”. This one day symposium offers young scientists from Swiss universities and high technical schools the opportunity to present work in applied organismal ecology that bears specific relevance for biodiversity conservation.
-    %p
-      Further information under this link: PACE14
-    %p
-      Organizing committee: University of Geneva and the Swiss chapter of the Europe Section of the Society for Conservation Biology
+- cache "home-pace14" do
+  #pace14
+    .container
+      %header
+        %h2 Pace14
+      %p
+        Swiss conservation biologists and restoration ecologists are pleased to invite you to the fourth edition of PACE, the yearly Swiss symposium on Plant and Animal Conservation Ecology, that will take place on Wednesday 12 February 2014, i.e. just before biology14. The major topic of this year meeting is “…………………………”. This one day symposium offers young scientists from Swiss universities and high technical schools the opportunity to present work in applied organismal ecology that bears specific relevance for biodiversity conservation.
+      %p
+        Further information under this link: PACE14
+      %p
+        Organizing committee: University of Geneva and the Swiss chapter of the Europe Section of the Society for Conservation Biology

@@ -10,6 +10,7 @@ Biology14::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   root 'home#show'
+  match '*path' => 'home#show', via: :all
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

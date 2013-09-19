@@ -5,8 +5,9 @@ class CreateRegistrations < ActiveRecord::Migration
       t.string :last_name
       t.string :email
       t.string :institute
-      t.text :address
-      t.string :postal_code
+      t.string :address
+      t.string :city
+      t.string :zip_code
       t.string :country
 
       t.timestamps

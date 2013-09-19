@@ -65,6 +65,7 @@ group :test do
   gem "factory_girl_rails"
   gem "selenium-webdriver"
   gem 'shoulda-matchers'
+  gem "faker"
   gem 'capybara-screenshot'# , :require => false
   gem 'simplecov', :require => false
 end

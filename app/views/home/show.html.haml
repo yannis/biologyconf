@@ -1,3 +1,5 @@
+
+- @title = "biology14 - the Swiss conference on organism biology"; title(@title)
 .jumbotron
   .container
     %h1 biology14
@@ -6,7 +8,7 @@
       %em
         13th & 14th February 2014, Geneva, Switzeland
     %p
-      = link_to "Register", "#register", class: "btn btn-primary btn-lg"
+      = link_to "Register", "#registration", class: "btn btn-primary btn-lg", data: {target: '#registration'}
 #conference
   .container
     %header
@@ -23,7 +25,6 @@
       We are looking forward to welcoming you in Geneva,
       %br
       %em The organizing committee
-
 #program
   .container
     %header
@@ -37,27 +38,9 @@
     %p
       = link_to "/pdf_program", class: "btn btn-default btn-lg" do
         %span.glyphicon.glyphicon-download
-        Download a PDF version of the program.
-
+        Download the program as PDF
     .row
-      - @grouped_events.each do |date, events|
-        .col-md-6
-          %table.table.table-striped
-            %thead
-              %tr
-                %td{colspan: 2}
-                  %h2
-                    = date.to_s(:day_month_year)
-            %tbody
-              - for event in events
-                %tr{class: event.table_classes}
-                  %th
-                    = event.start.to_s(:time_only)
-                    –
-                    = event.end.to_s(:time_only)
-                  %td
-                    = event.title
-
+      = render 'events/program', events: @grouped_events
 
   .container
     %header
@@ -71,72 +54,91 @@
     %header
       %h2 Registration
     #registration-form
-      = form_for "registration", role: 'form', class: 'form-horizontal' do |f|
+      = form_for @registration, url: registrations_path(anchor: "registration"), role: 'form', class: 'form-horizontal' do |f|
+        = render 'layouts/error_messages', target: @registration
         .row
           .col-md-6
             %fieldset.registration-form-details
               %legend
                 Your details
-              .form-group
+              = f.form_group :first_name do
                 .row
-                  = f.label :first_name, class: "col-md-3 control-label"
+                  = f.starred_label :first_name, nil, class: "col-md-3 control-label #{"has-error" if f.object.errors[:first_name].present?}"
                   .col-md-9
                     = f.text_field :first_name, class: "form-control", placeholder: "Enter first name"
-              .form-group
+                    = f.error_text :first_name
+              = f.form_group :last_name do
                 .row
-                  = f.label 'last_name', class: "col-md-3 control-label"
+                  = f.starred_label :last_name, nil, class: "col-md-3 control-label"
                   .col-md-9
-                    = f.text_field 'last_name', class: "form-control", placeholder: "Enter last name"
-              .form-group
+                    = f.text_field :last_name, class: "form-control", placeholder: "Enter last name"
+                    = f.error_text :last_name
+              = f.form_group :email do
                 .row
-                  = f.label 'email', class: "col-md-3 control-label"
+                  = f.starred_label :email, nil, class: "col-md-3 control-label"
                   .col-md-9
-                    = f.text_field 'email', class: "form-control", placeholder: "Enter email"
+                    = f.email_field :email, class: "form-control", placeholder: "Enter email"
+                    = f.error_text :email
           .col-md-6
             %fieldset.registration-form-affiliation
               %legend
                 Affiliation
-              .form-group
+              = f.form_group :institute do
                 .row
-                  = f.label 'institute', class: "col-md-3 control-label"
+                  = f.starred_label :institute, nil, class: "col-md-3 control-label"
                   .col-md-9
-                    = f.text_field 'institute', class: "form-control", placeholder: "Enter yout institute name"
-              .form-group
+                    = f.text_field :institute, class: "form-control", placeholder: "Enter your institute name"
+                    = f.error_text :institute
+              = f.form_group :address do
                 .row
-                  = f.label 'address', class: "col-md-3 control-label"
+                  = f.starred_label :address, nil, class: "col-md-3 control-label"
                   .col-md-9
-                    = f.text_field 'address', class: "form-control", placeholder: "Enter your institute street name and number"
-              .form-group
+                    = f.text_field :address, class: "form-control", placeholder: "Enter your institute street name and number"
+                    = f.error_text :address
+              = f.form_group :zip_code do
                 .row
-                  = f.label 'postal_code', class: "col-md-3 control-label"
+                  = f.starred_label :zip_code, nil, class: "col-md-3 control-label"
                   .col-md-9
-                    = f.text_field 'postal_code', class: "form-control", placeholder: "Enter your institute postal code"
-              .form-group
+                    = f.text_field :zip_code, class: "form-control", placeholder: "Enter your institute zip code"
+                    = f.error_text :zip_code
+              = f.form_group :city do
                 .row
-                  = f.label 'country', class: "col-md-3 control-label"
+                  = f.starred_label :city, nil, class: "col-md-3 control-label"
                   .col-md-9
-                    = f.country_select "country"
+                    = f.text_field :city, class: "form-control", placeholder: "Enter your institute city"
+                    = f.error_text :city
+              = f.form_group :country do
+                .row
+                  = f.starred_label :country, nil, class: "col-md-3 control-label"
+                  .col-md-9
+                    = f.country_select :country
+                    = f.error_text :country
 
-        = f.fields_for @abstract do |af|
-
-          %fieldset.registration-form-abstract
-            %legend Abstract
-            .form-group.row
-              = af.label 'talk', "Do you apply for a talk?", class: "col-md-3 control-label"
-              .col-md-9
-                = af.check_box 'talk', class: "form-control"
-            .form-group.row
-              = af.label 'title', class: "col-md-3 control-label"
-              .col-md-9
-                = af.text_field 'title', class: "form-control", placeholder: "Enter the title of your abstract"
-            .form-group.row
-              = af.label 'authors', class: "col-md-3 control-label"
-              .col-md-9
-                = af.text_area 'authors', class: "form-control", placeholder: "Enter the list of authors"
-            .form-group.row
-              = af.label 'body', class: "col-md-3 control-label"
-              .col-md-9
-                = af.text_area 'body', class: "form-control", placeholder: "Enter the body text of your abstract"
+        = f.fields_for :abstract, f.object.abstract do |af|
+          %fieldset.registration-form-abstract{data: {disabled: af.object.disabled.to_s}}
+            %legend
+              Abstract
+            .registration-form-abstract-collapse.collapsible
+              = af.form_group :talk, class: 'row' do
+                = af.starred_label :talk, "Do you apply for a talk?", class: "col-md-3 control-label"
+                .col-md-9
+                  = af.check_box :talk, class: "form-control"
+                  = af.error_text :talk
+              = af.form_group :title, class: 'row' do
+                = af.starred_label :title, nil, class: "col-md-3 control-label"
+                .col-md-9
+                  = af.text_field :title, class: "form-control", placeholder: "Enter the title of your abstract"
+                  = af.error_text :title
+              = af.form_group :authors, class: 'row' do
+                = af.starred_label :authors, nil, class: "col-md-3 control-label"
+                .col-md-9
+                  = af.text_area :authors, class: "form-control", placeholder: "Enter the list of authors"
+                  = af.error_text :authors
+              = af.form_group :body, class: 'row' do
+                = af.starred_label :body, nil, class: "col-md-3 control-label"
+                .col-md-9
+                  = af.text_area :body, class: "form-control", placeholder: "Enter the body text of your abstract"
+                  = af.error_text :body
         = f.submit "Send your registration",  class: "btn btn-primary"
         .help-block
           You're going to be redirected to a secured web page for payment

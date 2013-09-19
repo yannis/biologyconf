@@ -1,11 +1,11 @@
-RAILS_ROOT = "/Users/yannis/railsapps/genev2/current"
+RAILS_ROOT = "/Users/yannis/railsapps/biology14_staging/current"
 
 God.watch do |w|
-  pid_file = File.join(RAILS_ROOT, "tmp/pids/genev2_unicorn.pid")
+  pid_file = File.join(RAILS_ROOT, "tmp/pids/biology14_staging_unicorn.pid")
 
-  w.name = "genev2_unicorn"
+  w.name = "biology14_staging_unicorn"
   w.interval = 60.seconds
-  w.start = "cd #{RAILS_ROOT} && bundle exec unicorn -c #{RAILS_ROOT}/config/unicorn.rb -E production -D"
+  w.start = "cd #{RAILS_ROOT} && bundle exec unicorn -c #{RAILS_ROOT}/config/unicorn_staging.rb -E staging -D"
   w.stop = "kill -s QUIT $(cat #{pid_file})"
   w.restart = "kill -s HUP $(cat #{pid_file})"
   w.start_grace = 20.seconds

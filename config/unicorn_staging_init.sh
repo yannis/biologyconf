@@ -5,9 +5,9 @@ set -e
 
 # Feel free to change any of the following variables for your app:
 TIMEOUT=${TIMEOUT-60}
-APP_ROOT=/Users/yannis/railsapps/genev2
-PID=$APP_ROOT/tmp/pids/genev2_unicorn.pid
-CMD="$APP_ROOT/bin/unicorn -D -c $APP_ROOT/config/unicorn.rb"
+APP_ROOT=/Users/yannis/railsapps/biology14_staging
+PID=$APP_ROOT/tmp/pids/biology14_staging_unicorn.pid
+CMD="$APP_ROOT/bin/unicorn -D -c $APP_ROOT/config/unicorn_staging.rb"
 # INIT_CONF=$APP_ROOT/config/init.conf
 action="$1"
 set -u

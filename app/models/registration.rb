@@ -1,4 +1,7 @@
 class Registration < ActiveRecord::Base
+
+  CATEGORY = {}
+
   has_one :abstract, :dependent => :destroy
   # validates :first_name, presence: {message: 'kjhskdfkdfhdfkh'}
   validates_presence_of :first_name, :last_name, :email, :institute, :address, :zip_code, :city, :country

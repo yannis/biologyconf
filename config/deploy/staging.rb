@@ -20,5 +20,3 @@ namespace :deploy do
     start
   end
 end
-
-

@@ -9,7 +9,7 @@ require "bundler/capistrano"
 set :domain,                        "129.194.57.242"
 set :scm,                           :git
 set :scm_verbose,                   true
-set :repository,                    "ssh://yannis@129.194.56.197/Users/yannis/gitrepos/genev2/.git"
+set :repository,                    "ssh://yannis@129.194.56.197/Users/yannis/gitrepos/biology14/.git"
 set :migrate_target,                :current
 set :ssh_options,                   { :forward_agent => true }
 set :normalize_asset_timestamps,    false

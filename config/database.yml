@@ -29,11 +29,28 @@ test:
   password: '2375'
   socket: /tmp/mysql.sock
 
+staging:
+  adapter: mysql2
+  encoding: utf8
+  database: biology14_staging
+  username: biology14staging
+  password: "s7T8}Mc'09.51{W_Aj32+4%-!t(6Sw"
+  host: localhost
+
+# database already created and privileges already granted
 production:
   adapter: mysql2
   encoding: utf8
   database: biology14_production
-  pool: 5
-  username: root
-  password:
-  socket: /tmp/mysql.sock
+  username: biology14prod
+  password: "u36^k(7Xr9`f>2BWt4<01~U?&5=8:z"
+  host: localhost
+
+# production:
+#   adapter: mysql2
+#   encoding: utf8
+#   database: biology14_production
+#   pool: 5
+#   username: root
+#   password:
+#   socket: /tmp/mysql.sock

@@ -31,4 +31,4 @@ end
 
 after 'deploy:update_code', 'deploy:migrate'
 after "deploy", "deploy:cleanup"
-after "deploy:cleanup", "deploy:stop_reload_start"
+# after "deploy:cleanup", "deploy:stop_reload_start"

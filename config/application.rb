@@ -21,7 +21,7 @@ module Biology14
     # config.i18n.default_locale = :de
 
 
-    config.assets.paths << "#{Rails.root}/vendor/bootstrap-3/dist"
+    config.assets.paths << "#{Rails.root}/vendor/bootstrap-3"
     config.assets.paths << "#{Rails.root}/vendor/assets"
   end
 end

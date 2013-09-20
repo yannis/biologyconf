@@ -1,5 +1,3 @@
-AdminUser.create!(:email => 'yannis.jaquet@unige.ch', :password => '12345678', :password_confirmation => '12345678')
-
 # TYPE = ['organisation', 'student presentation', 'keynote presentation', 'break']
 events = [
   {
@@ -263,6 +261,94 @@ events = [
   }
 ]
 
+speakers = [
+  {
+    first_name: "Bastiaan",
+    last_name: "Ibelings",
+    title: "Prof.",
+    description: "<p>
+      Bastiaan Ibelings is full Professor in Microbial Ecology at the Institute F.-A. Forel, Section of Earth and Environmental Sciences, University of Geneva. He’s current research interest and projects are organized into four research lines:</p>
+      <ol>
+        <li>
+          evolutionary origin of biodiversity, with projects about adaptive radiation and niche construction in Pseudomonas and co-evolution of resource competitors;
+        </li>
+        <li>
+          diversity at the population level, with investigations on fungal parasites in the phytoplankton;
+        </li>
+        <li>
+          diversity at the community level, centered on lake phytoplankton community assembly;
+        </li>
+        <li>
+          loss of biodiversity and ecosystem services, with a focus on toxic cyanobacteria, their massive proliferation and the negative consequences on ecosystem services.
+        </li>
+      </ol>",
+    url: "http://www.unige.ch/forel/Ecologie-microbienne_en.html",
+    picture: "BastiaanIbelings.jpg"
+  },
+  {
+    first_name: "Pierre-Henri",
+    last_name: "Gouyon",
+    title: "Prof.",
+    description: "<p>
+      Prof. Pierre-Henri Gouyon is full Professor in Evolution, Genetics, Ecology and Ethics (among other) at the Muséum National d’Histoire Naturelle, Paris.
+      </p>
+      <p>
+        He’s current research interest and projects include theoretical considerations about the mechanisms underlying and driving the main functions of living organisms (sex, mutation, dispersion, death, …), considering the forces that act at different levels of integration (genes, individuals, metapopulations, species) and to decipher the role of chance, selection and historical contingency in evolutionary processes. His theoretical works are greatly complemented by experimental biology on plants.
+      </p>",
+    url: "http://www.mnhn.fr/oseb/GOUYON-Pierre-Henri",
+    picture: "Pierre-HenriGouyon.jpg"
+  },
+  {
+    first_name: "Diethard",
+    last_name: "Tautz",
+    title: "Prof.",
+    description: "<p>
+      Diethard Tautz is full Professor and Director of the Department of Evolutionary Genetics, Max Planck Institute for Evolutionary Biology, Germany.
+      </p>
+      <p>
+        The research lines of his group include the identification and characterization of genes involved in adaptation processes using the house mouse (Mus musculus) as a model system. They apply a broad range of genomic techniques, but also behavioral, morphological and mapping approaches. The characterization of the identified genes includes experiments in semi-natural environments.
+      </p>",
+    url: "http://www.evolbio.mpg.de/15929/evolutionarygenetics",
+    picture: "DiethardTautz.jpg"
+  },
+  {
+    first_name: "Alexandre",
+    last_name: "Antonelli",
+    title: "Prof.",
+    description: "<p>
+      Alexandre Antonelli is associate Professor at the Department of Biological and Environmental Sciences, University of Gothenburg, Sweden.
+      </p>
+      <p>
+        He is an evolutionary biologist with practical and theoretical experience ranging from fieldwork in the tropics to molecular-based laboratory and analytical techniques. His research interests focus on the origins and evolution of tropical America’s outstanding biodiversity and he is becoming increasingly interested in evaluating how past responses to climate changes may improve the predictions of species losses under Global warming, and how this knowledge can be used for conservation.
+      </p>",
+    url: "http://www.antonelli-lab.net/people.php",
+    picture: "AlexandreAntonelli.jpg"
+  },
+  {
+    first_name: "Jonathan R.",
+    last_name: "Leake",
+    title: "Prof.",
+    description: "<p>
+      Jonathan R. Leake is full Professor at the Department of Animal and Plant Sciences, University of Sheffield, UK.
+    </p>
+    <p>
+      He is an expert in mycorrhizal fungi and plant-soil interactions. His current research lines include (i) plant-to-soil carbon fluxes; (ii) mycorrhizal fungi networks of power and influence at all scales (from nano to global scales); (iii) Myco-heterotrophy: plants parasitic on fungi (including most orchids); (iv) root adaptations as an alternative strategy to mycorrhiza; and (v) pollution impacts on plants, soil biology and chemistry, and health.
+    </p>",
+    url: "http://www.shef.ac.uk/aps/staff-and-students/acadstaff/leake",
+    picture: "JonathanRLeake.jpg"
+  }
+]
+
+AdminUser.create!(:email => 'yannis.jaquet@unige.ch', :password => '12345678', :password_confirmation => '12345678') if AdminUser.all.blank?
+
+Event.delete_all
 for event in events
   Event.create title: event[:title], start: event[:start], end: event[:end], kind: event[:kind]
+end
+
+Speaker.delete_all
+for speaker in speakers
+  portrait = File.open "#{Rails.root}/lib/speaker_pictures/#{speaker[:picture]}"
+  Speaker.create first_name: speaker[:first_name], last_name: speaker[:last_name], title: speaker[:title], description: speaker[:description], portrait: portrait, url: speaker[:url]
+  portrait.close
 end

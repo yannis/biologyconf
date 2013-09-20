@@ -7,6 +7,11 @@ ActiveAdmin.register Event do
     end
   end
 
+  filter :title
+  filter :start
+  filter :end
+  filter :kind
+
   index do
     column :title
     column :start

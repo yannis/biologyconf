@@ -5,12 +5,12 @@ require "email_spec"
 require 'capybara/rspec'
 require 'capybara/rails'
 require 'capybara-screenshot/rspec'
-# require "paperclip/matchers"
+require "paperclip/matchers"
 Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
 
 RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
-  # config.include Paperclip::Shoulda::Matchers
+  config.include Paperclip::Shoulda::Matchers
   config.include(EmailSpec::Helpers)
   config.include(EmailSpec::Matchers)
   # config.include Warden::Test::Helpers

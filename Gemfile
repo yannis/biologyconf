@@ -11,7 +11,7 @@ gem 'html5-rails'
 # gem "hpricot"
 # gem "ruby_parser"
 # gem 'icalendar'
-# gem 'paperclip'
+gem 'paperclip'
 # gem "bio", '~>1.4.3'
 # gem "calendar_date_select"
 # gem 'htmlentities'

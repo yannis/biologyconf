@@ -1,5 +1,4 @@
-
-- @title = "biology14 - the Swiss conference on organism biology"; title(@title)
+- @title = "biology14 - the Swiss conference on organismal biology"; title(@title)
 - cache "home-header" do
   .jumbotron
     .container
@@ -43,10 +42,7 @@
           Download the program as PDF
       .row
         = render 'events/program', events: @grouped_events
-
-    .container
-      %header
-        %h3 Keynote speakers
+    = render 'home/speakers', speakers: @speakers
 - cache "home-venue" do
   #venue
     .container

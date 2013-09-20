@@ -29,6 +29,6 @@ def run_rake(cmd)
   run "cd #{current_path}; #{rake} #{cmd}"
 end
 
-after 'deploy:update_code', 'deploy:migrate'
-after "deploy", "deploy:cleanup"
+after 'deploy', 'deploy:migrate'
+after "deploy:migrate", "deploy:cleanup"
 after "deploy:cleanup", "deploy:stop_reload_start"

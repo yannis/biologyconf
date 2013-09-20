@@ -9,6 +9,7 @@ describe Registration do
   it {should validate_presence_of :institute}
   it {should validate_presence_of :category}
   it {should ensure_inclusion_of(:category).in_array(Registration.categories.map(&:name))}
+  it{should accept_nested_attributes_for :abstract}
 
   it{expect(Registration.categories.count).to eq 3}
   it{expect(Registration.categories.first).to be_a Category}

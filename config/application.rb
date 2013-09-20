@@ -22,7 +22,6 @@ module Biology14
 
 
     config.assets.paths << "#{Rails.root}/vendor/bootstrap/css"
-    config.assets.paths << "#{Rails.root}/vendor/bootstrap/fonts"
     config.assets.paths << "#{Rails.root}/vendor/bootstrap/js"
     config.assets.paths << "#{Rails.root}/vendor/assets"
   end

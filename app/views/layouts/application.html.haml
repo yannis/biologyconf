@@ -2,15 +2,12 @@
 - html_tag :class => 'no-js' do
   = render 'head'
 
-  %body{ :class => "#{ controller.controller_name }" }
+  %body{class: "#{ controller.controller_name }"}
     #wrap
       = render 'chromeframe'
       = render 'navigation'
-      .container
-
-        = render 'flashes'
-
-        = yield
+      = render 'flashes'
+      = yield
     - cache "application-footer" do
       %footer#footer
         .container

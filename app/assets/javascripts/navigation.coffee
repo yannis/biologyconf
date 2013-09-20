@@ -7,6 +7,12 @@ bio14.navigation =
       console.log 'target', target
       targetPosition = $(target).position()
       $('html, body').animate({scrollTop: targetPosition.top-60}, "slow")
+    @scrollSpy()
+
+  scrollSpy: ->
+    $('body').scrollspy
+      target: "#application-navigation"
+      offset: +100
 
 
       # if $(@).data('target').length

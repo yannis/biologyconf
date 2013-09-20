@@ -4,7 +4,7 @@
   .jumbotron
     .container
       %h1 biology14
-      %p the Swiss conference on organism biology
+      %p the Swiss conference on organismal biology
       %p
         %em
           13th & 14th February 2014, Geneva, Switzeland
@@ -82,6 +82,16 @@
                   .col-md-9
                     = f.email_field :email, class: "form-control", placeholder: "Enter email"
                     = f.error_text :email
+              %fieldset.registration-fees
+                %legend Registration fees
+                = f.form_group :category do
+                  - for category in Registration.categories
+                    .radio
+                      %label
+                        = f.radio_button :category, category.name, id: "registration-category-#{category.name}"
+                        =raw "#{category.details}: <strong>#{category.fee} CHF</strong>"
+                = f.error_text :category
+
           .col-md-6
             %fieldset.registration-form-affiliation
               %legend

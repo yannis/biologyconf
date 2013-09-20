@@ -130,14 +130,14 @@ events = [
   },
   {
     title: "Darwin's Dinner",
-    start: "2014-02-13 19:00",
+    start: "2014-02-13 18:30",
     end: "2014-02-13 23:00",
     kind: "break"
   },
   {
     title: 'Conference: Prof. P.H. Gouyon',
-    start: "2014-02-13 20:00",
-    end: "2014-02-13 20:45",
+    start: "2014-02-13 21:00",
+    end: "2014-02-13 21:45",
     kind: "keynote presentation"
   },
   ######## next day

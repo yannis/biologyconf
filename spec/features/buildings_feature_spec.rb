@@ -8,7 +8,7 @@ feature 'registration form', js: true do
   before {visit root_path(anchor: 'registration')}
 
   scenario 'I interact with the form' do
-    expect(page).to have_title "biology14 - the Swiss conference on organism biology"
+    expect(page).to have_title "biology14 - the Swiss conference on organismal biology"
     expect(page).to have_selector("form#new_registration")
     within("#new_registration") do
       expect(page).to have_selector("fieldset.registration-form-abstract", count: 1)

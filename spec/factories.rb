@@ -4,6 +4,16 @@ FactoryGirl.define do
     n.to_s
   end
 
+  sequence :integer do |n|
+    n
+  end
+
+  factory :abstract do
+    title { Faker::Lorem.sentence }
+    authors { Faker::Name.name }
+    body { "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. " }
+  end
+
   factory :event do
     title { 'student presentation' }
     start { "2014-02-13 10:00"}
@@ -15,6 +25,7 @@ FactoryGirl.define do
     first_name { Faker::Name.first_name }
     last_name { Faker::Name.last_name }
     email { Faker::Internet.email }
+    category {"non_member"}
     institute {Faker::Company.name}
     address {Faker::Address.street_address}
     zip_code {Faker::Address.zip_code}
@@ -22,10 +33,10 @@ FactoryGirl.define do
     country {Faker::Address.country}
   end
 
-  factory :abstract do
-    title { Faker::Lorem.sentence }
-    authors { Faker::Name.name }
-    body { "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. " }
+  factory :category do
+    name { Faker::Company.name }
+    fee { generate :integer }
+    details { "Lorem ipsum dolor sit amet" }
   end
 
   # sequence :user_email do |n|

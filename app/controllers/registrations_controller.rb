@@ -20,6 +20,6 @@ class RegistrationsController < ApplicationController
 
   private
     def registration_params
-      params.require(:registration).permit(:first_name, :last_name, :email, :institute, :address, :city, :zip_code, :country, abstract_attributes: [:title, :authors, :body, :talk, :registration_id])
+      params.require(:registration).permit(:first_name, :last_name, :email, :category, :institute, :address, :city, :zip_code, :country, abstract_attributes: [:title, :authors, :body, :talk, :registration_id])
     end
 end

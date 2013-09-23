@@ -1,0 +1,40 @@
+- cache "application-footer" do
+  %footer#footer
+    .container
+      %p
+        If you have any questions, do not hesitate to post them to biology14@unige.ch.
+      %p
+        Please spread the word about this conference to your colleagues!
+    .container#logos
+      #logos-organizers
+        %h3 Conference organized by
+        .row
+          = link_to "http://unige.ch", id: "logos-organizers-unige", target: '_blank', class: "col-md-3 logos-logo" do
+            %span.logos-log-title
+              University of Geneva
+          = link_to "http://www.ville-ge.ch/", id: "logos-organizers-geneve", target: '_blank', class: "col-md-3 logos-logo" do
+            %span.logos-log-title
+              Ville de Genève
+          = link_to "http://www.ville-ge.ch/mhng/", id: "logos-organizers-museum", target: '_blank', class: "col-md-3 logos-logo" do
+            %span.logos-log-title
+              Muséum d'histoire naturelle de la Ville de Genève
+          = link_to "http://www.ville-ge.ch/cjb/", id: "logos-organizers-jardinbot", target: '_blank', class: "col-md-3 logos-logo" do
+            %span.logos-log-title
+              Conservatoire et Jardin botaniques de la Ville de Genève
+      #logos-sponsors
+        %h3 Supported by
+        .row
+          = link_to 'http://ssz.scnatweb.ch/', id: "logos-sponsors-szs", target: '_blank', class: "col-md-3 logos-logo" do
+            %span.logos-log-title
+              Swiss Zoological Society
+          = link_to 'http://http://www.swiss-systematics.ch/', id: "logos-sponsors-sss", target: '_blank', class: "col-md-3 logos-logo" do
+            %span.logos-log-title
+              Swiss Systematics Society
+          = link_to 'http://ige3.unige.ch', id: "logos-sponsors-ige3", target: '_blank', class: "col-md-3 logos-logo" do
+            %span.logos-log-title
+              iGE3
+          = link_to 'http://www.botanica-helvetica.ch/', id: "logos-sponsors-sbs", target: '_blank', class: "col-md-3 logos-logo" do
+            %span.logos-log-title
+              Société Botanique Suisse
+
+

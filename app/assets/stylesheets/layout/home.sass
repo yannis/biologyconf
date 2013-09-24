@@ -1,26 +1,23 @@
 @import variables
 
-#conference, #program, #speakers, #venue, #registration, #pace14, #footer
-  padding-top: 30px
-  padding-bottom: 30px
+.home-section, #footer
   background:
     repeat: no-repeat
   .content
     background:
       color: rgba(255,255,255,1)
 
-
-
+// #home-banner
 .jumbotron
-  // padding-top: 30px
-  // padding-bottom: 30px
-  background:
-    color: $lightgrey
-    image: image-url('tree_of_life.png')
-    size: contain
-    position: 70%
-    repeat: no-repeat
   margin-bottom: 0
+  background:
+    color: white
+.home-banner-carousel img
+  max-height: 400px
+  margin: auto
+.home-banner-welcome
+  margin-top: 2.6184em
+
 
 #conference
   background:
@@ -44,21 +41,21 @@
     position: bottom left
     position: left 150%
     size: 40%
-#venue
-  background:
-    color: rgba(51,204,51, 0.25  )
-    image: image-url("backgrounds/venue.svg")
-    position: top right
-    size: 40%
 #registration
   background:
     color: rgba(166,92,68, 0.25  )
     image: image-url("backgrounds/registration.svg")
     position: top right
     size: 40%
+#venue
+  background:
+    color: rgba(51,204,51, 0.25  )
+    image: image-url("backgrounds/venue.png")
+    position: bottom left
+    size: 40%
 #pace14
   background:
     color: rgba(255,102,51, 0.25  )
-    image: image-url("backgrounds/pace14.svg")
+    image: image-url("backgrounds/pace14.png")
     position: top right
-    size: 40%
+    size: 20%

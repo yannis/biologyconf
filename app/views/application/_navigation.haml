@@ -4,8 +4,8 @@
       .span.sr-only Toggle navigation
       .span.icon-bar
       .span.icon-bar
-      .span.icon-bar
-    = link_to "biology14", "#banner", class: "navbar-brand"
+      .span.icon-bar, data: {target: '#program'}
+    = link_to "biology14", "#home-banner", class: "navbar-brand", data: {target: '#home-banner'}
   .collapse.navbar-collapse.navbar-ex1-collapse
     %ul.nav.navbar-nav
       %li
@@ -13,9 +13,9 @@
       %li
         = link_to "Speakers", "#speakers", data: {target: '#speakers'}
       %li
-        = link_to "Venue", "#venue", data: {target: '#venue'}
-      %li
         = link_to "Registration", "#registration", data: {target: '#registration'}
+      %li
+        = link_to "Venue", "#venue", data: {target: '#venue'}
       %li
         = link_to "Pace14", "#pace14", data: {target: '#pace14'}
       %li

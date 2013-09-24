@@ -1,171 +1,189 @@
 - @title = "biology14 - the Swiss conference on organismal biology"; title(@title)
-- cache "home-header" do
-  %section#banner.jumbotron
-    .container
-      %h1 biology14
-      %p the Swiss conference on organismal biology
-      %p
-        %em
-          13th & 14th February 2014, Geneva, Switzeland
-      %p
-        = link_to "Register", "#registration", class: "btn btn-primary btn-lg", data: {target: '#registration'}
-  %section#conference
-    .container
-      .row
-        .col-md-9.col-md-offset-3.content
-          %h2 Welcome
-          %p.lead
-            Welcome to the website of the biology14 conference! The "biology" is the yearly joint congress of the Swiss Zoological Society, the Swiss Botanical Society, and the Swiss Systematics Society.
-          .row
-            .col-md-9.col-md-offset-3
-              %p
-                One expected output of the meeting is to demonstrate the enthusiasm of researchers in Switzerland and neighboring countries for research activities in fields as divers as evolutionary biology, systematics, biodiversity, ecology, evo-devo, and many more…
-              %p
-                The conference provides opportunity for young scientists from Swiss Universities and Research Institutions to present their work in organismal biology.
-              %p
-                However, people from foreign universities or laymen are welcome to attend the conference too! A wide variety of different topics related to organismal biology will be covered, and there will be talks by invited speakers.
-              %p
-                We are looking forward to welcoming you in Geneva,
-                %br
-                %em The organizing committee
-- cache "home-program" do
-  %section#program
-    .container
-      .row
-        .col-md-9.content
-          %h2 Program
-          %p
-            The biology14 conference starts Thursday morning (13 February) with registration and reception. Talks and poster presentations are scheduled from Thursday morning until Friday afternoon, with the conference dinner (“Darwin Dinner”) taking place on Thursday evening.
-          %p
-            The Darwin Dinner will take place in …………………………. in honor of Charles Darwin. An invited international speaker will enrich this evening with an entertaining talk and there will be ample opportunity for discussions, also with our invited keynote speakers.
-          %p
-            The night then continues in downtown Geneva.
-          %p
-            = link_to "/pdf_program", class: "btn btn-default btn-lg" do
-              %span.glyphicon.glyphicon-download
-              Download the program as PDF
-      .row
-        = render 'events/program', events: @grouped_events
-= render 'home/speakers', speakers: @speakers
-- cache "home-venue" do
-  #venue
-    .container
-      .row
-        .col-md-9.col-md-offset-3.content
-          %h2 Venue & Travel
-          %p
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-#registration
-  .container
-    %h2 Registration
-    #registration-form
-      = form_for @registration, url: registrations_path(anchor: "registration"), role: 'form', class: 'form-horizontal' do |f|
-        = render 'layouts/error_messages', target: @registration
+#home
+  - cache "home-header" do
+    %section#home-banner.jumbotron.home-section
+      .container
         .row
+          .home-banner-header.col-md-6
+            %h1 biology14
+            %h2
+              the Swiss conference on organismal biology
+            %h2
+              %em
+                13th & 14th February 2014, Geneva, Switzeland
+            %p.lead
+              The "biology" conference is the yearly joint congress of the Swiss Zoological Society, the Swiss Botanical Society, and the Swiss Systematics Society
+            = link_to "Register", "#registration", class: "btn btn-primary btn-lg pull-right home-banner-registration-link", data: {target: '#registration'}
+          .home-banner-carousel.carousel.slide.col-md-6
+            .carousel-inner
+              #carousel-item-1.item.active
+                = image_tag "carousel/full_tree.png"
+              #carousel-item-2.item
+                = image_tag "carousel/algae.png"
+              #carousel-item-4.item
+                = image_tag "carousel/foram.png"
+              #carousel-item-5.item
+                = image_tag "carousel/truc.png"
+        .row.home-banner-welcome
           .col-md-6
-            %fieldset.registration-form-details
-              %legend
-                Your details
-              = f.form_group :first_name do
-                .row
-                  = f.starred_label :first_name, nil, class: "col-md-3 control-label #{"has-error" if f.object.errors[:first_name].present?}"
-                  .col-md-9
-                    = f.text_field :first_name, class: "form-control", placeholder: "Enter first name"
-                    = f.error_text :first_name
-              = f.form_group :last_name do
-                .row
-                  = f.starred_label :last_name, nil, class: "col-md-3 control-label"
-                  .col-md-9
-                    = f.text_field :last_name, class: "form-control", placeholder: "Enter last name"
-                    = f.error_text :last_name
-              = f.form_group :email do
-                .row
-                  = f.starred_label :email, nil, class: "col-md-3 control-label"
-                  .col-md-9
-                    = f.email_field :email, class: "form-control", placeholder: "Enter email"
-                    = f.error_text :email
-              %fieldset.registration-fees
-                %legend Registration fees
-                = f.form_group :category do
-                  - for category in Registration.categories
-                    .radio
-                      %label
-                        = f.radio_button :category, category.name, id: "registration-category-#{category.name}"
-                        =raw "#{category.details}: <strong>#{category.fee} CHF</strong>"
-                = f.error_text :category
-
+            %p
+              %small
+                One expected output of the meeting is to demonstrate the enthusiasm of researchers in Switzerland and neighboring countries for research activities in fields as divers as evolutionary biology, systematics, biodiversity, ecology, evo-devo, and many more…
+            %p
+              %small
+                The conference provides opportunity for young scientists from Swiss Universities and Research Institutions to present their work in organismal biology.
           .col-md-6
-            %fieldset.registration-form-affiliation
-              %legend
-                Affiliation
-              = f.form_group :institute do
-                .row
-                  = f.starred_label :institute, nil, class: "col-md-3 control-label"
-                  .col-md-9
-                    = f.text_field :institute, class: "form-control", placeholder: "Enter your institute name"
-                    = f.error_text :institute
-              = f.form_group :address do
-                .row
-                  = f.starred_label :address, nil, class: "col-md-3 control-label"
-                  .col-md-9
-                    = f.text_field :address, class: "form-control", placeholder: "Enter your institute street name and number"
-                    = f.error_text :address
-              = f.form_group :zip_code do
-                .row
-                  = f.starred_label :zip_code, nil, class: "col-md-3 control-label"
-                  .col-md-9
-                    = f.text_field :zip_code, class: "form-control", placeholder: "Enter your institute zip code"
-                    = f.error_text :zip_code
-              = f.form_group :city do
-                .row
-                  = f.starred_label :city, nil, class: "col-md-3 control-label"
-                  .col-md-9
-                    = f.text_field :city, class: "form-control", placeholder: "Enter your institute city"
-                    = f.error_text :city
-              = f.form_group :country do
-                .row
-                  = f.starred_label :country, nil, class: "col-md-3 control-label"
-                  .col-md-9
-                    = f.country_select :country
-                    = f.error_text :country
+            %p
+              %small
+                However, people from foreign universities or laymen are welcome to attend the conference too! A wide variety of different topics related to organismal biology will be covered, and there will be talks by invited speakers.
+            %p
+              %small
+                We are looking forward to welcoming you in Geneva,
+            %p
+              %small
+                %em The organizing committee
 
-        = f.fields_for :abstract, f.object.abstract do |af|
-          %fieldset.registration-form-abstract{data: {disabled: af.object.disabled.to_s}}
-            %legend
-              Abstract
-            .registration-form-abstract-collapse.collapsible
-              = af.form_group :talk, class: 'row' do
-                = af.starred_label :talk, "Do you apply for a talk?", class: "col-md-3 control-label"
-                .col-md-9
-                  = af.check_box :talk, class: "form-control"
-                  = af.error_text :talk
-              = af.form_group :title, class: 'row' do
-                = af.starred_label :title, nil, class: "col-md-3 control-label"
-                .col-md-9
-                  = af.text_field :title, class: "form-control", placeholder: "Enter the title of your abstract"
-                  = af.error_text :title
-              = af.form_group :authors, class: 'row' do
-                = af.starred_label :authors, nil, class: "col-md-3 control-label"
-                .col-md-9
-                  = af.text_area :authors, class: "form-control", placeholder: "Enter the list of authors"
-                  = af.error_text :authors
-              = af.form_group :body, class: 'row' do
-                = af.starred_label :body, nil, class: "col-md-3 control-label"
-                .col-md-9
-                  = af.text_area :body, class: "form-control", placeholder: "Enter the body text of your abstract"
-                  = af.error_text :body
-        = f.submit "Send your registration",  class: "btn btn-primary"
-        .help-block
-          You're going to be redirected to a secured web page for payment
-- cache "home-pace14" do
-  #pace14
+
+
+
+  - cache "home-program" do
+    %section#program.home-section
+      .container
+        .row
+          .col-md-9.content
+            %h2 Program
+            %p
+              The biology14 conference starts Thursday morning (13 February) with registration and reception. Talks and poster presentations are scheduled from Thursday morning until Friday afternoon, with the conference dinner (“Darwin Dinner”) taking place on Thursday evening.
+            %p
+              The Darwin Dinner will take place in …………………………. in honor of Charles Darwin. An invited international speaker will enrich this evening with an entertaining talk and there will be ample opportunity for discussions, also with our invited keynote speakers.
+            %p
+              The night then continues in downtown Geneva.
+            %p
+              = link_to "/pdf_program", class: "btn btn-default btn-lg" do
+                %span.glyphicon.glyphicon-download
+                Download the program as PDF
+        .row
+          = render 'events/program', events: @grouped_events
+  = render 'home/speakers', speakers: @speakers
+  %section#registration.home-section
     .container
-      .row
-        .col-md-9.content
-          %h2 Pace14
-          %p
-            Swiss conservation biologists and restoration ecologists are pleased to invite you to the fourth edition of PACE, the yearly Swiss symposium on Plant and Animal Conservation Ecology, that will take place on Wednesday 12 February 2014, i.e. just before biology14. The major topic of this year meeting is “…………………………”. This one day symposium offers young scientists from Swiss universities and high technical schools the opportunity to present work in applied organismal ecology that bears specific relevance for biodiversity conservation.
-          %p
-            Further information under this link: PACE14
-          %p
-            Organizing committee: University of Geneva and the Swiss chapter of the Europe Section of the Society for Conservation Biology
+      %h2 Registration
+      #registration-form
+        = form_for @registration, url: registrations_path(anchor: "registration"), role: 'form', class: 'form-horizontal' do |f|
+          = render 'layouts/error_messages', target: @registration
+          .row
+            .col-md-6
+              %fieldset.registration-form-details
+                %legend
+                  Your details
+                = f.form_group :first_name do
+                  .row
+                    = f.starred_label :first_name, nil, class: "col-md-3 control-label #{"has-error" if f.object.errors[:first_name].present?}"
+                    .col-md-9
+                      = f.text_field :first_name, class: "form-control", placeholder: "Enter first name"
+                      = f.error_text :first_name
+                = f.form_group :last_name do
+                  .row
+                    = f.starred_label :last_name, nil, class: "col-md-3 control-label"
+                    .col-md-9
+                      = f.text_field :last_name, class: "form-control", placeholder: "Enter last name"
+                      = f.error_text :last_name
+                = f.form_group :email do
+                  .row
+                    = f.starred_label :email, nil, class: "col-md-3 control-label"
+                    .col-md-9
+                      = f.email_field :email, class: "form-control", placeholder: "Enter email"
+                      = f.error_text :email
+                %fieldset.registration-fees
+                  %legend Registration fees
+                  = f.form_group :category do
+                    - for category in Registration.categories
+                      .radio
+                        %label
+                          = f.radio_button :category, category.name, id: "registration-category-#{category.name}"
+                          =raw "#{category.details}: <strong>#{category.fee} CHF</strong>"
+                  = f.error_text :category
+
+            .col-md-6
+              %fieldset.registration-form-affiliation
+                %legend
+                  Affiliation
+                = f.form_group :institute do
+                  .row
+                    = f.starred_label :institute, nil, class: "col-md-3 control-label"
+                    .col-md-9
+                      = f.text_field :institute, class: "form-control", placeholder: "Enter your institute name"
+                      = f.error_text :institute
+                = f.form_group :address do
+                  .row
+                    = f.starred_label :address, nil, class: "col-md-3 control-label"
+                    .col-md-9
+                      = f.text_field :address, class: "form-control", placeholder: "Enter your institute street name and number"
+                      = f.error_text :address
+                = f.form_group :zip_code do
+                  .row
+                    = f.starred_label :zip_code, nil, class: "col-md-3 control-label"
+                    .col-md-9
+                      = f.text_field :zip_code, class: "form-control", placeholder: "Enter your institute zip code"
+                      = f.error_text :zip_code
+                = f.form_group :city do
+                  .row
+                    = f.starred_label :city, nil, class: "col-md-3 control-label"
+                    .col-md-9
+                      = f.text_field :city, class: "form-control", placeholder: "Enter your institute city"
+                      = f.error_text :city
+                = f.form_group :country do
+                  .row
+                    = f.starred_label :country, nil, class: "col-md-3 control-label"
+                    .col-md-9
+                      = f.country_select :country
+                      = f.error_text :country
+
+          = f.fields_for :abstract, f.object.abstract do |af|
+            %fieldset.registration-form-abstract{data: {disabled: af.object.disabled.to_s}}
+              %legend
+                Abstract
+              .registration-form-abstract-collapse.collapsible
+                = af.form_group :talk, class: 'row' do
+                  = af.starred_label :talk, "Do you apply for a talk?", class: "col-md-3 control-label"
+                  .col-md-9
+                    = af.check_box :talk, class: "form-control"
+                    = af.error_text :talk
+                = af.form_group :title, class: 'row' do
+                  = af.starred_label :title, nil, class: "col-md-3 control-label"
+                  .col-md-9
+                    = af.text_field :title, class: "form-control", placeholder: "Enter the title of your abstract"
+                    = af.error_text :title
+                = af.form_group :authors, class: 'row' do
+                  = af.starred_label :authors, nil, class: "col-md-3 control-label"
+                  .col-md-9
+                    = af.text_area :authors, class: "form-control", placeholder: "Enter the list of authors"
+                    = af.error_text :authors
+                = af.form_group :body, class: 'row' do
+                  = af.starred_label :body, nil, class: "col-md-3 control-label"
+                  .col-md-9
+                    = af.text_area :body, class: "form-control", placeholder: "Enter the body text of your abstract"
+                    = af.error_text :body
+          = f.submit "Send your registration",  class: "btn btn-primary"
+          .help-block
+            You're going to be redirected to a secured web page for payment
+  - cache "home-venue" do
+    %section#venue.home-section
+      .container
+        .row
+          .col-md-9.col-md-offset-3.content
+            %h2 Venue & Travel
+            %p
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+  - cache "home-pace14" do
+    %section#pace14.home-section
+      .container
+        .row
+          .col-md-9.content
+            %h2 Pace14
+            %p
+              Swiss conservation biologists and restoration ecologists are pleased to invite you to the fourth edition of PACE, the yearly Swiss symposium on Plant and Animal Conservation Ecology, that will take place on Wednesday 12 February 2014, i.e. just before biology14. The major topic of this year meeting is “…………………………”. This one day symposium offers young scientists from Swiss universities and high technical schools the opportunity to present work in applied organismal ecology that bears specific relevance for biodiversity conservation.
+            %p
+              Further information under this link: PACE14
+            %p
+              Organizing committee: University of Geneva and the Swiss chapter of the Europe Section of the Society for Conservation Biology

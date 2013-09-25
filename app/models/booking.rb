@@ -2,7 +2,7 @@ class Booking
 
   attr_reader :registration, :form_id, :key, :params_hash
 
-  URL = "https://cms.unige.ch/webtools/static/booking/946335/index.php"
+  URL = "https://booking.unige.ch/CT.aspx"
 
   def initialize(registration=nil)
     @registration = registration

@@ -10,6 +10,11 @@ class CreateRegistrations < ActiveRecord::Migration
       t.string :zip_code
       t.string :country
 
+      t.string :title
+      t.text :authors
+      t.text :body
+      t.boolean :talk
+
       t.timestamps
     end
   end

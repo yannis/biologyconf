@@ -1,14 +1,14 @@
 ActiveAdmin.register Registration do
   controller do
     def permitted_params
-      params.permit(:registration => [:first_name, :last_name, :email, :category, :institute, :address, :city, :zip_code, :country, abstract_attributes: [:title, :authors, :body, :talk, :registration_id]])
+      params.permit(:registration => [:first_name, :last_name, :email, :category_name, :institute, :address, :city, :zip_code, :country, :title, :authors, :body, :talk])
     end
   end
 
   filter :first_name
   filter :last_name
   filter :email
-  filter :category
+  filter :category_name
   filter :institute
   filter :address
   filter :city
@@ -19,7 +19,7 @@ ActiveAdmin.register Registration do
     column :first_name
     column :last_name
     column :email
-    column :category
+    column :category_name
     column :institute
     column :address
     column :city
@@ -28,19 +28,17 @@ ActiveAdmin.register Registration do
     default_actions
   end
 
-  show do |speaker|
+  show do |registration|
     attributes_table do
       row :first_name
       row :last_name
       row :email
-      row :category
+      row :category_name
       row :institute
       row :address
       row :zip_code
       row :city
       row :country
-    end
-    attributes_table_for speaker.abstract do
       row :talk
       row :title
       row :authors
@@ -54,7 +52,7 @@ ActiveAdmin.register Registration do
       f.input :first_name
       f.input :last_name
       f.input :email
-      f.input :category, as: :select, collection: Registration.categories.map(&:name), include_blank: false
+      f.input :category_name, as: :select, collection: Registration.categories.map(&:name), include_blank: false
     end
     f.inputs "Affiliation" do
       f.input :institute
@@ -63,11 +61,11 @@ ActiveAdmin.register Registration do
       f.input :city
       f.input :country
     end
-    f.inputs "Abstract", :for => [:abstract, f.object.abstract || Abstract.new] do |af|
-      af.input :talk
-      af.input :title
-      af.input :authors
-      af.input :body
+    f.inputs "Abstract" do |f|
+      f.input :talk
+      f.input :title
+      f.input :authors
+      f.input :body
     end
     f.actions
   end

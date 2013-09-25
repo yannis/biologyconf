@@ -1,0 +1,88 @@
+- @title = "Confirm your registration data"; title @title
+!!! 5
+- html_tag :class => 'no-js' do
+  = render 'head'
+  %body{class: "#{ controller.controller_name }"}
+    #wrap
+      = render 'chromeframe'
+      .container
+        = render 'flashes'
+        %h1= @title
+        = form_tag Booking::URL , role: 'form', class: 'form-horizontal' do
+          - @registration.booking.params_hash.each do |k,v|
+            = hidden_field_tag k, v
+          %h2 Your details
+          .row.row-high
+            .col-md-3
+              %strong First name
+            .col-md-9= @registration.first_name
+          .row.row-high
+            .col-md-3
+              %strong Last name
+            .col-md-9= @registration.last_name
+          .row.row-high
+            .col-md-3
+              %strong Email
+            .col-md-9= @registration.email
+          %h2 Your address
+          .row.row-high
+            .col-md-3
+              %strong Institute
+            .col-md-9= @registration.institute
+          .row.row-high
+            .col-md-3
+              %strong Address
+            .col-md-9= @registration.address
+          .row.row-high
+            .col-md-3
+              %strong Zip code
+            .col-md-9= @registration.zip_code
+          .row.row-high
+            .col-md-3
+              %strong City
+            .col-md-9= @registration.city
+          .row.row-high
+            .col-md-3
+              %strong Country
+            .col-md-9= @registration.country
+
+          %h2 Your fees
+          .row.row-high
+            .col-md-3
+              %strong Registration fees
+            .col-md-9=raw "<strong>#{@registration.category.fee} CHF</strong> (#{@registration.category.details})"
+
+          %h2 Your abstract
+          .row.row-high
+            .col-md-3
+              %strong Title
+            .col-md-9= @registration.title
+          .row.row-high
+            .col-md-3
+              %strong Authors
+            .col-md-9= @registration.authors
+          .row.row-high
+            .col-md-3
+              %strong Body
+            .col-md-9= @registration.body
+          %h3
+          .row.row-high
+            .col-md-3
+              %strong Talk
+            .col-md-9
+              - if @registration.talk
+                You ARE applying for a talk
+              - else
+                You ARE NOT applying for a talk
+          .row.row-high
+            .col-md-4
+              = submit_tag "Pay your registration",  class: "btn btn-primary"
+              .help-block
+                You're going to be redirected to a secured web page for payment
+
+            .col-md-4.col-md-offset-4
+              = link_to "Modify your registration data", edit_registration_path(@registration),  class: "btn btn-warning"
+              .help-block
+                You'll go back to the registration form to modify your data
+    = render 'javascripts'
+

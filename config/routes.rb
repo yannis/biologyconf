@@ -1,7 +1,11 @@
 Biology14::Application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
-  resources :registrations, only: [:create]
+  resources :registrations, only: [:create, :edit] do
+    member do
+      get 'confirm'
+    end
+  end
   resources :events, only: [:index]
   get "pdf_program" => 'events#index', format: 'pdf'
 

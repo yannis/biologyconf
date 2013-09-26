@@ -16,4 +16,8 @@ end
 describe "A registration" do
   let(:registration) { create :registration, category_name: "non_member"}
   it {expect(registration.category).to be_a Category}
+  describe "when mark as paid" do
+    before {registration.mark_as_paid}
+    it {expect(registration).to be_paid}
+  end
 end

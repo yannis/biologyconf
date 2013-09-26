@@ -46,12 +46,6 @@
               %strong Country
             .col-md-9= @registration.country
 
-          %h2 Your fees
-          .row.row-high
-            .col-md-3
-              %strong Registration fees
-            .col-md-9=raw "<strong>#{@registration.category.fee} CHF</strong> (#{@registration.category.details})"
-
           %h2 Your abstract
           .row.row-high
             .col-md-3
@@ -74,14 +68,20 @@
                 You ARE applying for a talk
               - else
                 You ARE NOT applying for a talk
+
+          %h2 Your registration fees
+          .row.row-high
+            .col-md-3
+              %strong Registration fees
+            .col-md-9=raw "<strong>#{@registration.category.fee} CHF</strong> (#{@registration.category.details})"
           .row.row-high
             .col-md-4
               = submit_tag "Pay your registration",  class: "btn btn-primary"
               .help-block
                 You're going to be redirected to a secured web page for payment
-
+              = image_tag "http://cms.unige.ch/webtools/static/booking/creditok.jpg"
             .col-md-4.col-md-offset-4
-              = link_to "Modify your registration data", edit_registration_path(@registration),  class: "btn btn-warning"
+              = link_to "Modify your registration data", edit_registration_path(@registration, anchor: "registration"),  class: "btn btn-warning"
               .help-block
                 You'll go back to the registration form to modify your data
     = render 'javascripts'

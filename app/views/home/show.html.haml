@@ -69,7 +69,7 @@
     .container
       %h2 Registration
       #registration-form
-        = form_for @registration, url: registrations_path(anchor: "registration"), role: 'form', class: 'form-horizontal' do |f|
+        = form_for @registration, url: (@registration.new_record? ? registrations_path(anchor: "registration") : registration_path(@registration, anchor: "registration")), role: 'form', class: 'form-horizontal' do |f|
           = render 'layouts/error_messages', target: @registration
           .row
             .col-md-6

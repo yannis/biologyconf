@@ -20,20 +20,22 @@ feature 'registration form', js: true do
       page.find("#registration-form-abstract-hide").click
       expect(page).to have_selector('.registration-form-abstract-collapse', visible: false, count: 1)
     end
-    # expect(page).to have_selector(".buildings-building", text: building1.name, count: 1)
-    # page.find(".buildings-building a", text: building1.name).click
-    # expect(current_url).to match "buildings/#{building1.id}$"
-    # expect(page).to have_selector(".panel.building", count: 1)
-
-    # within(".panel.building") do
-    #   expect(page).to have_text(building1.name, count: 1)
-    #   expect(page).to_not have_selector("a", text: 'Edit')
-    # end
-
-
-    # page.find(".panel.building button.close").click
-    # expect(page).to_not have_selector(".panel.building")
-    # expect(current_url).to match /\/#\/buildings$/
   end
 
+  let(:registration) {build :registration}
+  scenario "I submit the form" do
+    fill_in 'registration_first_name', :with => registration.first_name
+    fill_in 'registration_last_name', :with => registration.last_name
+    fill_in 'registration_email', :with => registration.email
+    fill_in 'registration_institute', :with => registration.institute
+    fill_in 'registration_address', :with => registration.address
+    fill_in 'registration_zip_code', :with => registration.zip_code
+    fill_in 'registration_city', :with => registration.city
+    select registration.country, :from => "registration_country"
+    click_link_or_button "Send your registration"
+    expect(page).to have_text('Confirm your registration data', visible: true, count: 1)
+    click_link_or_button "Pay your registration"
+    expect(page).to have_text('Confirmation de la transaction', visible: true, count: 1)
+    expect(page).to have_text('Erreur dans les paramètres', visible: true, count: 1)
+  end
 end

@@ -18,7 +18,7 @@ gem 'paperclip'
 # # gem 'will_paginate', '~>3.0.2'
 # gem "kaminari"
 # gem "calendar_helper"
-# # gem 'airbrake'
+gem 'airbrake'
 # gem "newrelic_rpm"
 gem 'bundler'
 

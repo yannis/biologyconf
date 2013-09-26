@@ -1,18 +1,23 @@
 class Booking
 
-  attr_reader :registration, :form_id, :key, :params_hash
+  attr_reader :registration, :params_hash, :form_id, :uni_id
+  # attr:check_callback
 
   URL = "https://booking.unige.ch/CT.aspx"
+  KEY = "67C9BD2C6943CCD4377020C2ACE60762"
+  SECRET_KEY = "zrL$\Rp5ImNsFWO,jv4THJ=@+Qn;t:(*|]!!2jf#.t"
+  FORM_ID = "226"
 
   def initialize(registration=nil)
+    no_fonds = "S18078"
+    centre_couts = "229707"
+
     @registration = registration
-    @form_id = "226"
-    @key = "67C9BD2C6943CCD4377020C2ACE60762"
-    @no_fonds = "S18078"
-    @centre_couts = "229707"
+    @form_id = FORM_ID
+    @uni_id = "#{@form_id}-#{@registration.id}"
     @params_hash = {
       form_id: @form_id,
-      key: @key,
+      key: KEY,
       "Prix" => @registration.category.fee,
       firstname: @registration.first_name,
       surname: @registration.last_name,
@@ -24,22 +29,79 @@ class Booking
       payment_type: 0,
       gross_amount: @registration.category.fee,
       nb_place: 1,
-      uni_id: "#{@form_id}-#{@registration.id}",
-      no_fonds: @centre_couts,
-      centre_couts: @centre_couts,
+      uni_id: @uni_id,
+      no_fonds: centre_couts,
+      centre_couts: centre_couts,
       "SAP-LINK" => "PRD"
     }
   end
 
-  def params_string
-    self.params_hash.map{|k,v| "#{k}=#{v}"}.join('&')
-  end
+  def self.check_callback(request)
+    my = request.params['my']
+    test = request.params['test']
+    uni_id = request.params['id']
+    hash = request.params['hash']
+    mhash = request.params['mhash']
+    remote_addr = request.remote_ip
+    uri = request.original_url
 
-  def url
-    "#{URL}?#{params_string}"
-  end
+    secret_key = SECRET_KEY
+    if Rails.env.test?
+      goodRemote = "0.0.0.0"
+    elsif Rails.env.staging?
+      goodRemote = "129.194.18.217"
+    elsif Rails.env.production?
+      goodRemote = "193.111.202.14"
+    end
+    # goodRemote = "193.111.202.14" #prod
 
-  def send_data
-    Net::HTTP.post_form(URI.parse(URL), self.params_hash)
+    #calculs: hash concatenation cle secrete+idbooking
+    # $cle = $secret_key.$id;
+    cle = secret_key+uni_id.to_s
+
+    # $controle=hash('sha256','$cle');
+    # $controle2=md5('$cle');
+    controle = Digest::SHA256.hexdigest cle
+
+    # @txt = "
+    #   TEST URL DE SYNCHRONISATION booking
+    #   uri                 : $uri
+    #   my                  : $my
+    #   test                : $test
+    #   id                  : $id
+    #   hash                : $hash
+    #   mhash               : $mhash
+    #   REMOTE_ADDR         : $REMOTE_ADDR
+    #   cle                 : $cle
+    #   controle SHA256     : $controle
+    #   controle MD5        : $controle2
+    # "
+
+    data = {
+      uri:              uri,
+      my:               my,
+      test:             test,
+      uni_id:           uni_id,
+      hash:             hash,
+      mhash:            mhash,
+      remote_addr:      remote_addr,
+      cle:              cle,
+      controle_SHA256:  controle,
+    }
+
+    if hash != controle
+      exception = "BookingCallbackError: HASH INCORRECT! #{data.inspect}"
+      # notify_airbrake(exception)
+      raise exception
+      return false
+    elsif remote_addr != goodRemote
+      exception = "BookingCallbackError: SERVER INCORRECT! #{data.inspect}"
+      # notify_airbrake(exception)
+      raise exception
+      return false
+    else
+      id = uni_id.gsub("#{FORM_ID}-","")
+      return Registration.find id
+    end
   end
 end

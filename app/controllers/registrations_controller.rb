@@ -4,18 +4,15 @@ class RegistrationsController < ApplicationController
 
   def create
     @registration = Registration.new registration_params
-    respond_with @registration do |format|
-      if @registration.save
-        session[:registration_id] = @registration.id
-        flash[:success] = "Please confirm your data"
-        @booking = @registration.booking
-        format.html { redirect_to confirm_registration_path(@registration) }
-        # flash[:success] = "Registration successfull"
-        # format.html { redirect_to root_path }
-      else
-        @speakers = Speaker.order(:last_name, :first_name)
-        @grouped_events = Event.order(:start).group_by{|e| e.start.to_date}
-        # flash.now[:danger] = "Registration failed. Please check for any errors in your submitted data."
+    if @registration.save
+      session[:registration_id] = @registration.id_token
+      respond_with @registration do |format|
+        format.html { redirect_to confirm_registration_path(@registration)}
+      end
+    else
+      @speakers = Speaker.order(:last_name, :first_name)
+      @grouped_events = Event.order(:start).group_by{|e| e.start.to_date}
+      respond_with @registration do |format|
         format.html { render "home/show"}
       end
     end
@@ -23,30 +20,60 @@ class RegistrationsController < ApplicationController
 
   def confirm
     @registration = Registration.find params[:id]
-    if !@registration.paid && session[:registration_id] == @registration.id
+    if !@registration.paid && session[:registration_id] == @registration.id_token
       respond_with @registration do |f|
         f.html {render layout: false}
       end
     else
+      flash[:error] = "You can't access this registration"
       respond_with @registration do |f|
-        flash[:error] = "You can't access this registration"
         f.html {redirect_to root_path}
       end
     end
   end
 
+  def callback
+    @registration = Booking.check_callback request
+    if @registration
+      @registration.mark_as_paid
+      flash[:success] = "Payment successfull! We are looking forward to see you in Geneva soon."
+    else
+      flash[:error] = "A problem occurred with your payment. Please contact the organizers of the conference."
+    end
+    respond_with @registration do |f|
+      f.html {redirect_to root_path}
+    end
+  end
+
   def edit
     @registration = Registration.find params[:id]
-    if !@registration.paid && session[:registration_id] == @registration.id
+    if !@registration.paid && session[:registration_id] == @registration.id_token
       @speakers = Speaker.order(:last_name, :first_name)
       @grouped_events = Event.order(:start).group_by{|e| e.start.to_date}
       respond_with @registration do |f|
         f.html {render "home/show"}
       end
     else
+      flash[:error] = "You can't access this registration"
       respond_with @registration do |f|
-        flash[:error] = "You can't access this registration"
         f.html {redirect_to root_path}
+      end
+    end
+  end
+
+  def update
+    @registration = Registration.find params[:id]
+    redirect_to(root_path, warning: "You don't have access to this registration") && return if session[:registration_id] != @registration.id_token
+    if @registration.update registration_params
+      flash[:success] = "Please confirm your data"
+      respond_with @registration do |format|
+        format.html { redirect_to confirm_registration_path(@registration) }
+      end
+    else
+      @speakers = Speaker.order(:last_name, :first_name)
+      @grouped_events = Event.order(:start).group_by{|e| e.start.to_date}
+      respond_with @registration do |format|
+        format.html { render "home/show"}
       end
     end
   end

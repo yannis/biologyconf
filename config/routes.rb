@@ -1,9 +1,12 @@
 Biology14::Application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
-  resources :registrations, only: [:create, :edit] do
+  resources :registrations, only: [:create, :edit, :update] do
     member do
       get 'confirm'
+    end
+    collection do
+      get 'callback'
     end
   end
   resources :events, only: [:index]

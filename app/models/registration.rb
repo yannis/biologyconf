@@ -3,7 +3,7 @@ class Registration < ActiveRecord::Base
   attr_reader 'abstract_disabled'
 
   CATEGORIES = [
-    {name: "non_member", details: "Non-member (student or researcher)", fee: 50},
+    {name: "non_member", details: "Non-member (student or researcher)", fee: (Rails.env.production? ? 50 : 0.10)},
     {name: "student_member", details: "Master or PhD student, full member (SZS, SSS, or SBS)", fee: 20},
     {name: "advanced_member", details: "Advanced researcher, full member (SZS, SSS, or SBS)", fee: 30}
   ]
@@ -33,6 +33,10 @@ class Registration < ActiveRecord::Base
 
   def booking
     Booking.new self
+  end
+
+  def mark_as_paid
+    update_attributes paid: true
   end
 
   protected

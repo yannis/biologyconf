@@ -6,7 +6,7 @@ Biology14::Application.routes.draw do
       get 'confirm'
     end
     collection do
-      get 'callback'
+      post 'callback'
     end
   end
   resources :events, only: [:index]

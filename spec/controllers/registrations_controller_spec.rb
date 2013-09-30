@@ -78,16 +78,16 @@ describe RegistrationsController do
     it {expect(assigns(:registration).errors.full_messages_for(:first_name).to_sentence).to eq "First name can't be blank"}
   end
 
-  describe "GET 'callback' with valid params" do
+  describe "POST 'callback' with valid params" do
     let(:registration){create :registration}
     before {
-      get :callback, id: "#{registration.booking.form_id}-#{registration.id}", hash: Digest::SHA256.hexdigest(Booking::SECRET_KEY+registration.booking.uni_id)
+      post :callback, id: "#{registration.booking.form_id}-#{registration.id}", hash: Digest::SHA256.hexdigest(Booking::SECRET_KEY+registration.booking.uni_id)
     }
     it {expect(flash[:success]).to eq "Payment successfull! We are looking forward to see you in Geneva soon."}
     it {expect(response).to redirect_to root_path}
   end
 
-  describe "GET 'callback' with bad hash" do
+  describe "POST 'callback' with bad hash" do
     let(:registration){create :registration}
     it {
       expect {

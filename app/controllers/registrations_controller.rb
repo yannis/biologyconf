@@ -1,6 +1,7 @@
 class RegistrationsController < ApplicationController
 
   respond_to :html
+  protect_from_forgery :except => [:callback]
 
   def create
     @registration = Registration.new registration_params

@@ -50,6 +50,13 @@ GIT
     responders (1.0.0.rc)
       railties (>= 3.2, < 5)
 
+GIT
+  remote: git://github.com/thomas-mcdonald/bootstrap-sass.git
+  revision: c0e12a90ba3e44ab68d3f153411fba3edc400b2a
+  specs:
+    bootstrap-sass (3.0.0.0)
+      sass (~> 3.2)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -346,10 +353,11 @@ DEPENDENCIES
   airbrake
   better_errors
   binding_of_caller
+  bootstrap-sass!
   bundler
   capistrano
   capybara-screenshot
-  coffee-rails (~> 4.0.0)
+  coffee-rails
   countries
   country_select
   database_cleaner

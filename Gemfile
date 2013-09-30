@@ -25,7 +25,8 @@ gem 'bundler'
 # Gems used only for assets and not required
 # in production environments by default.
 gem 'sass-rails', '~> 4.0.0'
-gem 'coffee-rails', '~> 4.0.0'
+gem 'bootstrap-sass', github: "thomas-mcdonald/bootstrap-sass"
+gem 'coffee-rails'
 gem 'jquery-rails'
 gem "jquery-ui-rails"
 gem 'uglifier', '>= 1.0.3'

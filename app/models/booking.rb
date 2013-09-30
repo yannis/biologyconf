@@ -48,9 +48,9 @@ class Booking
     secret_key = SECRET_KEY
     if Rails.env.test?
       goodRemote = "0.0.0.0"
-    elsif Rails.env.staging?
-      goodRemote = "129.194.18.217"
-    elsif Rails.env.production?
+    elsif Rails.env.development?
+      goodRemote = "127.0.0.1"
+    elsif Rails.env.staging? || Rails.env.production?
       goodRemote = "193.111.202.14"
     end
     # goodRemote = "193.111.202.14" #prod

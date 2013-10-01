@@ -11,7 +11,7 @@
                 .speaker-portrait.col-sm-12.col-md-4
                   = image_tag speaker.portrait.url(:s300), class: 'speaker-portrait'
                 .speaker-caption.col-sm-12.col-md-8
-                  %h4= speaker.full_name
+                  %h3= speaker.full_name
                   =raw speaker.description
                   = link_to speaker.url, class: "btn btn-default pull-right", target: '_blank' do
                     %span.glyphicon.glyphicon-globe

@@ -53,29 +53,11 @@ class Booking
     elsif Rails.env.staging? || Rails.env.production?
       goodRemote = "193.111.202.14"
     end
-    # goodRemote = "193.111.202.14" #prod
 
-    #calculs: hash concatenation cle secrete+idbooking
-    # $cle = $secret_key.$id;
     cle = secret_key+uni_id.to_s
 
-    # $controle=hash('sha256','$cle');
-    # $controle2=md5('$cle');
-    controle = Digest::SHA256.hexdigest cle
-
-    # @txt = "
-    #   TEST URL DE SYNCHRONISATION booking
-    #   uri                 : $uri
-    #   my                  : $my
-    #   test                : $test
-    #   id                  : $id
-    #   hash                : $hash
-    #   mhash               : $mhash
-    #   REMOTE_ADDR         : $REMOTE_ADDR
-    #   cle                 : $cle
-    #   controle SHA256     : $controle
-    #   controle MD5        : $controle2
-    # "
+    controle_sha256 = Digest::SHA256.hexdigest cle
+    controle_md5 = Digest::MD5.hexdigest cle
 
     data = {
       uri:              uri,
@@ -86,10 +68,11 @@ class Booking
       mhash:            mhash,
       remote_addr:      remote_addr,
       cle:              cle,
-      controle_SHA256:  controle,
+      controle_md5:     controle_md5,
+      controle_sha256:  controle_sha256
     }
 
-    if hash != controle
+    if mhash != controle_md5
       exception = "BookingCallbackError: HASH INCORRECT! #{data.inspect}"
       # notify_airbrake(exception)
       raise exception

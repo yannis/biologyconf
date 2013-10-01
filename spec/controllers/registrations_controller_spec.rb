@@ -92,7 +92,7 @@ describe RegistrationsController do
     it {
       expect {
         get :callback, id: "#{registration.booking.form_id}-#{registration.id}", mhash: Digest::MD5.hexdigest(Booking::SECRET_KEY+"2222222222222222")
-      }.to raise_error RuntimeError, 'BookingCallbackError: HASH INCORRECT! {:uri=>"http://test.host/registrations/callback?id=226-1&mhash=aaff02c87576ec843960bc6dc3b9146b", :my=>nil, :test=>nil, :uni_id=>"226-1", :hash=>nil, :mhash=>"aaff02c87576ec843960bc6dc3b9146b", :remote_addr=>"0.0.0.0", :cle=>"zrL$Rp5ImNsFWO,jv4THJ=@+Qn;t:(*|]!!2jf#.t226-1", :controle_md5=>"0ac8522e230e5f2064ae9e145d709803", :controle_sha256=>"8240e4fd27017247bf9ef5cd5344960f578d3571181c5d701cfc69118f73f682"}'
+      }.to raise_error RuntimeError
     }
   end
 end

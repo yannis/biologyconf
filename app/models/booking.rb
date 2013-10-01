@@ -5,7 +5,7 @@ class Booking
 
   URL = "https://booking.unige.ch/CT.aspx"
   KEY = "67C9BD2C6943CCD4377020C2ACE60762"
-  SECRET_KEY = "zrL$\Rp5ImNsFWO,jv4THJ=@+Qn;t:(*|]!!2jf#.t"
+  SECRET_KEY = "zrL$\\Rp5ImNsFWO,jv4THJ=@+Qn;t:(*|]!!2jf#.t"
   FORM_ID = "226"
 
   def initialize(registration=nil)

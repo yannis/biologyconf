@@ -54,7 +54,7 @@ class Booking
       goodRemote = "193.111.202.14"
     end
 
-    cle = secret_key+uni_id.to_s
+    cle = uni_id.to_s+secret_key
 
     controle_sha256 = Digest::SHA256.hexdigest cle
     controle_md5 = Digest::MD5.hexdigest cle

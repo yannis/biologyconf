@@ -8,7 +8,7 @@
       .container
         = render 'flashes'
         %h1= @title
-        = form_tag Booking::URL , role: 'form', class: 'form-horizontal' do
+        = form_tag ENV['BOOKING_URL'] , role: 'form', class: 'form-horizontal' do
           - @registration.booking.params_hash.each do |k,v|
             = hidden_field_tag k, v
           %h2 Your details

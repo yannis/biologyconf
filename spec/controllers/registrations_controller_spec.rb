@@ -81,7 +81,7 @@ describe RegistrationsController do
   describe "POST 'callback' with valid params" do
     let(:registration){create :registration}
     before {
-      post :callback, id: "#{registration.booking.form_id}-#{registration.id}", mhash: Digest::MD5.hexdigest(Booking::SECRET_KEY+registration.booking.uni_id)
+      post :callback, id: "#{registration.booking.form_id}-#{registration.id}", mhash: Digest::MD5.hexdigest(registration.booking.uni_id+ENV['BOOKING_SECRET_KEY'])
     }
     it {expect(flash[:success]).to eq "Payment successfull! We are looking forward to see you in Geneva soon."}
     it {expect(response).to redirect_to root_path}
@@ -89,10 +89,11 @@ describe RegistrationsController do
 
   describe "POST 'callback' with bad hash" do
     let(:registration){create :registration}
-    it {
-      expect {
-        get :callback, id: "#{registration.booking.form_id}-#{registration.id}", mhash: Digest::MD5.hexdigest(Booking::SECRET_KEY+"2222222222222222")
-      }.to raise_error RuntimeError
+    before {
+      post :callback, id: "#{registration.booking.form_id}-#{registration.id}", mhash: "hjkdjgkfjfgjkgfghj"
     }
+    it {expect(flash[:success]).to be_nil}
+    it {expect(flash[:error]).to eq "A problem occurred with your payment. Please contact the organizers of the conference."}
+    it {expect(response).to redirect_to root_path}
   end
 end

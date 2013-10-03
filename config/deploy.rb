@@ -10,6 +10,7 @@ set :domain,                        "129.194.57.242"
 set :scm,                           :git
 set :scm_verbose,                   true
 set :repository,                    "ssh://yannis@129.194.56.197/Users/yannis/gitrepos/biology14/.git"
+set :deploy_via,                    :remote_cache
 set :migrate_target,                :current
 set :ssh_options,                   { :forward_agent => true }
 set :normalize_asset_timestamps,    false
@@ -29,6 +30,11 @@ def run_rake(cmd)
   run "cd #{current_path}; #{rake} #{cmd}"
 end
 
+before 'deploy:assets:precompile' do
+  run "ln -s #{shared_path}/config/application.yml #{release_path}/config/application.yml"
+  run "ln -s #{shared_path}/config/database.yml #{release_path}/config/database.yml"
+end
 after 'deploy', 'deploy:migrate'
 after "deploy:migrate", "deploy:cleanup"
 after "deploy:cleanup", "deploy:stop_reload_start"
+

@@ -78,8 +78,6 @@ Biology14::Application.configure do
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
 
-
-  config.action_mailer.default_url_options = { :host => 'stagingapp2.unige.ch' }
   config.action_mailer.raise_delivery_errors = false
   config.action_mailer.default :charset => "utf-8"
   config.action_mailer.perform_deliveries = true

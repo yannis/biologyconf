@@ -1,3 +1,4 @@
+
 # Be sure to restart your server when you modify this file.
 
 # Your secret key is used for verifying the integrity of signed cookies.
@@ -9,4 +10,4 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-Biology14::Application.config.secret_key_base = '9ab932c5275c204d45e0e77de46fea9d37f8d2f07f0629d4d93f4b14949e8b9f720f699c916218ba1056e792f678edb3a93647db85dceb663f55178c5f1a414a'
+Biology14::Application.config.secret_key_base = ENV['SECRET_TOKEN']

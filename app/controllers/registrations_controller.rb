@@ -34,16 +34,20 @@ class RegistrationsController < ApplicationController
   end
 
   def callback
-    @registration = Booking.check_callback request
-    if @registration
-      @registration.mark_as_paid
+    @callback = BookingCallback.new request
+    if @callback.valid?
+      @callback.registration.mark_as_paid
       flash[:success] = "Payment successfull! We are looking forward to see you in Geneva soon."
     else
       flash[:error] = "A problem occurred with your payment. Please contact the organizers of the conference."
     end
-    respond_with @registration do |f|
-      f.html {redirect_to root_path}
+    respond_to do |format|
+      format.html {redirect_to root_path}
     end
+  end
+
+  def callback2
+
   end
 
   def edit

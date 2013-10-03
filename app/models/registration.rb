@@ -9,13 +9,13 @@ class Registration < ActiveRecord::Base
   ]
 
   validates_presence_of :first_name, :last_name, :email, :institute, :address, :zip_code, :city, :country, :category_name
-  # validates_uniqueness_of :last_name, :scope => :first_name
-  # validates_uniqueness_of :email
+  validates_uniqueness_of :last_name, :if => Proc.new{|r| Registration.where(last_name: r.last_name, first_name: r.first_name, paid: true).count > 0 }
+  validates_uniqueness_of :email, :if => Proc.new{|r| Registration.where(last_name: r.last_name, first_name: r.first_name, paid: true).count > 0 }
   validates_inclusion_of :category_name, in: CATEGORIES.map{|c| c[:name]}, allow_nil: false
 
-  validates_presence_of :title, if: Proc.new{|r| r.authors.present?}
-  validates_presence_of :authors, if: Proc.new{|r| r.title.present?}
-  validates_presence_of :body, if: Proc.new{|r| r.title.present?}
+  validates_presence_of :title, if: Proc.new{|r| r.authors.present? || r.body.present?}
+  validates_presence_of :authors, if: Proc.new{|r| r.title.present? || r.body.present?}
+  validates_presence_of :body, if: Proc.new{|r| r.title.present? || r.authors.present?}
 
   before_create :set_id_token
 

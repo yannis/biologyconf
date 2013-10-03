@@ -17,7 +17,7 @@ Biology14::Application.configure do
   config.static_cache_control = "public, max-age=3600"
 
   # Show full error reports and disable caching.
-  config.consider_all_requests_local       = true
+  config.consider_all_requests_local       = false
   config.action_controller.perform_caching = false
 
   # Raise exceptions instead of rendering exception templates.
@@ -30,7 +30,6 @@ Biology14::Application.configure do
   # The :test delivery method accumulates sent emails in the
   # ActionMailer::Base.deliveries array.
   config.action_mailer.delivery_method = :test
-  config.action_mailer.default_url_options = { :host => 'biology14.dev' }
   config.action_mailer.perform_deliveries = false
 
   # Print deprecation notices to the stderr.

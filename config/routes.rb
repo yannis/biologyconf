@@ -7,6 +7,7 @@ Biology14::Application.routes.draw do
     end
     collection do
       post 'callback'
+      get 'callback2'
     end
   end
   resources :events, only: [:index]
@@ -17,7 +18,7 @@ Biology14::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   root 'home#show'
-  match '*path' => 'home#show', via: :all
+  # match '*path' => 'home#show', via: :all
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

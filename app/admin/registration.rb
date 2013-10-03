@@ -25,6 +25,7 @@ ActiveAdmin.register Registration do
     column :city
     column :zip_code
     column :country
+    column :paid
     default_actions
   end
 

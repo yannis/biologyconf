@@ -1,10 +1,5 @@
 - cache "application-footer" do
   %footer#footer
-    .container
-      %p
-        If you have any questions, do not hesitate to post them to biology14@unige.ch.
-      %p
-        Please spread the word about this conference to your colleagues!
     .container#logos
       #logos-organizers
         %h3 Conference organized by
@@ -36,5 +31,15 @@
           = link_to 'http://www.botanica-helvetica.ch/', id: "logos-sponsors-sbs", target: '_blank', class: "col-md-3 logos-logo" do
             %span.logos-log-title
               Société Botanique Suisse
-
-
+    #footer-copyright
+      biology14
+      –
+      = link_to "University of Geneva", 'http://unige.ch/'
+      –
+      = link_to "Dpt of Genetics & Evolution", 'http://genev.unige.ch/'
+      – Copyright &copy;
+      = Date.today.year
+      –
+      = mail_to "biology14@unige.ch", encode: 'hex' do
+        Contact us
+        %span.glyphicon.glyphicon-envelope

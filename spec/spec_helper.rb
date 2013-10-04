@@ -1,3 +1,9 @@
+if ENV['COV']
+  require 'simplecov'
+  SimpleCov.start 'rails' do
+    add_filter "/rails/"
+  end
+end
 ENV["RAILS_ENV"] ||= 'test'
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
@@ -6,6 +12,7 @@ require 'capybara/rspec'
 require 'capybara/rails'
 require 'capybara-screenshot/rspec'
 require "paperclip/matchers"
+
 Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
 
 RSpec.configure do |config|

@@ -5,15 +5,22 @@
       .container
         .row
           .home-banner-header.col-md-6
-            %h1 biology14
-            %h2
-              the Swiss conference on organismal biology
-            %h2
-              %em
-                13th & 14th February 2014, Geneva, Switzeland
-            %p.lead
-              The "biology" conference is the yearly joint congress of the Swiss Zoological Society, the Swiss Botanical Society, and the Swiss Systematics Society
-            = link_to "Register", "#registration", class: "btn btn-primary btn-lg pull-right home-banner-registration-link", data: {target: '#registration'}
+            .row
+              .col-md-12
+                %h3
+                  13th & 14th February 2014, Geneva, Switzerland
+            .row
+              .col-md-12
+                %h1.biology14
+                  biology
+                  %span 14
+                %h2
+                  the Swiss conference on organismal biology
+                %p.lead
+                  The "biology" conference is the yearly joint congress of the Swiss Zoological Society, the Swiss Botanical Society, and the Swiss Systematics Society
+                = link_to "#registration", class: "btn btn-primary btn-lg pull-right home-banner-registration-link", data: {target: '#registration'} do
+                  %span.glyphicon.glyphicon-check
+                  Register
           .home-banner-carousel.carousel.slide.col-md-6
             .carousel-inner
               #carousel-item-1.item.active
@@ -21,9 +28,13 @@
               #carousel-item-2.item
                 = image_tag "carousel/algae.png"
               #carousel-item-4.item
+                = image_tag "carousel/monkey.png"
+              #carousel-item-4.item
                 = image_tag "carousel/foram.png"
               #carousel-item-5.item
                 = image_tag "carousel/truc.png"
+              #carousel-item-5.item
+                = image_tag "carousel/cell.png"
         .row.home-banner-welcome
           .col-md-6
             %p
@@ -169,14 +180,7 @@
           = f.submit "Send your registration",  class: "btn btn-primary"
           .help-block
             You'll be able to verify your data before going to the payment secure webpage
-  - cache "home-venue" do
-    %section#venue.home-section
-      .container
-        .row
-          .col-md-9.col-md-offset-3.content
-            %h2 Venue & Travel
-            %p
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+  = render "venue"
   - cache "home-pace14" do
     %section#pace14.home-section
       .container

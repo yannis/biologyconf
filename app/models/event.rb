@@ -18,9 +18,9 @@ class Event < ActiveRecord::Base
 
   def table_classes
     c = [self.classes] << case self.kind
-      when "break" then "warning"
-      when "organisation" then "warning"
-      when "keynote presentation" then "success"
+      when "break" then "event-break"
+      when "organisation" then "event-organisation"
+      when "keynote presentation" then "event-keynote"
       else nil
       end
     c.compact.present? ? c.join(' ') : nil

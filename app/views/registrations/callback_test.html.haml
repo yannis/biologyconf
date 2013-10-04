@@ -1,0 +1,8 @@
+.row
+  .col-md-6.col-md-offset-3
+    %h1
+      = "Test callback for registration “#{@registration.id}”"
+    = form_tag action: :callback do
+      = hidden_field_tag :id, @uni_id
+      = hidden_field_tag :mhash, @mhash
+      = submit_tag "callback",  class: "btn btn-primary"

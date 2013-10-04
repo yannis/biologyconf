@@ -4,10 +4,10 @@ Biology14::Application.routes.draw do
   resources :registrations, only: [:create, :edit, :update] do
     member do
       get 'confirm'
+      get 'callback_test' unless Rails.env.production?
     end
     collection do
       post 'callback'
-      get 'callback2'
     end
   end
   resources :events, only: [:index]

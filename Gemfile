@@ -5,23 +5,11 @@ gem 'mysql2'
 
 gem 'haml-rails'
 gem 'html5-rails'
-# gem "devise"
-# gem "devise-encryptable"
-# gem "cancan", '1.6.9'
-# gem "hpricot"
-# gem "ruby_parser"
-# gem 'icalendar'
 gem 'paperclip'
-# gem "bio", '~>1.4.3'
-# gem "calendar_date_select"
-# gem 'htmlentities'
-# # gem 'will_paginate', '~>3.0.2'
-# gem "kaminari"
-# gem "calendar_helper"
 gem 'airbrake'
-# gem "newrelic_rpm"
 gem 'bundler'
 gem "figaro"
+gem "actionview-encoded_mail_to"
 
 # Gems used only for assets and not required
 # in production environments by default.

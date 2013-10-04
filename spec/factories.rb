@@ -35,9 +35,11 @@ FactoryGirl.define do
     details { "Lorem ipsum dolor sit amet" }
   end
 
-  # sequence :user_email do |n|
-  #   "email_#{n}@email.com"
-  # end
+  factory :speaker do
+    first_name{ Faker::Name.first_name }
+    last_name{ Faker::Name.last_name }
+    title{ "Dr" }
+  end
 
   # factory :category do |i|
   #   i.name { 'cat_'+FactoryGirl.generate(:name) }

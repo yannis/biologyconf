@@ -2,9 +2,9 @@ class BookingCallback
 
   attr_reader :errors, :mhash, :controle_md5, :registration_id, :remote_addr, :uni_id, :key, :secret_key
 
-  def self.hashize(key)
-    Digest::MD5.hexdigest key
-   end
+  def self.hashize(registration_id)
+    Digest::MD5.hexdigest "#{ENV['BOOKING_FORM_ID']}-#{registration_id.to_s}#{ENV['BOOKING_SECRET_KEY']}"
+  end
 
   def initialize(request)
     # p "request.remote_ip: #{request.remote_ip}"
@@ -14,7 +14,7 @@ class BookingCallback
     @remote_addr = request.remote_ip
     @secret_key = ENV['BOOKING_SECRET_KEY']
     @key = uni_id.to_s+secret_key
-    @controle_md5 = BookingCallback.hashize key
+    @controle_md5 = BookingCallback.hashize registration_id
     @errors = {}
   end
 
@@ -50,6 +50,7 @@ class BookingCallback
         errors[:hash] = "is incorrect"
         raise "Hash is incorrect: #{data.inspect}"
       end
+      true
     end
 
     def _validate_remote_addr
@@ -58,5 +59,6 @@ class BookingCallback
         errors[:remote_server] = "doesn't match"
         raise "Remote server is incorrect: #{data.inspect}"
       end
+      true
     end
 end

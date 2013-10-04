@@ -14,7 +14,7 @@ guard 'livereload', :api_version => '2.3' do
 end
 
 
-guard 'rspec', zeus: true, bundler: false,  :cli => "--profile --color -r rspec/instafail -f RSpec::Instafail", :all_after_pass => false, :all_on_start => false, :keep_failed => false, :notification => false do
+guard 'rspec', zeus: true, bundler: false,  cli: "--profile --color -r rspec/instafail -f RSpec::Instafail", all_after_pass: false, all_on_start: false, keep_failed: false, notification: false do
   watch('spec/spec_helper.rb')                                               { "spec" }
   watch('app/controllers/application_controller.rb')                         { "spec/controllers" }
   watch('config/routes.rb')                                                  { "spec/routing" }

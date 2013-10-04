@@ -78,11 +78,36 @@ describe RegistrationsController do
     it {expect(assigns(:registration).errors.full_messages_for(:first_name).to_sentence).to eq "First name can't be blank"}
   end
 
+  describe "PATCH 'update' with valid params" do
+    let(:registration){create :registration, paid: false}
+    before {
+      session[:registration_id] = registration.id_token
+      patch :update, id: registration.to_param, registration: {first_name: "new first_name"}
+    }
+    it {expect(response).to redirect_to confirm_registration_path(registration)}
+    it {expect(flash[:success]).to be_nil}
+    it {expect(assigns(:registration)).to be_valid_verbose}
+    it {expect(assigns(:registration)).to eq registration}
+    it {expect(registration.reload.first_name).to eq "new first_name"}
+  end
+  describe "PATCH 'update' with invalid params" do
+    let(:registration){create :registration, paid: false}
+    before {
+      session[:registration_id] = registration.id_token
+      patch :update, id: registration.to_param, registration: {first_name: ""}
+    }
+    it {expect(response).to render_template "home/show"}
+    it {expect(flash[:success]).to be_nil}
+    it {expect(assigns(:registration)).to_not be_valid_verbose}
+    it {expect(assigns(:registration).errors.full_messages_for(:first_name).to_sentence).to eq "First name can't be blank"}
+  end
+
   describe "POST 'callback' with valid params" do
     let(:registration){create :registration}
     before {
       post :callback, id: "#{registration.booking.form_id}-#{registration.id}", mhash: Digest::MD5.hexdigest(registration.booking.uni_id+ENV['BOOKING_SECRET_KEY'])
     }
+    it {expect(registration.reload.paid).to be_true}
     it {expect(flash[:success]).to eq "Payment successfull! We are looking forward to see you in Geneva soon."}
     it {expect(response).to redirect_to root_path}
   end
@@ -96,4 +121,5 @@ describe RegistrationsController do
     it {expect(flash[:error]).to eq "A problem occurred with your payment. Please contact the organizers of the conference."}
     it {expect(response).to redirect_to root_path}
   end
+
 end

@@ -5,19 +5,21 @@
       .span.icon-bar
       .span.icon-bar
       .span.icon-bar, data: {target: '#program'}
-    = link_to "biology14", "#home-banner", class: "navbar-brand", data: {target: '#home-banner'}
+    = link_to "#home-banner", class: "navbar-brand biology14", data: {target: '#home-banner'} do
+      b
+      %span 14
   .collapse.navbar-collapse.navbar-ex1-collapse
     %ul.nav.navbar-nav
-      %li
+      %li.navigation-program
         = link_to "Program", "#program", data: {target: '#program'}
-      %li
+      %li.navigation-speakers
         = link_to "Speakers", "#speakers", data: {target: '#speakers'}
-      %li
+      %li.navigation-registration
         = link_to "Registration", "#registration", data: {target: '#registration'}
-      %li
+      %li.navigation-venue
         = link_to "Venue", "#venue", data: {target: '#venue'}
-      %li
+      %li.navigation-pace14
         = link_to "Pace14", "#pace14", data: {target: '#pace14'}
-      %li
-        = link_to "Contact & more", "#footer", data: {target: '#footer'}
+      / %li.navigation-
+      /   = link_to "Contact & more", "#footer", data: {target: '#footer'}
 

@@ -4,8 +4,8 @@ class Registration < ActiveRecord::Base
 
   CATEGORIES = [
     {name: "non_member", details: "Non-member (student or researcher)", fee: (Rails.env.production? ? 50 : 0.10)},
-    {name: "student_member", details: "Master or PhD student, full member (SZS, SSS, or SBS)", fee: 20},
-    {name: "advanced_member", details: "Advanced researcher, full member (SZS, SSS, or SBS)", fee: 30}
+    {name: "student_member", details: "Master or PhD student, member <a href='http://ssz.scnatweb.ch/en/' target='_blank'>SZS</a>, <a href='http://www.swiss-systematics.ch/' target='_blank'>SSS</a>, or <a href='http://www.botanica-helvetica.ch/index.fr.php' target='_blank'>SBS</a>", fee: 20},
+    {name: "advanced_member", details: "Advanced researcher, member <a href='http://ssz.scnatweb.ch/en/' target='_blank'>SZS</a>, <a href='http://www.swiss-systematics.ch/' target='_blank'>SSS</a>, or <a href='http://www.botanica-helvetica.ch/index.fr.php' target='_blank'>SBS</a>", fee: 30}
   ]
 
   validates_presence_of :first_name, :last_name, :email, :institute, :address, :zip_code, :city, :country, :category_name

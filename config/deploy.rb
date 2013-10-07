@@ -5,11 +5,14 @@ require 'capistrano/ext/multistage'
 require "bundler/capistrano"
 # require 'airbrake/capistrano'
 # require 'new_relic/recipes'
+default_run_options[:pty] = true  # Must be set for the password prompt
+                                  # from git to work
 
 set :domain,                        "129.194.57.242"
 set :scm,                           :git
 set :scm_verbose,                   true
-set :repository,                    "ssh://yannis@129.194.56.197/Users/yannis/gitrepos/biology14/.git"
+# set :repository,                    "ssh://yannis@129.194.56.197/Users/yannis/gitrepos/biology14/.git"
+set :repository,                    "git@github.com:yannis/biologyconf.git"
 set :deploy_via,                    :remote_cache
 set :migrate_target,                :current
 set :ssh_options,                   { :forward_agent => true }

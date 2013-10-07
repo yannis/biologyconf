@@ -18,6 +18,7 @@ tmp/data/*
 coverage
 biology14.sublime-project
 biology14.sublime-workspace
+rails
 
 # Ignore application configuration
 config/application.yml

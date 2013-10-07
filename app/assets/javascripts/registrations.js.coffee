@@ -14,11 +14,11 @@ bio14.registration =
   setRadioButtons: ->
     hideInput = $("<input name='showAbstract' id='registration-form-abstract-hide' type='radio' value='false'>").attr('checked', @abstract_disabled()).click =>
         @setDisabled(true)
-    hideField = $("<label class='radio-inline'>no</label>").prepend hideInput
+    hideField = $("<label class=''>no</label>").prepend hideInput
 
     showInput = $("<input name='showAbstract' id='registration-form-abstract-show' type='radio' value='true'>").attr('checked', !@abstract_disabled()).click =>
         @setDisabled(false)
-    showField = $("<label class='radio-inline'>yes</label>").prepend showInput
+    showField = $("<label class=''>yes</label>").prepend showInput
 
     @legend().html("Do you want to present a talk or a poster?").append(hideField).append(showField)
 

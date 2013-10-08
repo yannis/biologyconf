@@ -273,7 +273,7 @@ speakers = [
           evolutionary origin of biodiversity, with projects about adaptive radiation and niche construction in Pseudomonas and co-evolution of resource competitors;
         </li>
         <li>
-          diversity at the population level, with investigations on fungal parasites in the phytoplankton;
+          diversity at the population level, with investigations on the role of fungal parasites in the maintenance of intraspecifc diatom diversity;
         </li>
         <li>
           diversity at the community level, centered on lake phytoplankton community assembly;
@@ -290,10 +290,10 @@ speakers = [
     last_name: "Gouyon",
     title: "Prof.",
     description: "<p>
-      Prof. Pierre-Henri Gouyon is full Professor in Evolution, Genetics, Ecology and Ethics (among other) at the Muséum National d’Histoire Naturelle, Paris.
+      Prof. Pierre-Henri Gouyon is full Professor in Evolution, Genetics, Ecology and Ethics (among other) at the Muséum National d’Histoire Naturelle, at AgroParisTech and Sciences Politiques, Paris.
       </p>
       <p>
-        He’s current research interest and projects include theoretical considerations about the mechanisms underlying and driving the main functions of living organisms (sex, mutation, dispersion, death, …), considering the forces that act at different levels of integration (genes, individuals, metapopulations, species) and to decipher the role of chance, selection and historical contingency in evolutionary processes. His theoretical works are greatly complemented by experimental biology on plants.
+        His current research interest and projects include theoretical considerations about the mechanisms underlying and driving the main functions of living organisms (sex, mutation, dispersion, death, …), considering the forces that act at different levels of integration (genes, individuals, metapopulations, species), in order to decipher the role of chance, selection and historical contingency in evolutionary processes. His theoretical works are greatly complemented by experimental biology on plants.
       </p>",
     url: "http://www.mnhn.fr/oseb/GOUYON-Pierre-Henri",
     picture: "Pierre-HenriGouyon.jpg"
@@ -332,8 +332,25 @@ speakers = [
       Jonathan R. Leake is full Professor at the Department of Animal and Plant Sciences, University of Sheffield, UK.
     </p>
     <p>
-      He is an expert in mycorrhizal fungi and plant-soil interactions. His current research lines include (i) plant-to-soil carbon fluxes; (ii) mycorrhizal fungi networks of power and influence at all scales (from nano to global scales); (iii) Myco-heterotrophy: plants parasitic on fungi (including most orchids); (iv) root adaptations as an alternative strategy to mycorrhiza; and (v) pollution impacts on plants, soil biology and chemistry, and health.
-    </p>",
+      He is an expert in mycorrhizal fungi and plant-soil interactions. His current research lines include
+    </p>
+    <ol>
+      <li>
+        the evolution of plant-fungal symbioses
+      </li>
+      <li>
+        effects of mycorrhizal fungal networks of power and influence at all scales (from nano to global scales in contemporary ecosystems and over the past 450 million years)
+      </li>
+      <li>
+        the adapationds and functioning of myco-heterotrophs: plants parasitic on fungi (including most orchids)
+      </li>
+      <li>
+        root adaptations as an alternative strategy to mycorrhiza
+      </li>
+      <li>
+        pollution impacts on plants, soil biology and chemistry, and health.
+      </li>
+    </ol>",
     url: "http://www.shef.ac.uk/aps/staff-and-students/acadstaff/leake",
     picture: "JonathanRLeake.jpg"
   }

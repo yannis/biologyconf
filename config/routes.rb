@@ -12,6 +12,7 @@ Biology14::Application.routes.draw do
   end
   resources :events, only: [:index]
   get "pdf_program" => 'events#index', format: 'pdf'
+  get "registrations" => 'home#show'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

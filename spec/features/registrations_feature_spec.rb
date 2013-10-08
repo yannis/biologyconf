@@ -12,13 +12,41 @@ feature 'registration form', js: true do
     expect(page).to have_selector("form#new_registration")
     within("#new_registration") do
       expect(page).to have_selector("fieldset.registration-form-abstract", count: 1)
-      expect(page).to have_text('Do you want to present a talk or a poster? no yes
-', visible: true, count: 1)
+      expect(page).to have_text('Do you want to present a talk or a poster?', visible: true, count: 1)
       expect(page).to have_selector('.registration-form-abstract-collapse', visible: false, count: 1)
       page.find("#registration-form-abstract-show").click
       expect(page).to have_selector('.registration-form-abstract-collapse', visible: true, count: 1)
       page.find("#registration-form-abstract-hide").click
       expect(page).to have_selector('.registration-form-abstract-collapse', visible: false, count: 1)
+    end
+  end
+
+  scenario "I change the items i'm registering for (dormitory, dinner)" do
+    within("#new_registration") do
+      expect(page).to have_selector('#registration-fees-total', visible: false, count: 1)
+      within("#registration-fees-total") do
+        expect(page).to have_text("Total: 0.1 CHF", visible: true, count: 1)
+      end
+      choose "30 CHF: Advanced researcher, member SZS, SSS, or SBS"
+      within("#registration-fees-total") do
+        expect(page).to_not have_text("Total: 63.1 CHF")
+        expect(page).to have_text("Total: 30 CHF", visible: true, count: 1)
+      end
+      select "non-student: 60 CHF", :from => "registration_dinner_category_name"
+      within("#registration-fees-total") do
+        expect(page).to_not have_text("Total: 63.1 CHF")
+        expect(page).to have_text("Total: 90 CHF", visible: true, count: 1)
+      end
+      check "22 CHF: per person per night"
+      within("#registration-fees-total") do
+        expect(page).to_not have_text("Total: 63.1 CHF")
+        expect(page).to have_text("Total: 112 CHF", visible: true, count: 1)
+      end
+      select "student: 30 CHF", :from => "registration_dinner_category_name"
+      within("#registration-fees-total") do
+        expect(page).to_not have_text("Total: 83 CHF")
+        expect(page).to have_text("Total: 82 CHF", visible: true, count: 1)
+      end
     end
   end
 

@@ -2,9 +2,9 @@
   "folders":
   [
     {
-      "path": "~/Documents/railsapps/biologyconf/",
-      "folder_exclude_patterns": ["rails", "log", ".sass-cache", ".yardoc"],
-      "file_exclude_patterns": ["*sublime*"]
+      "path": "~/railsapps/biologyconf/",
+      "folder_exclude_patterns": ["rails", "log", ".sass-cache", ".yardoc", "coverage"],
+      "file_exclude_patterns": ["*.sublime-workspace*"]
     }
   ]
 }

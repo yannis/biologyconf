@@ -8,9 +8,17 @@ class Registration < ActiveRecord::Base
     {name: "advanced_member", details: "Advanced researcher, member <a href='http://ssz.scnatweb.ch/en/' target='_blank'>SZS</a>, <a href='http://www.swiss-systematics.ch/' target='_blank'>SSS</a>, or <a href='http://www.botanica-helvetica.ch/index.fr.php' target='_blank'>SBS</a>", fee: 30}
   ]
 
+  DINNER_CATEGORIES = [
+    {name: "student", details: "student", fee: 30},
+    {name: "non_student", details: "non-student", fee: 60}
+  ]
+
+  DORMITORY_FEE = 22
+
   validates_presence_of :first_name, :last_name, :email, :institute, :address, :zip_code, :city, :country, :category_name
   validates_uniqueness_of :last_name, if: Proc.new{|r| Registration.where(last_name: r.last_name, first_name: r.first_name, paid: true).count > 0 }, message: "A paid registration for “%{value}” already exist"
   validates_inclusion_of :category_name, in: CATEGORIES.map{|c| c[:name]}, allow_nil: false
+  validates_inclusion_of :dinner_category_name, in: DINNER_CATEGORIES.map{|c| c[:name]}, allow_blank: true
   validates_presence_of :title, if: Proc.new{|r| r.authors.present? || r.body.present?}
   validates_presence_of :authors, if: Proc.new{|r| r.title.present? || r.body.present?}
   validates_presence_of :body, if: Proc.new{|r| r.title.present? || r.authors.present?}
@@ -21,16 +29,24 @@ class Registration < ActiveRecord::Base
     CATEGORIES.map{|ch| Category.new ch}
   end
 
+  def self.dinner_categories
+    DINNER_CATEGORIES.map{|ch| Category.new ch}
+  end
+
   def full_name
     "#{first_name} #{last_name}"
   end
 
   def abstract_disabled
-    [self.title, self.authors, self.body, self.talk].compact.blank?
+    self.title.blank? && self.authors.blank? && self.body.blank? && self.talk.blank?
   end
 
   def category
     Registration.categories.detect{|c| c.name == self.category_name}
+  end
+
+  def dinner_category
+    Registration.dinner_categories.detect{|c| c.name == self.dinner_category_name}
   end
 
   def booking
@@ -38,7 +54,15 @@ class Registration < ActiveRecord::Base
   end
 
   def mark_as_paid
-    update_attributes paid: true
+    self.update_attributes paid: true, paid_fee: self.fee
+  end
+
+  def fee
+    fee = 0
+    fee += self.category.try(:fee).to_f
+    fee += self.dinner_category.try(:fee).to_f
+    fee += DORMITORY_FEE if self.dormitory?
+    fee
   end
 
   protected

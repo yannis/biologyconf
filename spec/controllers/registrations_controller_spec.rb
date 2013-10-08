@@ -18,7 +18,7 @@ describe RegistrationsController do
   describe "GET 'confirm' with valid session registration_id" do
     let(:registration){create :registration}
     before {
-      session[:registration_id] = registration.id_token
+      session[:registration_id_token] = registration.id_token
       get :confirm, id: registration.to_param
     }
     it {expect(response).to render_template "confirm"}
@@ -27,7 +27,7 @@ describe RegistrationsController do
   describe "GET 'confirm' with invalid session registration_id" do
     let(:registration){create :registration}
     before {
-      session[:registration_id] = nil
+      session[:registration_id_token] = nil
       get :confirm, id: registration.to_param
     }
     it {expect(response).to redirect_to root_path}
@@ -37,7 +37,7 @@ describe RegistrationsController do
   describe "GET 'edit' with valid session registration_id" do
     let(:registration){create :registration}
     before {
-      session[:registration_id] = registration.id_token
+      session[:registration_id_token] = registration.id_token
       get :edit, id: registration.to_param
     }
     it {expect(response).to render_template "home/show"}
@@ -46,7 +46,7 @@ describe RegistrationsController do
   describe "GET 'confirm' with invalid session registration_id" do
     let(:registration){create :registration}
     before {
-      session[:registration_id] = nil
+      session[:registration_id_token] = nil
       get :edit, id: registration.to_param
     }
     it {expect(response).to redirect_to root_path}
@@ -81,7 +81,7 @@ describe RegistrationsController do
   describe "PATCH 'update' with valid params" do
     let(:registration){create :registration, paid: false}
     before {
-      session[:registration_id] = registration.id_token
+      session[:registration_id_token] = registration.id_token
       patch :update, id: registration.to_param, registration: {first_name: "new first_name"}
     }
     it {expect(response).to redirect_to confirm_registration_path(registration)}
@@ -93,7 +93,7 @@ describe RegistrationsController do
   describe "PATCH 'update' with invalid params" do
     let(:registration){create :registration, paid: false}
     before {
-      session[:registration_id] = registration.id_token
+      session[:registration_id_token] = registration.id_token
       patch :update, id: registration.to_param, registration: {first_name: ""}
     }
     it {expect(response).to render_template "home/show"}
@@ -105,21 +105,25 @@ describe RegistrationsController do
   describe "POST 'callback' with valid params" do
     let(:registration){create :registration}
     before {
-      post :callback, id: "#{registration.booking.form_id}-#{registration.id}", mhash: Digest::MD5.hexdigest(registration.booking.uni_id+ENV['BOOKING_SECRET_KEY'])
+      session[:registration_id_token] = registration.id_token
+      post :callback, id: "#{registration.booking.form_id}-#{registration.id_token}", mhash: Digest::MD5.hexdigest(registration.booking.uni_id+ENV['BOOKING_SECRET_KEY'])
     }
     it {expect(registration.reload.paid).to be_true}
     it {expect(flash[:success]).to eq "Payment successfull! We are looking forward to see you in Geneva soon."}
     it {expect(response).to redirect_to root_path}
+    it {expect(session[:registration_id_token]).to be_nil}
   end
 
   describe "POST 'callback' with bad hash" do
     let(:registration){create :registration}
     before {
-      post :callback, id: "#{registration.booking.form_id}-#{registration.id}", mhash: "hjkdjgkfjfgjkgfghj"
+      session[:registration_id_token] = registration.id_token
+      post :callback, id: "#{registration.booking.form_id}-#{registration.id_token}", mhash: "hjkdjgkfjfgjkgfghj"
     }
     it {expect(flash[:success]).to be_nil}
     it {expect(flash[:error]).to eq "A problem occurred with your payment. Please contact the organizers of the conference."}
     it {expect(response).to redirect_to root_path}
+    it {expect(session[:registration_id_token]).to eq registration.id_token}
   end
 
 end

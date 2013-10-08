@@ -7,7 +7,10 @@
       = render 'chromeframe'
       .container
         = render 'flashes'
-        %h1= @title
+        %h1.biology14
+          biology
+          %span 14
+        %h2= @title
         = form_tag ENV['BOOKING_URL'] , role: 'form', class: 'form-horizontal' do
           - @registration.booking.params_hash.each do |k,v|
             = hidden_field_tag k, v
@@ -73,15 +76,15 @@
           .row.row-high
             .col-md-3
               %strong Registration fees
-            .col-md-9=raw "<strong>#{@registration.category.fee} CHF</strong> (#{@registration.category.details})"
+            .col-md-9=raw "<strong>#{@registration.fee} CHF</strong> (#{@registration.category.details})"
           .row.row-high
             .col-md-4
-              = submit_tag "Pay your registration",  class: "btn btn-primary"
+              = submit_tag "Pay your registration",  class: "btn btn-primary btn-lg"
               .help-block
                 You're going to be redirected to a secured web page for payment
               = image_tag "http://cms.unige.ch/webtools/static/booking/creditok.jpg"
             .col-md-4.col-md-offset-4
-              = link_to "Modify your registration data", edit_registration_path(@registration, anchor: "registration"),  class: "btn btn-warning"
+              = link_to "Modify your registration data", edit_registration_path(@registration, anchor: "registration"),  class: "btn btn-warning btn-lg"
               .help-block
                 You'll go back to the registration form to modify your data
     = render 'javascripts'

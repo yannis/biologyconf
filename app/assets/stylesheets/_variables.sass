@@ -6,6 +6,7 @@
   src: url(asset-path("mdcollageal-webfont.eot?#iefix")) format("embedded-opentype"), url(asset-path("mdcollageal-webfont.woff")) format("woff"), url(asset-path("mdcollageal-webfont.ttf")) format("truetype"), url(asset-path("mdcollageal-webfont.svg")) format("svg")
 
 $heading: "jaf-domus-titling-web", sans-serif
+$sanserif: "Helvetica Neue", Helvetica, Arial, sans-serif
 
 /* basis */
 $lightgrey: rgb(233, 233, 233)
@@ -33,3 +34,14 @@ $dark_orange: rgb(255, 90, 0)
 $blue: #77BED2
 $halfblue: rgba(119, 190, 210, 0.5)
 $darkblue: rgb(100, 160, 180)
+
+=transition-property($transition: all)
+  -webkit-transition-property: $transition
+  -moz-transition-property: $transition
+  -o-transition-property: $transition
+  transition-property: $transition
+=transition-duration($duration: 0.2)
+  -webkit-transition-duration: $duration
+  -moz-transition-duration: $duration
+  -o-transition-duration: $duration
+  transition-duration: $duration

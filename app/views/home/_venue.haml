@@ -2,59 +2,111 @@
   %section#venue.home-section
     .container
       .row
-        .col-md-9.content
+        .col-md-12
           %h2 Venue & Travel
+      .row
+        .col-md-3
           %h3 Conference venue
           %p
             Auditorium A300
             %br
-            Main hall of Sciences II building.
+            Main hall of Sciences II building
             %br
-            30 quai Ernest Ansermet,
+            30 quai Ernest Ansermet
             %br
             1211 Geneva
-          %h3 Conference venue
+        .col-md-3
+          %h3 Darwin Dinner
           %p
-            Auditorium A300
+            Main hall of Sciences II building
             %br
-            Main hall of Sciences II building.
-            %br
-            30 quai Ernest Ansermet,
+            30 quai Ernest Ansermet
             %br
             1211 Geneva
+      .row
+        .col-md-6
+          %p
+            %span.glyphicon.glyphicon-globe
+            46.198277, 6.132919 or 46°11’53”N 06°08’00”E
+      .row
+        .col-md-12
           %h3
             Coming in
-
+      .row
+        .col-md-6
           %h4
             By car
           %p
-            Google maps below give driving directions from France or from Lausanne. The Science Department is located in the center of Geneva. We do not recommend coming by car because traffic and construction sites make driving quite tedious. Parking is also quite expensive and sometimes hard to find. The closest public parking areas are located at the “Ecole de Physique”, at Uni Mail (follow Quai Ernest Ansermet for about 1 km) and in the street “David Dufour” (see the Parking Map).
-
+            Google maps below give driving directions from France or from Lausanne.
+          %p
+            The Science Department is located in the center of Geneva. We do not recommend coming by car because traffic and construction sites make driving quite tedious. Parking is also quite expensive and sometimes hard to find.
+          %p
+            The closest public parking areas are located at the “Ecole de Physique”, at Uni Mail (follow Quai Ernest Ansermet for about 1 km) and in the street “David Dufour” (see the Parking Map).
           %h4
             By train and bus
           %p
-            Take tramway 14 (direction: P+R Bernex). Get off the tramway at “Jonction” and change for either bus 2 (direction: Genève-Plage) or bus 19 (direction: Vernier-Village). Both these buses depart from the “Rue du Vélodrome” that you reach by crossing the “Rue des Deux-Ponts” in front of the tramway. These buses will bring you to “Sainte-Clotilde”, the closest bus stop from the Sciences departments. For directions from the bus stop, read the instructions below (“Walking from the “Sainte-Clotilde” bus stop to the Sciences department”). For bus maps and timetables, see the TPG website.
-
+            Take tramway 14 (direction: P+R Bernex). Get off the tramway at “Jonction” and change for either bus 2 (direction: Genève-Plage) or bus 19 (direction: Vernier-Village).
+          %p
+            Both these buses depart from the “Rue du Vélodrome” that you reach by crossing the “Rue des Deux-Ponts” in front of the tramway.
+          %p
+            These buses will bring you to “Sainte-Clotilde”, the closest bus stop from the Sciences departments.
+          %p
+            For directions from the bus stop, read the instructions below (“Walking from the “Sainte-Clotilde” bus stop to the Sciences department”).
+          %p
+            =raw "For bus maps and timetables, see the #{link_to "TPG website", "http://tpg.ch", target: "_blank"}."
           %h4
             By plane
           %p
-            In Geneva's Cointrin international airport baggage claim area, take a free bus ticket from the machine sitting right before customs and exit doors. Follow the signs inside the airport to the bus stop. Take either bus line 10 (direction: Rive) or bus 5 (direction: Thônex-Vallard) and stop at “Bel-Air”. Change for bus 19 or bus 2 (direction: Onex-Cité) and stop at “Sainte-Clotilde”. For directions from the Sainte-Clotilde bus stop to the Sciences Departments read the instructions below. For bus maps and timetables, see the TPG website.
+            In Geneva's Cointrin international airport baggage claim area, take a free bus ticket from the machine sitting right before customs and exit doors.
+          %p
+            Follow the signs inside the airport to the bus stop.
+            %p
+              Take either bus line 10 (direction: Rive) or bus 5 (direction: Thônex-Vallard) and stop at “Bel-Air”.
+            %p
+              Change for bus 19 or bus 2 (direction: Onex-Cité) and stop at “Sainte-Clotilde”.
+            %p
+              =raw "For directions from the Sainte-Clotilde bus stop to the Sciences Departments read the instructions below. For bus maps and timetables, see the #{link_to "TPG website", "http://tpg.ch", target: "_blank"}."
+          %h4
+            Walking from the “Sainte-Clotilde” bus stop to the Sciences department
+          %p
+            At the “Sainte-Clotilde” bus stop, turn left in the Rue Sainte-Clotilde (at the rear of the bus) and left again into Boulevard d’Yvoy. After about 100m, you’ll see the entrance of the Sciences III building on the right hand-side.
+        .col-md-6
+          %h4 By car from France
+          = link_to "Google map itinerary from France to our building", "https://maps.google.com/maps/ms?msid=218082617088752551772.00048d0e5c16867c9aac1&msa=0&ll=46.177929,6.116638&spn=0.203254,0.513268", target: "_blank", id: 'directions_map_from_france', id: "directions_map_from_france", class: "google_map_link"
+          %p.link_to_more
+            = link_to "larger map", "http://maps.google.com/maps/ms?msid=218082617088752551772.00048d0e5c16867c9aac1&msa=0&ie=UTF8&z=13&source=embed"
+          %h4 By car from Lausanne
+          = link_to "Google map itinerary from Lausanne to our building", "https://maps.google.com/maps?f=d&source=embed&saddr=Exit+4&daddr=Boulevard+d%E2%80%99Yvoy+4,+1205+Geneve,+switzerland&hl=en&geocode=FbFRwQIdVBpdAA%3B&mra=ls&sll=46.20229,6.128826&sspn=0.222648,0.52597&ie=UTF8&ll=46.2112,6.127281&spn=0.083153,0.161362&z=12", target: "_blank", id: 'directions_map_from_lausanne', class: "google_map_link"
+          %p.link_to_more
+            = link_to "larger map", "http://maps.google.com/maps?f=d&source=embed&saddr=Exit+4&daddr=Boulevard+d%E2%80%99Yvoy+4,+1205+Geneve,+switzerland&hl=en&geocode=FbFRwQIdVBpdAA%3B&mra=ls&sll=46.20229,6.128826&sspn=0.222648,0.52597&ie=UTF8&ll=46.2112,6.127281&spn=0.083153,0.161362&z=12"
+          %h4 Parkings
+          = link_to "Parkings around the venue", "http://maps.google.com/maps/ms?ie=UTF8&hl=en&msa=0&msid=218082617088752551772.00049aac49fbcab5644d9&ll=46.197125,6.140774&spn=0.003646,0.001579&output=embed&z=15", target: "_blank", id: 'parkings', class: "google_map_link"
+          %p.link_to_more
+            = link_to "larger map", "http://maps.google.com/maps/ms?ie=UTF8&hl=en&msa=0&msid=218082617088752551772.00049aac49fbcab5644d9&ll=46.197125,6.140774&spn=0.003646,0.001579&output=embed"
+          %h4 By foot from the bus stop
+          = link_to "Google map itinerary from the bus stop to our building", "http://maps.google.com/maps?f=d&source=embed&saddr=Rue+des+Deux+Ponts&daddr=46.198354,6.132839&geocode=FQr3wAIdOoddAA%3B&hl=en&mra=dme&mrcr=0&mrsp=1&sz=16&dirflg=w&sll=46.198429,6.135135&sspn=0.013917,0.032873&ie=UTF8&ll=46.199587,6.131959&spn=0.005198,0.010085&z=16", target: "_blank", id: 'directions_map_from_bus_stop', class: "google_map_link"
+          %p.link_to_more
+            = link_to "larger map", "http://maps.google.com/maps?f=d&source=embed&saddr=Rue+des+Deux+Ponts&daddr=46.198354,6.132839&geocode=FQr3wAIdOoddAA%3B&hl=en&mra=dme&mrcr=0&mrsp=1&sz=16&dirflg=w&sll=46.198429,6.135135&sspn=0.013917,0.032873&ie=UTF8&ll=46.199587,6.131959&spn=0.005198,0.010085&z=16"
+      .row
+        .col-md-6
           %h3
             Housing (walking distance from the conference venue)
           %ul
             %li
-              Hotel Carmen : http://www.hotel-carmen.ch/
+              = link_to "Hotel Carmen", "http://www.hotel-carmen.ch", target: "blank_"
             %li
-              Hotel Dizerens : http://www.residencedizerens.ch/
+              = link_to "Hotel Dizerens", "http://www.residencedizerens.ch", target: "blank_"
             %li
-              Hotel Aida : http://www.hotel-aida.ch/
+              = link_to "Hotel Aida", "http://www.hotel-aida.ch/", target: "blank_"
             %li
-              Hotel Comédie : http://www.hotel-comedie.ch/
+              = link_to "Hotel Comédie", "http://www.hotel-comedie.ch", target: "blank_"
             %li
-              Hotel Starling Residence : http://www.shresidence.ch/
+              = link_to "Hotel Starling Residence", "http://www.shresidence.ch", target: "blank_"
             %li
-              Special Boutique Design Hotel : La cours des Augustins  http://www.lacourdesaugustins.com
+              = link_to "Special Boutique Design Hotel : La cours des Augustins", "http://www.lacourdesaugustins.com", target: "blank_"
+      .row
+        .col-md-6
           %h3
             General tourist information
           %p
-            http://www.geneve-tourisme.ch/en/accueil/
+            = link_to "Geneva Tourism & Conventions - Touristical information", "http://www.geneve-tourisme.ch/en/accueil"

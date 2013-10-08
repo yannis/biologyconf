@@ -1,20 +1,20 @@
 class BookingCallback
 
-  attr_reader :errors, :mhash, :controle_md5, :registration_id, :remote_addr, :uni_id, :key, :secret_key
+  attr_reader :errors, :mhash, :controle_md5, :registration_id_token, :remote_addr, :uni_id, :key, :secret_key
 
-  def self.hashize(registration_id)
-    Digest::MD5.hexdigest "#{ENV['BOOKING_FORM_ID']}-#{registration_id.to_s}#{ENV['BOOKING_SECRET_KEY']}"
+  def self.hashize(registration_id_token)
+    Digest::MD5.hexdigest "#{ENV['BOOKING_FORM_ID']}-#{registration_id_token}#{ENV['BOOKING_SECRET_KEY']}"
   end
 
   def initialize(request)
     # p "request.remote_ip: #{request.remote_ip}"
     @uni_id = request.params['id']
-    @registration_id = uni_id.gsub("#{ENV['BOOKING_FORM_ID']}-","")
+    @registration_id_token = uni_id.gsub("#{ENV['BOOKING_FORM_ID']}-","")
     @mhash = request.params['mhash']
     @remote_addr = request.remote_ip
     @secret_key = ENV['BOOKING_SECRET_KEY']
     @key = uni_id.to_s+secret_key
-    @controle_md5 = BookingCallback.hashize registration_id
+    @controle_md5 = BookingCallback.hashize registration_id_token
     @errors = {}
   end
 
@@ -29,7 +29,7 @@ class BookingCallback
   end
 
   def registration
-    Registration.find registration_id
+    Registration.where(id_token: registration_id_token).first
   end
 
   def valid?

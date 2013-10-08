@@ -7,4 +7,7 @@ class Category
     @details = data[:details]
   end
 
+  def details_and_price
+    "#{details}: #{fee} CHF"
+  end
 end

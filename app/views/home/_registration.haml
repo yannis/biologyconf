@@ -63,15 +63,35 @@
                     = f.error_text :country
         .row
           .col-md-6
-            %fieldset.registration-fees
+            %fieldset#registration-fees
               %legend Registration fees
+              %h3 Conference
               = f.form_group :category_name do
                 - for category in Registration.categories
                   .radio
                     %label
-                      = f.radio_button :category_name, category.name, id: "registration-category_name-#{category.name}"
+                      = f.radio_button :category_name, category.name, id: "registration-category_name-#{category.name}", data: {fee: category.fee}
                       =raw "<strong>#{category.fee} CHF:</strong> #{category.details}"
               = f.error_text :category_name
+              %h3 Darwin's Dinner
+              = f.form_group :dinner_category_name do
+                = f.select :dinner_category_name, Registration.dinner_categories.map{|c| [c.details_and_price, c.name, {data: {fee: c.fee}}]}, { prompt: true }
+              = f.error_text :dinner_category_name
+              %h3 Dormitory
+              .help-block
+                Accommodation in an underground shelter (anti-nuclear shelter), for Thursday night, 13th of February 2014
+              .checkbox
+                %label
+                  = f.check_box :dormitory, data: {fee: Registration::DORMITORY_FEE}
+                  =raw "<strong>22 CHF:</strong> per person per night"
+        .row
+          .col-md-6
+            #registration-fees-total
+              Total:
+              %span
+                = @registration.fee
+              %strong
+                CHF
         .row
           .col-md-12
             %fieldset.registration-form-abstract{data: {"abstract_disabled" => f.object.abstract_disabled.to_s}}
@@ -81,7 +101,7 @@
                 = f.form_group :talk, class: 'row' do
                   = f.starred_label :talk, "Do you apply for a talk?", class: "col-md-3 control-label"
                   .col-md-9
-                    = f.check_box :talk, class: "form-control"
+                    = f.check_box :talk
                     = f.error_text :talk
                 = f.form_group :title, class: 'row' do
                   = f.starred_label :title, nil, class: "col-md-3 control-label"

@@ -1,7 +1,7 @@
 ActiveAdmin.register Registration do
   controller do
     def permitted_params
-      params.permit(:registration => [:first_name, :last_name, :email, :category_name, :institute, :address, :city, :zip_code, :country, :title, :authors, :body, :talk])
+      params.permit(:registration => [:first_name, :last_name, :email, :category_name, :dinner_category_name, :dormitory, :institute, :address, :city, :zip_code, :country, :title, :authors, :body, :talk])
     end
   end
 

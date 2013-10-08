@@ -1,7 +1,6 @@
 window.bio14 ||= {}
 bio14.registration =
   abstractFieldset: $(".registration-form-abstract")
-  feeFieldset: $("#registration-fees")
   abstract_disabled: ->
     $(@abstractFieldset).data('abstract-disabled')
   setDisabled: (value)->
@@ -21,28 +20,12 @@ bio14.registration =
     @legend().html("Do you want to present a talk or a poster?").append(hideField).append(showField)
 
   collapseForm: ->
-    # console.log "abstract-disabled:", @abstract_disabled()
+    console.log "abstract-disabled:", @abstract_disabled()
     $(@abstractFieldset).attr('abstract-disabled', @abstract_disabled())
     $(@abstractFieldset).find('.collapsible').toggleClass('collapse', @abstract_disabled())
-
-  calculateFee: ->
-    fee = 0.00
-    $(@feeFieldset).find(":selected, :checked").each (i, element) ->
-      value = parseFloat($(element).data('fee'))
-      fee += value if value > 0
-    return fee
-
-  setFee: ->
-    zis = @
-    $(@feeFieldset).on 'change', "input, select", (event) ->
-      fee = zis.calculateFee()
-      $("#registration-fees-total span").html(fee)
-
   set: ->
     @setRadioButtons()
     @collapseForm()
-    @setFee()
-
 
 $ ->
   bio14.registration.set()

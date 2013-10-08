@@ -53,43 +53,8 @@
             %p
               %small
                 %em The organizing committee
-
-
-
-
-  - cache "home-program" do
-    %section#program.home-section
-      .container
-        .row
-          .col-md-12
-            %h2 Program
-        .row
-          .col-md-6
-            %p.lead
-              The biology14 conference starts Thursday morning (13 February) with registration and reception. Talks and poster presentations are scheduled from Thursday morning until Friday afternoon, with the conference dinner (“Darwin Dinner”) taking place on Thursday evening.
-            %p.lead
-              The Darwin Dinner will take place in a nearby restaurant in honor of Charles Darwin. An invited international speaker will enrich this evening with an entertaining talk and there will be ample opportunity for discussions, also with our invited keynote speakers.
-            %p.lead
-              The night then continues in downtown Geneva.
-        .row
-          = render 'events/program', events: @grouped_events
-        .row
-          .col-md-12
-            = link_to "/pdf_program", class: "btn btn-default btn-lg pull-right" do
-              %span.glyphicon.glyphicon-download
-              Download the program as PDF
+  = render 'home/program', events: @grouped_events
   = render 'home/speakers', speakers: @speakers
-  = render 'registration', registration: @registration
-  = render "venue"
-  - cache "home-pace14" do
-    %section#pace14.home-section
-      .container
-        .row
-          .col-md-6.content
-            %h2 Pace14
-            %p.lead
-              Swiss conservation biologists and restoration ecologists are pleased to invite you to the fourth edition of PACE, the yearly Swiss symposium on Plant and Animal Conservation Ecology, that will take place on Wednesday 12 February 2014, i.e. just before biology14. The major topic of this year meeting is “…………………………”. This one day symposium offers young scientists from Swiss universities and high technical schools the opportunity to present work in applied organismal ecology that bears specific relevance for biodiversity conservation.
-            %p.lead
-              Further information under this link: PACE14
-            %p.lead
-              Organizing committee: University of Geneva and the Swiss chapter of the Europe Section of the Society for Conservation Biology
+  = render 'home/registration', registration: @registration
+  = render "home/venue"
+  = render "home/pace14"

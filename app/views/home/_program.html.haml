@@ -1,0 +1,37 @@
+- cache "home-program" do
+  %section#program.home-section
+    .container
+      .row
+        .col-md-12
+          %h2 Program
+      .row
+        .col-md-6
+          %p.lead
+            The biology14 conference starts Thursday morning (13 February) with registration and reception. Talks and poster presentations are scheduled from Thursday morning until Friday afternoon, with the conference dinner (“Darwin Dinner”) taking place on Thursday evening.
+          %p.lead
+            The Darwin Dinner will take place in a nearby restaurant in honor of Charles Darwin. An invited international speaker will enrich this evening with an entertaining talk and there will be ample opportunity for discussions, also with our invited keynote speakers.
+          %p.lead
+            The night then continues in downtown Geneva.
+      .row
+        - events.each do |date, events|
+          .col-md-5
+            %table.table
+              %thead
+                %tr
+                  %td{colspan: 2}
+                    %h3
+                      = date.to_s(:day_month_year)
+              %tbody
+                - for event in events
+                  %tr{class: event.table_classes}
+                    %th
+                      = event.start.to_s(:time_only)
+                      –
+                      = event.end.to_s(:time_only)
+                    %td
+                      = event.title
+      .row
+        .col-md-12
+          = link_to "/pdf_program", class: "btn btn-default btn-lg pull-right" do
+            %span.glyphicon.glyphicon-download
+            Download the program as PDF

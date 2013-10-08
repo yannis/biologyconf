@@ -22,6 +22,6 @@ describe Event do
 
   describe "the classes" do
     subject {create :event, classes: "bold grey", kind: "break"}
-    its(:table_classes){should eq "bold grey warning"}
+    its(:table_classes){should eq "bold grey event-break"}
   end
 end

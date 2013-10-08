@@ -7,6 +7,7 @@ class RegistrationsController < ApplicationController
   def create
     @registration = Registration.new registration_params
     if @registration.save
+      @registration.reload
       session[:registration_id_token] = @registration.id_token
       respond_with @registration do |format|
         format.html { redirect_to confirm_registration_path(@registration)}
@@ -65,8 +66,8 @@ class RegistrationsController < ApplicationController
 
   def callback_test
     @registration = Registration.find params[:id]
-    @uni_id = "226-#{@registration.id_token}"
-    @mhash = BookingCallback.hashize(@registration.id_token)
+    @uni_id = "226-#{@registration.timestamp_id}"
+    @mhash = BookingCallback.hashize(@registration.timestamp_id)
   end
 
   private
@@ -76,7 +77,7 @@ class RegistrationsController < ApplicationController
 
     def check_session_var
       @registration = Registration.find params[:id]
-      if @registration.paid || session[:registration_id_token] != @registration.id_token
+      if @registration.paid || (session[:registration_id_token].to_s != @registration.reload.id_token.to_s)
         flash[:error] = "You can't access this registration"
         respond_with @registration do |f|
           f.html {redirect_to root_path}

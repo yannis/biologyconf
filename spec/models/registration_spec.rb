@@ -16,11 +16,17 @@ describe Registration do
 end
 
 describe "A registration" do
+  Timecop.freeze("2013-11-01 14:00:00")
   let(:registration) { create :registration}
   it {expect(registration.category).to be_a Category}
   it {expect(registration.category_name).to eq "non_member"}
   it {expect(registration.fee).to eq 0.1}
   it {expect(registration.paid_fee.to_f).to eq 0}
+  it {
+    expect(registration.reload.timestamp_id).to eq "13833108001"
+    Timecop.return
+  }
+  # Timecop.return
 
   describe "when mark as paid" do
     before {registration.mark_as_paid}
@@ -66,7 +72,6 @@ describe "A registration" do
     end
   end
 end
-
 
 describe "validation of last name" do
   context "if an unpaid registration with same last_name and first_name already exists" do

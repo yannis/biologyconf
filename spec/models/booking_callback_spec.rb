@@ -1,23 +1,23 @@
 require 'spec_helper'
 
 def request(registration)
-  id = "226-#{registration.id_token}"
+  id = "226-#{registration.timestamp_id}"
   req = Object.new
   req.stub(:remote_ip){"0.0.0.0"}
-  req.stub(:params){{"id" => id, "mhash" => BookingCallback.hashize(registration.id_token)}}
+  req.stub(:params){{"id" => id, "mhash" => BookingCallback.hashize(registration.timestamp_id)}}
   return req
 end
 
 def bad_remote_request(registration)
-  id = "226-#{registration.id_token}"
+  id = "226-#{registration.timestamp_id}"
   req = Object.new
   req.stub("remote_ip"){"1.1.1.1"}
-  req.stub(:params){{"id" => id, "mhash" => BookingCallback.hashize(registration.id_token)}}
+  req.stub(:params){{"id" => id, "mhash" => BookingCallback.hashize(registration.timestamp_id)}}
   return req
 end
 
 def bad_hash_request(registration)
-  id = "226-#{registration.id_token}"
+  id = "226-#{registration.timestamp_id}"
   req = Object.new
   req.stub(:remote_ip){"0.0.0.0"}
   req.stub(:params){{"id" => id, "mhash" => BookingCallback.hashize(registration.id)}}

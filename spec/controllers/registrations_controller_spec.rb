@@ -21,7 +21,11 @@ describe RegistrationsController do
       session[:registration_id_token] = registration.id_token
       get :confirm, id: registration.to_param
     }
-    it {expect(response).to render_template "confirm"}
+    it {expect(registration.id_token).to eq session[:registration_id_token]}
+    # it {expect(response).to redirect_to root_path}
+    it {
+      expect(response).to render_template "confirm"
+    }
   end
 
   describe "GET 'confirm' with invalid session registration_id" do
@@ -63,6 +67,7 @@ describe RegistrationsController do
     it {expect(flash[:success]).to be_nil}
     it {expect(assigns(:registration)).to be_valid_verbose}
     it {expect(Registration.count).to eq registration_count+1}
+    it {expect(session[:registration_id_token]).to eq Digest::SHA1.hexdigest(Time.now.to_s + assigns(:registration).id.to_s)}
   end
 
   describe "POST 'create with invalid_params'" do
@@ -106,7 +111,7 @@ describe RegistrationsController do
     let(:registration){create :registration}
     before {
       session[:registration_id_token] = registration.id_token
-      post :callback, id: "#{registration.booking.form_id}-#{registration.id_token}", mhash: Digest::MD5.hexdigest(registration.booking.uni_id+ENV['BOOKING_SECRET_KEY'])
+      post :callback, id: "#{registration.booking.form_id}-#{registration.timestamp_id}", mhash: Digest::MD5.hexdigest(registration.booking.uni_id+ENV['BOOKING_SECRET_KEY'])
     }
     it {expect(registration.reload.paid).to be_true}
     it {expect(flash[:success]).to eq "Payment successfull! We are looking forward to see you in Geneva soon."}
@@ -118,7 +123,7 @@ describe RegistrationsController do
     let(:registration){create :registration}
     before {
       session[:registration_id_token] = registration.id_token
-      post :callback, id: "#{registration.booking.form_id}-#{registration.id_token}", mhash: "hjkdjgkfjfgjkgfghj"
+      post :callback, id: "#{registration.booking.form_id}-#{registration.timestamp_id}", mhash: "hjkdjgkfjfgjkgfghj"
     }
     it {expect(flash[:success]).to be_nil}
     it {expect(flash[:error]).to eq "A problem occurred with your payment. Please contact the organizers of the conference."}

@@ -23,7 +23,7 @@ class Registration < ActiveRecord::Base
   validates_presence_of :authors, if: Proc.new{|r| r.title.present? || r.body.present?}
   validates_presence_of :body, if: Proc.new{|r| r.title.present? || r.authors.present?}
 
-  before_create :set_id_token
+  after_create :set_id_token, :set_timestamp_id
 
   def self.categories
     CATEGORIES.map{|ch| Category.new ch}
@@ -74,6 +74,10 @@ class Registration < ActiveRecord::Base
   private
 
     def set_id_token
-      self.id_token = self.generate_personal_token if self.respond_to?(:id_token) && self.id_token.blank?
+      self.update_attributes(id_token: self.generate_personal_token) if self.respond_to?(:id_token) && self.id_token.nil?
+    end
+
+    def set_timestamp_id
+      self.update_attributes(timestamp_id: "#{self.created_at.to_i}#{self.id}")
     end
 end

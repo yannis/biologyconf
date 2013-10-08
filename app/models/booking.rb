@@ -5,7 +5,7 @@ class Booking
   def initialize(registration=nil)
     @registration = registration
     @form_id = ENV['BOOKING_FORM_ID']
-    @uni_id = "#{@form_id}-#{@registration.id_token}"
+    @uni_id = "#{@form_id}-#{@registration.timestamp_id}"
     @params_hash = {
       form_id: @form_id,
       key: ENV['BOOKING_FORM_KEY'],

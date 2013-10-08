@@ -23,7 +23,8 @@ describe "A registration" do
   it {expect(registration.fee).to eq 0.1}
   it {expect(registration.paid_fee.to_f).to eq 0}
   it {
-    expect(registration.reload.timestamp_id).to eq "13833108001"
+    # expect(registration.reload.timestamp_id).to eq "13833108001"
+    expect(registration.reload.timestamp_id).to eq "8001"
     Timecop.return
   }
   # Timecop.return

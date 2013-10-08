@@ -78,6 +78,6 @@ class Registration < ActiveRecord::Base
     end
 
     def set_timestamp_id
-      self.update_attributes(timestamp_id: "#{self.created_at.to_i}#{self.id}")
+      self.update_attributes timestamp_id: "#{self.created_at.to_i}#{self.id}"[-4..-1]
     end
 end

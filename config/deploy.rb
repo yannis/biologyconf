@@ -13,7 +13,7 @@ set :scm,                           :git
 set :scm_verbose,                   true
 # set :repository,                    "ssh://yannis@129.194.56.197/Users/yannis/gitrepos/biology14/.git"
 set :repository,                    "git@github.com:yannis/biologyconf.git"
-set :deploy_via,                    :remote_cache
+# set :deploy_via,                    :remote_cache
 set :migrate_target,                :current
 set :ssh_options,                   { :forward_agent => true }
 set :normalize_asset_timestamps,    false

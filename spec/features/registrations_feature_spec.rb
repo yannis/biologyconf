@@ -27,12 +27,12 @@ feature 'registration form', js: true do
       within("#registration-fees-total") do
         expect(page).to have_text("Total: 0.1 CHF", visible: true, count: 1)
       end
-      choose "30 CHF: Advanced researcher, member SZS, SSS, or SBS"
+      choose "35 CHF: Advanced researcher, member SZS, SSS, or SBS"
       within("#registration-fees-total") do
         expect(page).to_not have_text("Total: 63.1 CHF")
-        expect(page).to have_text("Total: 30 CHF", visible: true, count: 1)
+        expect(page).to have_text("Total: 35 CHF", visible: true, count: 1)
       end
-      select "non-student: 60 CHF", :from => "registration_dinner_category_name"
+      select "non-student: 55 CHF", :from => "registration_dinner_category_name"
       within("#registration-fees-total") do
         expect(page).to_not have_text("Total: 63.1 CHF")
         expect(page).to have_text("Total: 90 CHF", visible: true, count: 1)
@@ -45,7 +45,7 @@ feature 'registration form', js: true do
       select "student: 30 CHF", :from => "registration_dinner_category_name"
       within("#registration-fees-total") do
         expect(page).to_not have_text("Total: 83 CHF")
-        expect(page).to have_text("Total: 82 CHF", visible: true, count: 1)
+        expect(page).to have_text("Total: 87 CHF", visible: true, count: 1)
       end
     end
   end

@@ -4,7 +4,7 @@
     %section#home-banner.jumbotron.home-section
       .container
         .row
-          .home-banner-header.col-md-6
+          .home-banner-header.col-md-6.col-sm-8
             .row
               .col-md-12
                 %h3
@@ -18,23 +18,25 @@
                   the Swiss conference on organismal biology
                 %p.lead
                   The "biology" conference is the yearly joint congress of the Swiss Zoological Society, the Swiss Botanical Society, and the Swiss Systematics Society
-                = link_to "#registration", class: "btn btn-primary btn-lg pull-right home-banner-registration-link", data: {target: '#registration'} do
-                  %span.glyphicon.glyphicon-check
-                  Register
-          .home-banner-carousel.carousel.slide.col-md-6
+          .home-banner-carousel.carousel.slide.col-md-6.col-sm-4
             .carousel-inner
               #carousel-item-1.item.active
                 = image_tag "carousel/full_tree.png"
               #carousel-item-2.item
                 = image_tag "carousel/algae.png"
-              #carousel-item-4.item
+              #carousel-item-3.item
                 = image_tag "carousel/monkey.png"
               #carousel-item-4.item
                 = image_tag "carousel/foram.png"
               #carousel-item-5.item
                 = image_tag "carousel/truc.png"
-              #carousel-item-5.item
+              #carousel-item-6.item
                 = image_tag "carousel/cell.png"
+        .row
+          .col-lg-6.col-md-12
+            = link_to "#registration", class: "btn btn-primary btn-lg pull-right home-banner-registration-link", data: {target: '#registration'} do
+              %span.glyphicon.glyphicon-check
+              Register
         .row.home-banner-welcome
           .col-md-6
             %p

@@ -23,5 +23,5 @@ $ ->
   bio14.navigation.set()
 
   $(window).scroll ->
-    scrollTop = $(@).scrollTop()
-    $("#application-navigation li").removeClass("active") if scrollTop < 300
+    scrollTop = $(window).scrollTop()
+    $("#application-navigation li").removeClass("active") if scrollTop < 50

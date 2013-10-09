@@ -71,7 +71,10 @@
                   .radio
                     %label
                       = f.radio_button :category_name, category.name, id: "registration-category_name-#{category.name}", data: {fee: category.fee}
-                      =raw "<strong>#{category.fee} CHF:</strong> #{category.details}"
+                      %strong
+                        = category.fee
+                        CHF:
+                      =raw category.details
               = f.error_text :category_name
               %h3 Darwin's Dinner
               = f.form_group :dinner_category_name do
@@ -81,8 +84,8 @@
               .help-block
                 Accommodation in an underground shelter (anti-nuclear shelter), for Thursday night, 13th of February 2014
               .checkbox
-                %label
-                  = f.check_box :dormitory, data: {fee: Registration::DORMITORY_FEE}
+                = f.check_box :dormitory, data: {fee: Registration::DORMITORY_FEE}, id: "registration-dormitory"
+                %label{for: "registration-dormitory"}
                   =raw "<strong>22 CHF:</strong> per person per night"
         .row
           .col-md-6

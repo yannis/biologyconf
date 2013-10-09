@@ -8,7 +8,7 @@ class Booking
     @uni_id = "#{@form_id}-#{@registration.timestamp_id}"
     @params_hash = {
       form_id: @form_id,
-      key: ENV['BOOKING_FORM_KEY'],
+      key: ENV["BOOKING_KEY"],
       "Prix" => @registration.fee,
       firstname: @registration.first_name,
       surname: @registration.last_name,

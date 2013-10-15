@@ -18,7 +18,7 @@ gem 'bootstrap-sass', github: "thomas-mcdonald/bootstrap-sass"
 gem 'coffee-rails'
 gem 'jquery-rails'
 gem "jquery-ui-rails"
-gem 'uglifier', '>= 1.0.3'
+gem 'uglifier'
 
 gem 'devise',              github: 'plataformatec/devise'
 gem 'responders',          github: 'plataformatec/responders'

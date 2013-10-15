@@ -24,6 +24,10 @@ module Biology14
     # config.assets.paths << "#{Rails.root}/vendor/bootstrap/css"
     # config.assets.paths << "#{Rails.root}/vendor/bootstrap/js"
     config.assets.paths << "#{Rails.root}/vendor/assets"
+    config.assets.enabled = true
+    config.assets.js_compressor = :uglifier
+    # config.assets.js_compressor = :closure
+    config.assets.precompile += %w( polyfills.js )
 
     config.action_mailer.default_url_options = { :host => ENV['MAILER_HOST'] }
   end

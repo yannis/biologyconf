@@ -15,6 +15,6 @@
                   = image_tag speaker.portrait.url(:s300), class: 'speaker-portrait img-responsive', alt: speaker.full_name
                   = link_to speaker.url, class: "btn btn-default speaker-website", target: '_blank' do
                     %span.glyphicon.glyphicon-globe
-                    visit website
+                    website
                 .speaker-caption.col-md-8.col-sm-8
                   =raw speaker.description

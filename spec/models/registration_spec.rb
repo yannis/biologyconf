@@ -61,13 +61,13 @@ describe "A registration" do
       describe "when dormitory is true" do
         before {registration.update_attributes dormitory: true}
         it{expect(registration).to be_valid_verbose}
-        it {expect(registration.fee).to eq 112.0}
+        it {expect(registration.fee).to eq 116.0}
         it {expect(registration.paid_fee.to_f).to eq 0}
 
         describe "when mark as paid" do
           before {registration.mark_as_paid}
           it {expect(registration).to be_paid}
-          it {expect(registration.paid_fee.to_f).to eq 112.0}
+          it {expect(registration.paid_fee.to_f).to eq 116.0}
         end
       end
     end

@@ -7,7 +7,7 @@ bio14.home =
     # console.log "windowHeight", windowHeight
     # console.log "navHeight", navHeight
     # console.log "heightToSet", heightToSet
-    $(".home-section").css "min-height", heightToSet
+    $(".home-section, .jumbotron").css "min-height", heightToSet
     $('[data-spy="scroll"]').each ->
       $(@).scrollspy('refresh')
 

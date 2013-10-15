@@ -1,128 +1,154 @@
 %section#registration.home-section
   .container
     %h2 Registration
-    #registration-form
-      = form_for @registration, url: (@registration.new_record? ? registrations_path(anchor: "registration") : registration_path(@registration, anchor: "registration")), role: 'form', class: 'form-horizontal' do |f|
-        = render 'layouts/error_messages', target: @registration
-        .row
-          .col-md-6
-            %fieldset.registration-form-details
-              %legend
-                Your details
-              = f.form_group :first_name do
-                .row
-                  = f.starred_label :first_name, nil, class: "col-md-3 control-label #{"has-error" if f.object.errors[:first_name].present?}"
-                  .col-md-9
-                    = f.text_field :first_name, class: "form-control", placeholder: "Enter first name"
-                    = f.error_text :first_name
-              = f.form_group :last_name do
-                .row
-                  = f.starred_label :last_name, nil, class: "col-md-3 control-label"
-                  .col-md-9
-                    = f.text_field :last_name, class: "form-control", placeholder: "Enter last name"
-                    = f.error_text :last_name
-              = f.form_group :email do
-                .row
-                  = f.starred_label :email, nil, class: "col-md-3 control-label"
-                  .col-md-9
-                    = f.email_field :email, class: "form-control", placeholder: "Enter email"
-                    = f.error_text :email
-          .col-md-6
-            %fieldset.registration-form-affiliation
-              %legend
-                Affiliation
-              = f.form_group :institute do
-                .row
-                  = f.starred_label :institute, nil, class: "col-md-3 control-label"
-                  .col-md-9
-                    = f.text_field :institute, class: "form-control", placeholder: "Enter your institute name"
-                    = f.error_text :institute
-              = f.form_group :address do
-                .row
-                  = f.starred_label :address, nil, class: "col-md-3 control-label"
-                  .col-md-9
-                    = f.text_field :address, class: "form-control", placeholder: "Enter your institute street name and number"
-                    = f.error_text :address
-              = f.form_group :zip_code do
-                .row
-                  = f.starred_label :zip_code, nil, class: "col-md-3 control-label"
-                  .col-md-9
-                    = f.text_field :zip_code, class: "form-control", placeholder: "Enter your institute zip code"
-                    = f.error_text :zip_code
-              = f.form_group :city do
-                .row
-                  = f.starred_label :city, nil, class: "col-md-3 control-label"
-                  .col-md-9
-                    = f.text_field :city, class: "form-control", placeholder: "Enter your institute city"
-                    = f.error_text :city
-              = f.form_group :country do
-                .row
-                  = f.starred_label :country, nil, class: "col-md-3 control-label"
-                  .col-md-9
-                    = f.country_select :country
-                    = f.error_text :country
-        .row
-          .col-md-6
-            %fieldset#registration-fees
-              %legend Registration fees
-              %h3 Conference
-              = f.form_group :category_name do
-                - for category in Registration.categories
-                  .radio
-                    %label
-                      = f.radio_button :category_name, category.name, id: "registration-category_name-#{category.name}", data: {fee: category.fee}
-                      %strong
-                        = category.fee
-                        CHF:
-                      =raw category.details
-              = f.error_text :category_name
-              %h3 Darwin's Dinner
-              = f.form_group :dinner_category_name do
-                = f.select :dinner_category_name, Registration.dinner_categories.map{|c| [c.details_and_price, c.name, {data: {fee: c.fee}}]}, { prompt: true }
-              = f.error_text :dinner_category_name
-              %h3 Dormitory
-              .help-block
-                Accommodation in an underground shelter (anti-nuclear shelter), for Thursday night, 13th of February 2014
-              .checkbox
-                = f.check_box :dormitory, data: {fee: Registration::DORMITORY_FEE}, id: "registration-dormitory"
-                %label{for: "registration-dormitory"}
-                  =raw "<strong>22 CHF:</strong> per person per night"
-        .row
-          .col-md-6
-            #registration-fees-total
-              Total:
-              %span
-                = @registration.fee
-              %strong
-                CHF
-        .row
-          .col-md-12
-            %fieldset.registration-form-abstract{data: {"abstract_disabled" => f.object.abstract_disabled.to_s}}
-              %legend
-                Abstract
-              .registration-form-abstract-collapse.collapsible
-                = f.form_group :talk, class: 'row' do
-                  = f.starred_label :talk, "Do you apply for a talk?", class: "col-md-3 control-label"
-                  .col-md-9
-                    = f.check_box :talk
-                    = f.error_text :talk
-                = f.form_group :title, class: 'row' do
-                  = f.starred_label :title, nil, class: "col-md-3 control-label"
-                  .col-md-9
-                    = f.text_field :title, class: "form-control", placeholder: "Enter the title of your abstract"
-                    = f.error_text :title
-                = f.form_group :authors, class: 'row' do
-                  = f.starred_label :authors, nil, class: "col-md-3 control-label"
-                  .col-md-9
-                    = f.text_area :authors, class: "form-control", placeholder: "Enter the list of authors"
-                    = f.error_text :authors
-                = f.form_group :body, class: 'row' do
-                  = f.starred_label :body, nil, class: "col-md-3 control-label"
-                  .col-md-9
-                    = f.text_area :body, class: "form-control", placeholder: "Enter the body text of your abstract"
-                    = f.error_text :body
-        .row
-          .col-md-12
-            = f.submit "Send your registration",  class: "btn btn-primary btn-lg"
+    %p
+      Online registration will close the 7th of February 2014. Registration will still be possible on site.
+    %p
+      Abstract submission will close the 10th of January 2014.
+    = form_for @registration, url: (@registration.new_record? ? registrations_path(anchor: "registration") : registration_path(@registration, anchor: "registration")), role: 'form', class: 'form-horizontal' do |f|
+      = render 'layouts/error_messages', target: @registration
+      .row
+        .col-md-6
+          %fieldset.registration-form-details
+            %legend
+              Your details
+            = f.form_group :first_name do
+              .row
+                = f.starred_label :first_name, nil, class: "col-md-3 control-label #{"has-error" if f.object.errors[:first_name].present?}"
+                .col-md-9
+                  = f.text_field :first_name, class: "form-control", placeholder: "Enter first name"
+                  = f.error_text :first_name
+            = f.form_group :last_name do
+              .row
+                = f.starred_label :last_name, nil, class: "col-md-3 control-label"
+                .col-md-9
+                  = f.text_field :last_name, class: "form-control", placeholder: "Enter last name"
+                  = f.error_text :last_name
+            = f.form_group :email do
+              .row
+                = f.starred_label :email, nil, class: "col-md-3 control-label"
+                .col-md-9
+                  = f.email_field :email, class: "form-control", placeholder: "Enter email"
+                  = f.error_text :email
+        .col-md-6
+          %fieldset.registration-form-affiliation
+            %legend
+              Affiliation
+            = f.form_group :institute do
+              .row
+                = f.starred_label :institute, nil, class: "col-md-3 control-label"
+                .col-md-9
+                  = f.text_field :institute, class: "form-control", placeholder: "Enter your institute name"
+                  = f.error_text :institute
+            = f.form_group :address do
+              .row
+                = f.starred_label :address, nil, class: "col-md-3 control-label"
+                .col-md-9
+                  = f.text_field :address, class: "form-control", placeholder: "Enter your institute street name and number"
+                  = f.error_text :address
+            = f.form_group :zip_code do
+              .row
+                = f.starred_label :zip_code, nil, class: "col-md-3 control-label"
+                .col-md-9
+                  = f.text_field :zip_code, class: "form-control", placeholder: "Enter your institute zip code"
+                  = f.error_text :zip_code
+            = f.form_group :city do
+              .row
+                = f.starred_label :city, nil, class: "col-md-3 control-label"
+                .col-md-9
+                  = f.text_field :city, class: "form-control", placeholder: "Enter your institute city"
+                  = f.error_text :city
+            = f.form_group :country do
+              .row
+                = f.starred_label :country, nil, class: "col-md-3 control-label"
+                .col-md-9
+                  = f.country_select :country, nil, {}, class: "form-control"
+                  = f.error_text :country
+      .row
+        .col-md-6
+          %fieldset#registration-fees
+            %legend Registration fees
+            %h3 Conference
+            = f.form_group :category_name do
+              - for category in Registration.categories
+                .radio
+                  %label
+                    = f.radio_button :category_name, category.name, id: "registration-category_name-#{category.name}", data: {fee: category.fee}
+                    %strong
+                      = category.fee
+                      CHF:
+                    =raw category.details
+            = f.error_text :category_name
+            %h3 Darwin's Dinner
             .help-block
-              You'll be able to verify your data before going to the payment secure webpage
+              Registration to the Darwin's dinner is only possible online. Registration on site not possible.
+            = f.form_group :dinner_category_name do
+              = f.select :dinner_category_name, Registration.dinner_categories.map{|c| [c.details_and_price, c.name, {data: {fee: c.fee}}]}, { prompt: true }, class: "form-control"
+            = f.error_text :dinner_category_name
+            .checkbox
+              = f.check_box :vegetarian, data: {fee: Registration::DORMITORY_FEE}, id: "registration-vegetarian"
+              %label{for: "registration-vegetarian"}
+                =raw "Vegetarian meal"
+            = f.error_text :vegetarian
+
+            %h3 Student accommodation in a dormitory
+            .help-block
+              Students have the possibility to be housed in a in an underground shelter (anti-nuclear shelter) for Thursday night, 13th of February.
+            .checkbox
+              = f.check_box :dormitory, data: {fee: Registration::DORMITORY_FEE}, id: "registration-dormitory"
+              %label{for: "registration-dormitory"}
+                =raw "<strong>#{Registration::DORMITORY_FEE} CHF:</strong> per person per night"
+      .row
+        .col-md-6
+          #registration-fees-total
+            Total fees:
+            %span
+              = @registration.fee
+            %strong
+              CHF
+      .row
+        .col-md-12
+          %fieldset.registration-form-abstract
+            %legend
+              Submit a talk or poster abstract
+            = f.form_group :talk, class: 'row' do
+              .col-md-3.control-label Apply for a talk or present a poster?
+              .col-md-9
+                %label.col-md-3.control-label
+                  = f.radio_button :talk, 1
+                  Talk
+                %label.col-md-3.control-label
+                  = f.radio_button :talk, 0
+                  Poster
+                = f.error_text :talk
+
+            = f.form_group :poster_agreement, class: 'row' do
+              .col-md-3.control-label Would you like to present a poster if your talk submission is rejected?
+              .col-md-9
+                %label.col-md-3.control-label
+                  = f.radio_button :poster_agreement, 1
+                  Yes
+                %label.col-md-3.control-label
+                  = f.radio_button :poster_agreement, 0
+                  No
+                = f.error_text :poster_agreement
+            = f.form_group :title, class: 'row' do
+              = f.starred_label :title, nil, class: "col-md-3 control-label"
+              .col-md-9
+                = f.text_field :title, class: "form-control", placeholder: "Enter the title of your abstract"
+                = f.error_text :title
+            = f.form_group :authors, class: 'row' do
+              = f.starred_label :authors, nil, class: "col-md-3 control-label"
+              .col-md-9
+                = f.text_area :authors, class: "form-control", placeholder: "Enter the list of authors"
+                = f.error_text :authors
+            = f.form_group :body, class: 'row' do
+              = f.starred_label :body, nil, class: "col-md-3 control-label"
+              .col-md-9
+                = f.text_area :body, class: "form-control", placeholder: "Enter the body text of your abstract"
+                = f.error_text :body
+      .row
+        .col-md-12
+          = f.submit "Submit your registration",  class: "btn btn-primary btn-lg"
+          .help-block
+            You'll be able to verify your data before going to the payment secure webpage

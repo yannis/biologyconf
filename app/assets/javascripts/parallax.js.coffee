@@ -13,20 +13,12 @@ bio14.parallax =
 
       if (scrollTop+windowHeight) > programOffset
         $("#program").css("background-position", "#{150-scrollTop/20}% #{-50+(scrollTop/20)}%")
-
-
       if (scrollTop+windowHeight) > speakersOffset
         $("#speakers").css("background-position", "#{-50+((scrollTop-speakersOffset)/20)}% #{200-((scrollTop-speakersOffset)/20)}%")
-
-      if (scrollTop+windowHeight) > registrationOffset
-        $("#registration").css("background-position", "#{150-((scrollTop-registrationOffset)/20)}% #{150-((scrollTop-registrationOffset)/20)}%")
-
-      # console.log "scrollTop+windowHeight: #{scrollTop+windowHeight}; scrollTop: #{scrollTop}; venueOffset: #{venueOffset}; scrollTop+windowHeight-venueOffset: #{scrollTop+windowHeight-venueOffset}"
       if (scrollTop+windowHeight) > venueOffset
-        # $("#venue").css("background-position", "#{50+((scrollTop-venueOffset)/10)}% #{scrollTop+windowHeight-venueOffset}px")
-
-        $("#venue").css("background-position", "#{0}% #{-$(window).width()*0.7+(scrollTop+windowHeight-venueOffset)/1.5}px")
-
+        $("#venue").css("background-position", "#{150-((scrollTop-venueOffset)/20)}% #{150-((scrollTop-venueOffset)/20)}%")
+      if (scrollTop+windowHeight) > registrationOffset
+        $("#registration").css("background-position", "#{0}% #{-$(window).width()*0.7+(scrollTop+windowHeight-registrationOffset)/1.5}px")
       if (scrollTop+windowHeight) > pace14Offset
         $("#pace14").css("background-position", "#{100-((scrollTop-pace14Offset)/10)}% #{windowHeight/2-(scrollTop-pace14Offset)}px")
 

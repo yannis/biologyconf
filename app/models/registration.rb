@@ -1,7 +1,5 @@
 class Registration < ActiveRecord::Base
 
-  attr_reader 'abstract_disabled'
-
   CATEGORIES = [
     {name: "non_member", details: "Non-member (student or researcher)", fee: (Rails.env.production? ? 50 : 0.10)},
     {name: "student_member", details: "Master or PhD student, member <a href='http://ssz.scnatweb.ch/en/' target='_blank'>SZS</a>, <a href='http://www.swiss-systematics.ch/' target='_blank'>SSS</a>, or <a href='http://www.botanica-helvetica.ch/index.fr.php' target='_blank'>SBS</a>", fee: 25},
@@ -13,15 +11,15 @@ class Registration < ActiveRecord::Base
     {name: "non_student", details: "non-student", fee: 55}
   ]
 
-  DORMITORY_FEE = 22
+  DORMITORY_FEE = 26
 
   validates_presence_of :first_name, :last_name, :email, :institute, :address, :zip_code, :city, :country, :category_name
   validates_uniqueness_of :last_name, if: Proc.new{|r| Registration.where(last_name: r.last_name, first_name: r.first_name, paid: true).count > 0 }, message: "A paid registration for “%{value}” already exist"
   validates_inclusion_of :category_name, in: CATEGORIES.map{|c| c[:name]}, allow_nil: false
   validates_inclusion_of :dinner_category_name, in: DINNER_CATEGORIES.map{|c| c[:name]}, allow_blank: true
-  validates_presence_of :title, if: Proc.new{|r| r.authors.present? || r.body.present?}
-  validates_presence_of :authors, if: Proc.new{|r| r.title.present? || r.body.present?}
-  validates_presence_of :body, if: Proc.new{|r| r.title.present? || r.authors.present?}
+  validates_presence_of :title, if: Proc.new{|r| r.talk.present? || r.authors.present? || r.body.present?}
+  validates_presence_of :authors, if: Proc.new{|r| r.talk.present? || r.title.present? || r.body.present?}
+  validates_presence_of :body, if: Proc.new{|r| r.talk.present? || r.title.present? || r.authors.present?}
 
   after_create :set_id_token, :set_timestamp_id
 
@@ -35,10 +33,6 @@ class Registration < ActiveRecord::Base
 
   def full_name
     "#{first_name} #{last_name}"
-  end
-
-  def abstract_disabled
-    self.title.blank? && self.authors.blank? && self.body.blank? && self.talk.blank?
   end
 
   def category

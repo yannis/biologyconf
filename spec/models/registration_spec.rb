@@ -92,3 +92,25 @@ describe "validation of last name" do
     }
   end
 end
+
+describe "validation of abstract:" do
+  context "a registration with incomplete abstract" do
+    let(:registration){build :registration, talk: true}
+    it{expect(registration).to_not be_valid}
+    it {
+      registration.valid?
+      expect(registration.errors[:title]).to include "can't be blank"
+      expect(registration.errors[:authors]).to include "can't be blank"
+      expect(registration.errors[:body]).to include "can't be blank"
+    }
+  end
+end
+
+describe "body sanitization:" do
+  context "a registration with blacklisted tags in its body" do
+    let(:registration) { create :registration, :abstract, body: "<h3>h3</h3> <strong>strong</strong> <i>i</i>  <i class='paf'>i with class att</i> <b>b</b>" }
+    it "is sanitized" do
+      expect(registration.body).to eq "h3 strong <i>i</i>  <i>i with class att</i> <b>b</b>"
+    end
+  end
+end

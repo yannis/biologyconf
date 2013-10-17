@@ -1,3 +1,4 @@
+
 class ProgramPdf < Prawn::Document
   def initialize
     super(page_layout: :portrait)
@@ -16,6 +17,7 @@ class ProgramPdf < Prawn::Document
       text "program"
     end
 
+    # text "This <i>includes <b>inline</b></i> <font size='24'>formatting</font>", :inline_format => true
     grouped_events = Event.order(:start).group_by{|e| e.start.to_date}
 
     grouped_events.each do |date, events|

@@ -1,9 +1,9 @@
 class Registration < ActiveRecord::Base
 
   CATEGORIES = [
-    {name: "non_member", details: "Non-member (student or researcher)", fee: (Rails.env.production? ? 50 : 0.10)},
-    {name: "student_member", details: "Master or PhD student, member <a href='http://ssz.scnatweb.ch/en/' target='_blank'>SZS</a>, <a href='http://www.swiss-systematics.ch/' target='_blank'>SSS</a>, or <a href='http://www.botanica-helvetica.ch/index.fr.php' target='_blank'>SBS</a>", fee: 25},
-    {name: "advanced_member", details: "Advanced researcher, member <a href='http://ssz.scnatweb.ch/en/' target='_blank'>SZS</a>, <a href='http://www.swiss-systematics.ch/' target='_blank'>SSS</a>, or <a href='http://www.botanica-helvetica.ch/index.fr.php' target='_blank'>SBS</a>", fee: 35}
+    {name: "non_member", details: "non-member (student or researcher)", fee: (Rails.env.production? ? 50 : 0.10)},
+    {name: "student_member", details: "master or PhD student, member <a href='http://ssz.scnatweb.ch/en/' target='_blank'>SZS</a>, <a href='http://www.swiss-systematics.ch/' target='_blank'>SSS</a>, or <a href='http://www.botanica-helvetica.ch/index.fr.php' target='_blank'>SBS</a>", fee: 25},
+    {name: "advanced_member", details: "advanced researcher, member <a href='http://ssz.scnatweb.ch/en/' target='_blank'>SZS</a>, <a href='http://www.swiss-systematics.ch/' target='_blank'>SSS</a>, or <a href='http://www.botanica-helvetica.ch/index.fr.php' target='_blank'>SBS</a>", fee: 35}
   ]
 
   DINNER_CATEGORIES = [
@@ -17,10 +17,11 @@ class Registration < ActiveRecord::Base
   validates_uniqueness_of :last_name, if: Proc.new{|r| Registration.where(last_name: r.last_name, first_name: r.first_name, paid: true).count > 0 }, message: "A paid registration for “%{value}” already exist"
   validates_inclusion_of :category_name, in: CATEGORIES.map{|c| c[:name]}, allow_nil: false
   validates_inclusion_of :dinner_category_name, in: DINNER_CATEGORIES.map{|c| c[:name]}, allow_blank: true
-  validates_presence_of :title, if: Proc.new{|r| r.talk.present? || r.authors.present? || r.body.present?}
-  validates_presence_of :authors, if: Proc.new{|r| r.talk.present? || r.title.present? || r.body.present?}
-  validates_presence_of :body, if: Proc.new{|r| r.talk.present? || r.title.present? || r.authors.present?}
+  validates_presence_of :title, if: Proc.new{|r| r.abstract?}
+  validates_presence_of :authors, if: Proc.new{|r| r.abstract?}
+  validates_presence_of :body, if: Proc.new{|r| r.abstract?}
 
+  before_validation :sanitize_abstract_body
   after_create :set_id_token, :set_timestamp_id
 
   def self.categories
@@ -59,6 +60,10 @@ class Registration < ActiveRecord::Base
     fee
   end
 
+  def abstract?
+    self.talk.present? || self.title.present? || self.authors.present? || self.body.present?
+  end
+
   protected
 
     def generate_personal_token
@@ -73,5 +78,9 @@ class Registration < ActiveRecord::Base
 
     def set_timestamp_id
       self.update_attributes timestamp_id: "#{self.created_at.to_i}#{self.id}"
+    end
+
+    def sanitize_abstract_body
+      self.body = ActionController::Base.helpers.sanitize(self.body , tags: %w(i b h1 h2 p ul ol li), attributes: %w())
     end
 end

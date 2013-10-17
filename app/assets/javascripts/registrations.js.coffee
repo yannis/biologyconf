@@ -26,6 +26,7 @@ bio14.registration =
   #   # console.log "abstract-disabled:", @abstract_disabled()
   #   $(@abstractFieldset).attr('abstract-disabled', @abstract_disabled())
   #   $(@abstractFieldset).find('.collapsible').toggleClass('collapse', @abstract_disabled())
+  editor: new wysihtml5.Editor "registration_body", toolbar: "registration-body-toolbar", parserRules:  wysihtml5ParserRules
 
   disableVegetarianIfNoDinner: ->
     @vegetarianInput.attr("disabled", "disabled") if @dinnerCategoryInput.val() == ""
@@ -41,13 +42,12 @@ bio14.registration =
 
   disablePosterAgreementIfNoTalk: ->
     value = $("input[name='registration[talk]']:checked").val()
-    console.log "disablePosterAgreementIfNoTalk", value?
-    $("input[name='registration[poster_agreement]']").attr("disabled", "disabled") if value != "1"
+    $("input[name='registration[poster_agreement]']").attr("disabled", "disabled") if value != "true"
 
   observeTalk: ->
     zis = @
     $("input[name='registration[talk]']").on "change", ->
-      $("input[name='registration[poster_agreement]']").attr("disabled", $(@).val() == "0")
+      $("input[name='registration[poster_agreement]']").attr("disabled", $(@).val() == "false")
 
   setPosterAgreementInput: ->
     @disablePosterAgreementIfNoTalk()
@@ -67,8 +67,6 @@ bio14.registration =
       $("#registration-fees-total span").html(fee)
 
   set: ->
-    # @setRadioButtons()
-    # @collapseForm()
     @setFee()
     @setVegetarianInput()
     @setPosterAgreementInput()

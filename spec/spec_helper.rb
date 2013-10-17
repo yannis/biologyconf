@@ -80,4 +80,10 @@ RSpec.configure do |config|
   def flash_should_contain(text)
     page.find("div#flash").should have_content text
   end
+
+  def fill_registration_abstract(text)
+    #js must be enabled
+    page.execute_script  "bio14.registration.editor.setValue('#{text}')"
+    # page.execute_script("editor.setValue('#{text}')")
+  end
 end

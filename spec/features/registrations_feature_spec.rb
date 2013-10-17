@@ -37,6 +37,11 @@ feature 'registration form', js: true do
         expect(page).to_not have_text("Total fees: 63.1 CHF")
         expect(page).to have_text("Total fees: 90 CHF", visible: true, count: 1)
       end
+      check "Vegetarian meal"
+      within("#registration-fees-total") do
+        expect(page).to_not have_text("Total fees: 63.1 CHF")
+        expect(page).to have_text("Total fees: 90 CHF", visible: true, count: 1)
+      end
       check "26 CHF: per person per night"
       within("#registration-fees-total") do
         expect(page).to_not have_text("Total fees: 63.1 CHF")

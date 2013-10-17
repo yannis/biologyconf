@@ -86,7 +86,7 @@
               = f.select :dinner_category_name, Registration.dinner_categories.map{|c| [c.details_and_price, c.name, {data: {fee: c.fee}}]}, { prompt: true }, class: "form-control"
             = f.error_text :dinner_category_name
             .checkbox
-              = f.check_box :vegetarian, data: {fee: Registration::DORMITORY_FEE}, id: "registration-vegetarian"
+              = f.check_box :vegetarian, id: "registration-vegetarian"
               %label{for: "registration-vegetarian"}
                 =raw "Vegetarian meal"
             = f.error_text :vegetarian

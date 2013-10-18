@@ -13,6 +13,11 @@ class Registration < ActiveRecord::Base
 
   DORMITORY_FEE = 26
 
+  POSTER_DEADLINE = Time.parse("2014-01-14 23:59")
+  DORMITORY_CAPACITY = 50
+  REGISTRATION_DEADLINE = Time.parse("2014-02-07 23:59")
+
+
   validates_presence_of :first_name, :last_name, :email, :institute, :address, :zip_code, :city, :country, :category_name
   validates_uniqueness_of :last_name, if: Proc.new{|r| Registration.where(last_name: r.last_name, first_name: r.first_name, paid: true).count > 0 }, message: "A paid registration for “%{value}” already exist"
   validates_inclusion_of :category_name, in: CATEGORIES.map{|c| c[:name]}, allow_nil: false
@@ -30,6 +35,10 @@ class Registration < ActiveRecord::Base
 
   def self.dinner_categories
     DINNER_CATEGORIES.map{|ch| Category.new ch}
+  end
+
+  def self.dormitory_full?
+    where(paid: true, dormitory: true).count >= DORMITORY_CAPACITY
   end
 
   def full_name

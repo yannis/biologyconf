@@ -5,7 +5,7 @@ class RegistrationsController < ApplicationController
   before_filter :check_session_var, only: [:edit, :update, :confirm]
 
   def create
-    @registration = Registration.new registration_params
+    @registration = Registration.new RegisrationParams.permit(params)
     if @registration.save
       @registration.reload
       session[:registration_id_token] = @registration.id_token
@@ -31,7 +31,7 @@ class RegistrationsController < ApplicationController
   end
 
   def update
-    if @registration.update registration_params
+    if @registration.update RegisrationParams.permit(params)
       respond_with @registration do |format|
         format.html { redirect_to confirm_registration_path(@registration) }
       end
@@ -71,9 +71,15 @@ class RegistrationsController < ApplicationController
   end
 
   private
-    def registration_params
-      params.require(:registration).permit(:first_name, :last_name, :email, :category_name, :dinner_category_name, :dormitory, :institute, :address, :city, :zip_code, :country, :title, :authors, :body, :talk, :vegetarian, :poster_agreement)
-    end
+    # def registration_params
+    #   if Time.now < Registration::POSTER_DEADLINE
+    #     params.require(:registration).permit(:first_name, :last_name, :email, :category_name, :dinner_category_name, :dormitory, :institute, :address, :city, :zip_code, :country, :title, :authors, :body, :talk, :vegetarian, :poster_agreement)
+    #   elsif Time.now < Registration::REGISTRATION_DEADLINE
+    #     params.require(:registration).permit(:first_name, :last_name, :email, :category_name, :dinner_category_name, :dormitory, :institute, :address, :city, :zip_code, :country, :vegetarian)
+    #   else
+    #     params
+    #   end
+    # end
 
     def check_session_var
       @registration = Registration.find params[:id]
@@ -84,4 +90,23 @@ class RegistrationsController < ApplicationController
         end
       end
     end
+
+
+  class RegisrationParams
+    def self.permit(params)
+       # params.
+       # require(:user).
+       # permit(:first_name, :last_name)
+
+
+
+      if Time.now < Registration::POSTER_DEADLINE
+        params.require(:registration).permit(:first_name, :last_name, :email, :category_name, :dinner_category_name, :dormitory, :institute, :address, :city, :zip_code, :country, :title, :authors, :body, :talk, :vegetarian, :poster_agreement)
+      elsif Time.now < Registration::REGISTRATION_DEADLINE
+        params.require(:registration).permit(:first_name, :last_name, :email, :category_name, :dinner_category_name, :dormitory, :institute, :address, :city, :zip_code, :country, :vegetarian)
+      else
+        {}
+      end
+    end
+  end
 end

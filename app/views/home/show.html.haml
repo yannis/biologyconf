@@ -3,5 +3,12 @@
 = render 'home/program', events: @grouped_events
 = render 'home/speakers', speakers: @speakers
 = render "home/venue"
-= render 'home/registration', registration: @registration
+- if Time.now > Registration::REGISTRATION_DEADLINE
+  %section#registration.home-section
+    .container
+      %h2 Registration
+      %p
+        = "Online registration is closed since #{Registration::REGISTRATION_DEADLINE.to_date.to_s(:day_month_year)} at midnight. Registration will still be possible on site."
+- else
+  = render 'home/registration', registration: @registration
 = render "home/pace14"

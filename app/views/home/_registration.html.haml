@@ -2,11 +2,11 @@
   .container
     %h2 Registration
     %p
-      Online registration will close the 7th of February 2014. Registration will still be possible on site.
+      = "Online registration will close on #{Registration::REGISTRATION_DEADLINE.to_date.to_s(:day_month_year)} at midnight. Registration will still be possible on site."
     %p
-      Abstract submission will close the 10th of January 2014.
-    = form_for @registration, url: (@registration.new_record? ? registrations_path(anchor: "registration") : registration_path(@registration, anchor: "registration")), html: {role: 'form', class: 'form-horizontal', id: "registration-form"} do |f|
-      = render 'layouts/error_messages', target: @registration
+      = "Abstract submission will close on #{Registration::POSTER_DEADLINE.to_date.to_s(:day_month_year)} at midnight."
+    = form_for registration, url: (registration.new_record? ? registrations_path(anchor: "registration") : registration_path(registration, anchor: "registration")), html: {role: 'form', class: 'form-horizontal', id: "registration-form"} do |f|
+      = render 'layouts/error_messages', target: registration
       .row
         .col-md-6
           %fieldset.registration-form-details
@@ -103,58 +103,10 @@
           #registration-fees-total
             Total fees:
             %span
-              = @registration.fee
+              = registration.fee
             %strong
               CHF
-      .row
-        .col-md-12
-          %fieldset.registration-form-abstract
-            %legend
-              Submit a talk or poster abstract
-            = f.form_group :talk, class: 'row' do
-              .col-md-3.control-label Apply for a talk or present a poster?
-              .col-md-9
-                %label.col-md-3.control-label
-                  = f.radio_button :talk, true
-                  Talk
-                %label.col-md-3.control-label
-                  = f.radio_button :talk, false
-                  Poster
-                = f.error_text :talk
-
-            = f.form_group :poster_agreement, class: 'row' do
-              .col-md-3.control-label Would you like to present a poster if your talk submission is rejected?
-              .col-md-9
-                %label.col-md-3.control-label
-                  = f.radio_button :poster_agreement, true
-                  Yes
-                %label.col-md-3.control-label
-                  = f.radio_button :poster_agreement, false
-                  No
-                = f.error_text :poster_agreement
-            = f.form_group :title, class: 'row' do
-              = f.starred_label :title, nil, class: "col-md-3 control-label"
-              .col-md-9
-                = f.text_field :title, class: "form-control", placeholder: "Enter the title of your abstract"
-                = f.error_text :title
-            = f.form_group :authors, class: 'row' do
-              = f.starred_label :authors, nil, class: "col-md-3 control-label"
-              .col-md-9
-                = f.text_area :authors, class: "form-control", placeholder: "Enter the list of authors"
-                = f.error_text :authors
-            = f.form_group :body, class: 'row' do
-              = f.starred_label :body, nil, class: "col-md-3 control-label"
-              .col-md-9
-                #registration-body-toolbar{style: "display: none;"}
-                  %a.wysihtml5-bold{data: {wysihtml5: {command: "bold"}}} bold
-                  %a.wysihtml5-italic{data: {wysihtml5: {command: "italic"}}} italic
-                  %a.wysihtml5-h1{"data-wysihtml5-command" => "formatBlock", "data-wysihtml5-command-value" => "h1"} h1
-                  %a.wysihtml5-h2{"data-wysihtml5-command" => "formatBlock", "data-wysihtml5-command-value" => "h2"} h2
-                  %a.wysihtml5-p{"data-wysihtml5-command" => "formatBlock", "data-wysihtml5-command-value" => "p"} p
-                  %a.wysihtml5-ul{data: {wysihtml5: {command: "insertUnorderedList"}}} unordered list
-                  %a.wysihtml5-ol{data: {wysihtml5: {command: "insertOrderedList"}}} ordered list
-                = f.text_area :body, class: "form-control registration-body", placeholder: "Enter the body text of your abstract"
-                = f.error_text :body
+      = render "home/registration_abstract", registration: registration, f: f
       .row
         .col-md-12
           = f.submit "Submit your registration",  class: "btn btn-primary btn-lg"

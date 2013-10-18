@@ -5,15 +5,13 @@ class ProgramPdf < Prawn::Document
     # inconsolata_font
     # start_new_page :layout => :landscape
 
-  #   bounding_box [bounds.left + 0, bounds.top-40], :width => 700 do
-  #     logo = "#{Rails.root}/app/assets/images/logo-128.jpg"
-  #     image logo, :at => [0,50], :width => 100
-  #   end
+    # bounding_box [bounds.left + 0, bounds.top-40], :width => 700 do
+    # end
 
-    bounding_box [bounds.left, bounds.top], :width => 200 do
+    bounding_box [bounds.left, bounds.top-50], :width => 200 do
+      logo = "#{Rails.root}/app/assets/images/pdf_banner.png"
+      image logo, :at => [0,50], :width => 200
       font_size 24
-      text "biology14"
-      font_size 14
       text "program"
     end
 
@@ -23,7 +21,7 @@ class ProgramPdf < Prawn::Document
     grouped_events.each do |date, events|
       leftb = date == grouped_events.keys.first ? 0 : 270
 
-      bounding_box [bounds.left+leftb, bounds.top-60], width: 250 do
+      bounding_box [bounds.left+leftb, bounds.top-100], width: 250 do
         font_size 24
         text date.to_s(:day_month_year)
         data = events.map{|event| ["#{event.start.to_s(:time_only)} – #{event.end.to_s(:time_only)}", event.title] }

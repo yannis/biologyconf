@@ -5,7 +5,7 @@
       = "Online registration will close on #{Registration::REGISTRATION_DEADLINE.to_date.to_s(:day_month_year)} at midnight. Registration will still be possible on site."
     %p
       = "Abstract submission will close on #{Registration::POSTER_DEADLINE.to_date.to_s(:day_month_year)} at midnight."
-    = form_for registration, url: (registration.new_record? ? registrations_path(anchor: "registration") : registration_path(registration, anchor: "registration")), html: {role: 'form', class: 'form-horizontal', id: "registration-form"} do |f|
+    = form_for registration, url: (registration.new_record? ? registrations_path(anchor: "registration") : registration_path(registration, anchor: "registration")), html: {honeypot: true, role: 'form', class: 'form-horizontal', id: "registration-form"} do |f|
       = render 'layouts/error_messages', target: registration
       .row
         .col-md-6

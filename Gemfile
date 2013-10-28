@@ -19,6 +19,7 @@ gem 'coffee-rails'
 gem 'jquery-rails'
 gem "jquery-ui-rails"
 gem 'uglifier'
+gem 'honeypot-captcha'
 
 gem 'devise',              github: 'plataformatec/devise'
 gem 'responders',          github: 'plataformatec/responders'

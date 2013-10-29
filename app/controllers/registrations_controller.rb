@@ -5,7 +5,7 @@ class RegistrationsController < ApplicationController
   before_filter :check_session_var, only: [:edit, :update, :confirm]
 
   def create
-    @registration = Registration.new RegisrationParams.permit(params)
+    @registration = Registration.new RegistrationParams.permit(params)
     if @registration.save
       @registration.reload
       session[:registration_id_token] = @registration.id_token
@@ -31,7 +31,7 @@ class RegistrationsController < ApplicationController
   end
 
   def update
-    if @registration.update RegisrationParams.permit(params)
+    if @registration.update RegistrationParams.permit(params)
       respond_with @registration do |format|
         format.html { redirect_to confirm_registration_path(@registration) }
       end
@@ -51,10 +51,10 @@ class RegistrationsController < ApplicationController
   end
 
   def callback
-    @callback = BookingCallback.new request
+    @callback = Registration.booking_callback request
     if @callback.valid?
       session.delete(:registration_id_token)
-      @callback.registration.mark_as_paid
+      @callback.bookable.mark_as_paid
       flash[:success] = "Payment successfull! We are looking forward to see you in Geneva soon."
     else
       flash[:error] = "A problem occurred with your payment. Please contact the organizers of the conference."
@@ -71,16 +71,6 @@ class RegistrationsController < ApplicationController
   end
 
   private
-    # def registration_params
-    #   if Time.now < Registration::POSTER_DEADLINE
-    #     params.require(:registration).permit(:first_name, :last_name, :email, :category_name, :dinner_category_name, :dormitory, :institute, :address, :city, :zip_code, :country, :title, :authors, :body, :talk, :vegetarian, :poster_agreement)
-    #   elsif Time.now < Registration::REGISTRATION_DEADLINE
-    #     params.require(:registration).permit(:first_name, :last_name, :email, :category_name, :dinner_category_name, :dormitory, :institute, :address, :city, :zip_code, :country, :vegetarian)
-    #   else
-    #     params
-    #   end
-    # end
-
     def check_session_var
       @registration = Registration.find params[:id]
       if @registration.paid || (session[:registration_id_token].to_s != @registration.reload.id_token.to_s)
@@ -92,14 +82,8 @@ class RegistrationsController < ApplicationController
     end
 
 
-  class RegisrationParams
+  class RegistrationParams
     def self.permit(params)
-       # params.
-       # require(:user).
-       # permit(:first_name, :last_name)
-
-
-
       if Time.now < Registration::POSTER_DEADLINE
         params.require(:registration).permit(:first_name, :last_name, :email, :category_name, :dinner_category_name, :dormitory, :institute, :address, :city, :zip_code, :country, :title, :authors, :body, :talk, :vegetarian, :poster_agreement)
       elsif Time.now < Registration::REGISTRATION_DEADLINE

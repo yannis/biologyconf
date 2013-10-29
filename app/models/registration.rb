@@ -1,4 +1,7 @@
+require 'acts_as_bookable'
 class Registration < ActiveRecord::Base
+
+  acts_as_bookable
 
   CATEGORIES = [
     {name: "non_member", details: "non-member (student or researcher)", fee: (Rails.env.production? ? 50 : 0.10)},
@@ -17,7 +20,6 @@ class Registration < ActiveRecord::Base
   DORMITORY_CAPACITY = 50
   REGISTRATION_DEADLINE = Time.parse("2014-02-07 23:59")
 
-
   validates_presence_of :first_name, :last_name, :email, :institute, :address, :zip_code, :city, :country, :category_name
   validates_uniqueness_of :last_name, if: Proc.new{|r| Registration.where(last_name: r.last_name, first_name: r.first_name, paid: true).count > 0 }, message: "A paid registration for “%{value}” already exist"
   validates_inclusion_of :category_name, in: CATEGORIES.map{|c| c[:name]}, allow_nil: false
@@ -26,8 +28,8 @@ class Registration < ActiveRecord::Base
   validates_presence_of :authors, if: Proc.new{|r| r.abstract?}
   validates_presence_of :body, if: Proc.new{|r| r.abstract?}
 
-  before_validation :sanitize_abstract_body
-  after_create :set_id_token, :set_timestamp_id
+  before_validation :_sanitize_abstract_body
+  after_create :_set_id_token, :_set_timestamp_id
 
   def self.categories
     CATEGORIES.map{|ch| Category.new ch}
@@ -53,14 +55,6 @@ class Registration < ActiveRecord::Base
     Registration.dinner_categories.detect{|c| c.name == self.dinner_category_name}
   end
 
-  def booking
-    Booking.new self
-  end
-
-  def mark_as_paid
-    self.update_attributes paid: true, paid_fee: self.fee
-  end
-
   def fee
     fee = 0
     fee += self.category.try(:fee).to_f
@@ -81,15 +75,15 @@ class Registration < ActiveRecord::Base
 
   private
 
-    def set_id_token
+    def _set_id_token
       self.update_attributes(id_token: self.generate_personal_token) if self.respond_to?(:id_token) && self.id_token.nil?
     end
 
-    def set_timestamp_id
+    def _set_timestamp_id
       self.update_attributes timestamp_id: "#{self.created_at.to_i}#{self.id}"
     end
 
-    def sanitize_abstract_body
+    def _sanitize_abstract_body
       self.body = ActionController::Base.helpers.sanitize(self.body , tags: %w(i b h1 h2 p ul ol li), attributes: %w())
     end
 end

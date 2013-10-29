@@ -136,8 +136,8 @@ describe RegistrationsController do
       before {
         session[:registration_id_token] = registration.id_token
         post :callback,
-        id: "#{registration.booking.form_id}-#{registration.timestamp_id}",
-        mhash: Digest::MD5.hexdigest(registration.booking.uni_id+ENV['BOOKING_SECRET_KEY'])
+        id: "#{registration.form_id}-#{registration.timestamp_id}",
+        mhash: Digest::MD5.hexdigest(registration.uni_id+ENV['BOOKING_SECRET_KEY'])
       }
       it {expect(registration.reload.paid).to be_true}
       it {expect(flash[:success]).to eq "Payment successfull! We are looking forward to see you in Geneva soon."}
@@ -150,7 +150,7 @@ describe RegistrationsController do
       before {
         session[:registration_id_token] = registration.id_token
         post :callback,
-        id: "#{registration.booking.form_id}-#{registration.timestamp_id}",
+        id: "#{registration.form_id}-#{registration.timestamp_id}",
         mhash: "hjkdjgkfjfgjkgfghj"
       }
       it {expect(flash[:success]).to be_nil}
@@ -170,7 +170,7 @@ describe RegistrationsController do
     }
   end
 
-  describe RegistrationsController::RegisrationParams do
+  describe RegistrationsController::RegistrationParams do
     let(:registration_full_params) {
       {
         first_name: "Melyna",
@@ -203,7 +203,7 @@ describe RegistrationsController do
       }
       it "returns the full params" do
         params = ActionController::Parameters.new registration: {}.merge(registration_full_params)
-        permitted_params = RegistrationsController::RegisrationParams.permit(params)
+        permitted_params = RegistrationsController::RegistrationParams.permit(params)
         expect(permitted_params).to eq registration_full_params.with_indifferent_access
       end
     end
@@ -216,7 +216,7 @@ describe RegistrationsController do
       }
       it "returns the full params" do
         params = ActionController::Parameters.new registration: {}.merge(registration_full_params)
-        permitted_params = RegistrationsController::RegisrationParams.permit(params)
+        permitted_params = RegistrationsController::RegistrationParams.permit(params)
         expect(permitted_params).to eq registration_full_params.delete_if{|key, value| [:authors, :body, :poster_agreement, :talk, :title].include?key }.with_indifferent_access
       end
     end
@@ -229,7 +229,7 @@ describe RegistrationsController do
       }
       it "returns the full params" do
         params = ActionController::Parameters.new registration: {}.merge(registration_full_params)
-        permitted_params = RegistrationsController::RegisrationParams.permit(params)
+        permitted_params = RegistrationsController::RegistrationParams.permit(params)
         expect(permitted_params).to be_empty
       end
     end

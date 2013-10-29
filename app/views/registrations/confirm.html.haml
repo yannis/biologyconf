@@ -12,7 +12,7 @@
           %span 14
         %h2= @title
         = form_tag ENV['BOOKING_URL'] , role: 'form', class: 'form-horizontal' do
-          - @registration.booking.params_hash.each do |k,v|
+          - @registration.params_hash.each do |k,v|
             = hidden_field_tag k, v
           %p.lead
             =raw "You are registered as #{@registration.category.details}."
@@ -80,7 +80,7 @@
                 = "You have submitted an abstract for a #{@registration.talk? ? "talk" : "poster"}."
                 - if @registration.talk?
                   - if @registration.poster_agreement?
-                    You will a poster with the same abstract if your talk proposal is rejected.
+                    You will present a poster with the same abstract if your talk proposal is rejected.
                   - else
                     You will not present a poster if your talk proposal is rejected.
                 - else

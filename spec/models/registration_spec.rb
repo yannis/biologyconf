@@ -24,6 +24,7 @@ describe "A registration" do
   it {expect(registration.category_name).to eq "non_member"}
   it {expect(registration.fee).to eq 0.1}
   it {expect(registration.paid_fee.to_f).to eq 0}
+  it{expect(registration.abstract?).to_not be_true}
   it {
     Timecop.freeze("2013-11-01 14:00:00")
     expect(registration.reload.timestamp_id).to eq "13833108001"
@@ -113,7 +114,9 @@ end
 describe "validation of abstract:" do
   context "a registration with incomplete abstract" do
     let(:registration){build :registration, talk: true}
+    it{expect(registration.abstract?).to be_true}
     it{expect(registration).to_not be_valid}
+    it{expect(registration).to have_errors_on :title}
     it {
       registration.valid?
       expect(registration.errors[:title]).to include "can't be blank"

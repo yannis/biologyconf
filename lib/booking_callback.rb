@@ -1,41 +1,27 @@
 class BookingCallback
+  attr_reader :errors, :mhash, :controle_md5, :bookable_timestamp_id, :remote_addr, :uni_id, :key, :secret_key, :bookable
 
-  attr_reader :errors, :mhash, :controle_md5, :registration_timestamp_id, :remote_addr, :uni_id, :key, :secret_key
-
-  def self.hashize(registration_timestamp_id)
-    Digest::MD5.hexdigest "#{ENV['BOOKING_FORM_ID']}-#{registration_timestamp_id}#{ENV['BOOKING_SECRET_KEY']}"
-  end
-
-  def initialize(request)
+  def initialize(request, bookable_class)
     @uni_id = request.params['id']
-    @registration_timestamp_id = uni_id.gsub("#{ENV['BOOKING_FORM_ID']}-","")
+    @bookable_timestamp_id = uni_id.gsub("#{ENV['BOOKING_FORM_ID']}-","")
     @mhash = request.params['mhash']
     @remote_addr = request.remote_ip
     @secret_key = ENV['BOOKING_SECRET_KEY']
     @key = uni_id.to_s+secret_key
-    @controle_md5 = BookingCallback.hashize registration_timestamp_id
+    @controle_md5 = BookingCallback.hashize bookable_timestamp_id
+    @bookable = bookable_class.where(timestamp_id: bookable_timestamp_id).first
     @errors = {}
   end
 
-  def data
-    {
-      uni_id:       uni_id,
-      mhash:        mhash,
-      remote_addr:  remote_addr,
-      key:          key,
-      controle_md5: controle_md5
-    }
-  end
-
-  def registration
-    Registration.where(timestamp_id: self.registration_timestamp_id).first
+  def self.hashize(bookable_timestamp_id)
+    Digest::MD5.hexdigest "#{ENV['BOOKING_FORM_ID']}-#{bookable_timestamp_id}#{ENV['BOOKING_SECRET_KEY']}"
   end
 
   def valid?
     begin
       _validate_mhash
       _validate_remote_addr
-      registration.present?
+      bookable.present?
     rescue Exception => e
       Airbrake.notify(e)
     end

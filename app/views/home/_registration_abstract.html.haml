@@ -7,38 +7,38 @@
         %legend
           Submit a talk or poster abstract
         = f.form_group :talk, class: 'row' do
-          .col-md-3.control-label Apply for a talk or present a poster?
-          .col-md-9
-            %label.col-md-3.control-label
+          .col-md-4.control-label Apply for a talk or present a poster?
+          .col-md-8
+            %label.col-md-4.control-label
               = f.radio_button :talk, true
               Talk
-            %label.col-md-3.control-label
+            %label.col-md-4.control-label
               = f.radio_button :talk, false
               Poster
             = f.error_text :talk
         = f.form_group :poster_agreement, class: 'row' do
-          .col-md-3.control-label Would you like to present a poster if your talk submission is rejected?
-          .col-md-9
-            %label.col-md-3.control-label
+          .col-md-4.control-label Would you like to present a poster if your talk application is not selected?
+          .col-md-8
+            %label.col-md-4.control-label
               = f.radio_button :poster_agreement, true
               Yes
-            %label.col-md-3.control-label
+            %label.col-md-4.control-label
               = f.radio_button :poster_agreement, false
               No
             = f.error_text :poster_agreement
         = f.form_group :title, class: 'row' do
-          = f.starred_label :title, nil, class: "col-md-3 control-label"
-          .col-md-9
+          = f.starred_label :title, nil, class: "col-md-4 control-label"
+          .col-md-8
             = f.text_field :title, class: "form-control", placeholder: "Enter the title of your abstract"
             = f.error_text :title
         = f.form_group :authors, class: 'row' do
-          = f.starred_label :authors, nil, class: "col-md-3 control-label"
-          .col-md-9
+          = f.starred_label :authors, nil, class: "col-md-4 control-label"
+          .col-md-8
             = f.text_area :authors, class: "form-control", placeholder: "Enter the list of authors"
             = f.error_text :authors
         = f.form_group :body, class: 'row' do
-          = f.starred_label :body, nil, class: "col-md-3 control-label"
-          .col-md-9
+          = f.starred_label :body, nil, class: "col-md-4 control-label"
+          .col-md-8
             #registration-body-toolbar{style: "display: none;"}
               %a.wysihtml5-bold{data: {wysihtml5: {command: "bold"}}} bold
               %a.wysihtml5-italic{data: {wysihtml5: {command: "italic"}}} italic

@@ -6,7 +6,7 @@ class ProgramPdf < Prawn::Document
     # start_new_page :layout => :landscape
 
     # bounding_box [bounds.left + 0, bounds.top-40], :width => 700 do
-    # end
+    #
 
     bounding_box [bounds.left, bounds.top-50], :width => 200 do
       logo = "#{Rails.root}/app/assets/images/pdf_banner.png"

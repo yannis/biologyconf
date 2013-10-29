@@ -30,15 +30,15 @@ end
 
 describe "A booking callback with a valid request" do
   let(:registration){create :registration}
-  let(:booking_callback){BookingCallback.new request(registration)}
+  let(:booking_callback){BookingCallback.new request(registration), Registration}
   it { expect(booking_callback).to be_valid_verbose }
-  it { expect(booking_callback.registration).to eq registration }
-  it {expect(booking_callback.data.keys).to eql [:uni_id, :mhash, :remote_addr, :key, :controle_md5]}
+  it { expect(booking_callback.bookable).to eq registration }
+  # it {expect(booking_callback.data.keys).to eql [:uni_id, :mhash, :remote_addr, :key, :controle_md5]}
 end
 
 describe "A booking callback with a request with invalid remote" do
   let(:registration){create :registration}
-  let(:booking_callback){BookingCallback.new bad_remote_request(registration)}
+  let(:booking_callback){BookingCallback.new bad_remote_request(registration), Registration}
   it { expect(booking_callback).to_not be_valid }
   it {
     booking_callback.valid?
@@ -48,7 +48,7 @@ end
 
 describe "A booking callback with a request with invalid hash" do
   let(:registration){create :registration}
-  let(:booking_callback){BookingCallback.new bad_hash_request(registration)}
+  let(:booking_callback){BookingCallback.new bad_hash_request(registration), Registration}
   it { expect(booking_callback).to_not be_valid }
   it {
     booking_callback.valid?

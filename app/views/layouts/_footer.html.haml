@@ -50,12 +50,19 @@
                 Biolabo
     .container
       #footer-copyright
-        biology14
-        –
-        = link_to "University of Geneva", 'http://unige.ch/'
-        –
-        = link_to "Dpt of Genetics & Evolution", 'http://genev.unige.ch/'
-        – Copyright &copy;
-        = Date.today.year
-        –
-        = mail_to "biology14@unige.ch", "Contact us <span class='glyphicon glyphicon-envelope'></span>".html_safe, encode: "hex"
+        .col-md-12
+          biology14
+          –
+          = link_to "University of Geneva", 'http://unige.ch/'
+          –
+          = link_to "Dpt of Genetics & Evolution", 'http://genev.unige.ch/'
+          – Copyright &copy;
+          = Date.today.year
+          –
+          = mail_to "biology14@unige.ch", "Contact us <span class='glyphicon glyphicon-envelope'></span>".html_safe, encode: "hex"
+        .col-md-12
+          website by
+          = mail_to "yannis.jaquet@unige.ch", "Yannis Jaquet", encode: "hex"
+          –
+          illustrations by
+          = mail_to "Slim.Chraiti@unige.ch", "Slim Chraïti", encode: "hex"

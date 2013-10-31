@@ -1,32 +1,32 @@
 require 'spec_helper'
 
 describe Registration do
+  it_behaves_like "a bookable"
+
   it {expect(Registration::POSTER_DEADLINE).to be_a Time}
   it {expect(Registration::REGISTRATION_DEADLINE).to be_a Time}
-  it {should validate_presence_of :first_name}
-  it {should validate_presence_of :last_name}
   # it {should validate_uniqueness_of(:last_name)}
-  it {should validate_presence_of :email}
   it {should validate_presence_of :institute}
   it {should validate_presence_of :category_name}
   it {should ensure_inclusion_of(:category_name).in_array(Registration.categories.map(&:name))}
 
-  it{expect(Registration.categories.count).to eq 3}
-  it{expect(Registration.categories.first).to be_a Category}
-  it{expect(Registration.dinner_categories.count).to eq 2}
-  it{expect(Registration.dinner_categories.first).to be_a Category}
+  it {expect(Registration.categories.count).to eq 3}
+  it {expect(Registration.categories.first).to be_a Category}
+  it {expect(Registration.dinner_categories.count).to eq 2}
+  it {expect(Registration.dinner_categories.first).to be_a Category}
 end
 
 describe "A registration" do
 
-  let(:registration) { create :registration}
+  let(:registration) { build :registration}
   it {expect(registration.category).to be_a Category}
   it {expect(registration.category_name).to eq "non_member"}
   it {expect(registration.fee).to eq 0.1}
   it {expect(registration.paid_fee.to_f).to eq 0}
-  it{expect(registration.abstract?).to_not be_true}
+  it {expect(registration.abstract?).to_not be_true}
   it {
     Timecop.freeze("2013-11-01 14:00:00")
+    registration.save
     expect(registration.reload.timestamp_id).to eq "13833108001"
     Timecop.return
   }
@@ -50,7 +50,7 @@ describe "A registration" do
 
     describe "when dinner_category_name is 'non_member'" do
       before {registration.update_attributes dinner_category_name: 'non_student'}
-      it{expect(registration).to be_valid_verbose}
+      it {expect(registration).to be_valid_verbose}
       it {expect(registration.dinner_category.name).to eq 'non_student'}
       it {expect(registration.fee).to eq 90.0}
       it {expect(registration.paid_fee.to_f).to eq 0}
@@ -62,7 +62,7 @@ describe "A registration" do
 
       describe "when dormitory is true" do
         before {registration.update_attributes dormitory: true}
-        it{expect(registration).to be_valid_verbose}
+        it {expect(registration).to be_valid_verbose}
         it {expect(registration.fee).to eq 116.0}
         it {expect(registration.paid_fee.to_f).to eq 0}
 
@@ -83,11 +83,11 @@ describe "#dormitory_full" do
         create :registration, paid: true, dormitory: true
       end
     }
-    it{expect(Registration.dormitory_full?).to be_false}
+    it {expect(Registration.dormitory_full?).to be_false}
 
     context "when one more paid dormitory registration is created" do
       before {create :registration, paid: true, dormitory: true}
-      it{expect(Registration.dormitory_full?).to be_true}
+      it {expect(Registration.dormitory_full?).to be_true}
     end
   end
 end
@@ -114,9 +114,9 @@ end
 describe "validation of abstract:" do
   context "a registration with incomplete abstract" do
     let(:registration){build :registration, talk: true}
-    it{expect(registration.abstract?).to be_true}
-    it{expect(registration).to_not be_valid}
-    it{expect(registration).to have_errors_on :title}
+    it {expect(registration.abstract?).to be_true}
+    it {expect(registration).to_not be_valid}
+    it {expect(registration).to have_errors_on :title}
     it {
       registration.valid?
       expect(registration.errors[:title]).to include "can't be blank"

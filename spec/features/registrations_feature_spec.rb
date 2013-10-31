@@ -16,7 +16,7 @@ feature "registration form when deadlines haven't been reached", js: true do
   context "Dealines not reached" do
 
     scenario 'I interact with the form' do
-      expect(page).to have_title "biology14 - the Swiss conference on organismal biology"
+      expect(page).to have_title "biology14 - the Swiss conference on organismic biology"
       expect(page).to have_selector("form#registration-form")
       within("#registration-form") do
         expect(page).to have_selector("fieldset.registration-form-abstract", count: 1)
@@ -99,10 +99,10 @@ feature "registration form when deadlines haven't been reached", js: true do
 
     scenario "The abstract body textarea should be wysiwyg" do
       within("#registration-form") do
-        expect(page).to have_text "bold italic h1 h2 p unordered list ordered list"
+        expect(page).to have_text "bold italic h1 h2 p"
         fill_registration_abstract "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
         sleep 0.5
-        click_link_or_button "unordered list"
+        click_link_or_button "italic"
       end
     end
   end

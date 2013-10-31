@@ -61,6 +61,11 @@ group :test do
   gem 'simplecov', :require => false
 end
 
+group :test, :development do
+  gem "parallel_tests"
+  gem "zeus-parallel_tests"
+end
+
 group :production do
   gem 'god'
   gem "unicorn"

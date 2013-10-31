@@ -5,4 +5,5 @@ describe Category do
 
   its(:name){should eq "category_name"}
   its(:fee){should eq 55}
+  its(:details_and_price){should eq ": 55 CHF"}
 end

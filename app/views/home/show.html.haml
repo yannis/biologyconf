@@ -1,4 +1,4 @@
-- @title = "biology14 - the Swiss conference on organismal biology"; title(@title)
+- @title = "biology14 - the Swiss conference on organismic biology"; title(@title)
 = render 'home/jumbotron'
 = render 'home/program', events: @grouped_events
 = render 'home/speakers', speakers: @speakers
@@ -11,4 +11,4 @@
         = "Online registration is closed since #{Registration::REGISTRATION_DEADLINE.to_date.to_s(:day_month_year)} at midnight. Registration will still be possible on site."
 - else
   = render 'home/registration', registration: @registration
-/ = render "home/pace14"
+= render "home/pace14"

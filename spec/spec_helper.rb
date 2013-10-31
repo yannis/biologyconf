@@ -44,6 +44,11 @@ RSpec.configure do |config|
     DatabaseCleaner.clean
   end
 
+  # config.before(:each) { GC.disable }
+  # config.after(:each) { GC.enable }
+  config.before(:all) { DeferredGarbageCollection.start }
+  config.after(:all) { DeferredGarbageCollection.reconsider }
+
   def should_be_asked_to_sign_in
     it {response.should redirect_to(new_user_session_path)}
     it {flash[:alert].should =~ /Please sign in/}

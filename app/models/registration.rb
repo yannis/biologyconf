@@ -1,8 +1,6 @@
 require 'acts_as_bookable'
 class Registration < ActiveRecord::Base
 
-  acts_as_bookable
-
   CATEGORIES = [
     {name: "non_member", details: "non-member (student or researcher)", fee: (Rails.env.production? ? 50 : 0.10)},
     {name: "student_member", details: "master or PhD student, member <a href='http://ssz.scnatweb.ch/en/' target='_blank'>SZS</a>, <a href='http://www.swiss-systematics.ch/' target='_blank'>SSS</a>, or <a href='http://www.botanica-helvetica.ch/index.fr.php' target='_blank'>SBS</a>", fee: 25},
@@ -20,8 +18,9 @@ class Registration < ActiveRecord::Base
   DORMITORY_CAPACITY = 50
   REGISTRATION_DEADLINE = Time.parse("2014-02-07 23:59")
 
-  validates_presence_of :first_name, :last_name, :email, :institute, :address, :zip_code, :city, :country, :category_name
-  validates_uniqueness_of :last_name, if: Proc.new{|r| Registration.where(last_name: r.last_name, first_name: r.first_name, paid: true).count > 0 }, message: "A paid registration for “%{value}” already exist"
+  acts_as_bookable
+
+  validates_presence_of :institute, :category_name # other presence validation taken in charge by the acts_as_bookable module
   validates_inclusion_of :category_name, in: CATEGORIES.map{|c| c[:name]}, allow_nil: false
   validates_inclusion_of :dinner_category_name, in: DINNER_CATEGORIES.map{|c| c[:name]}, allow_blank: true
   validates_presence_of :title, if: Proc.new{|r| r.abstract?}

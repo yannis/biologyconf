@@ -1,6 +1,8 @@
 require 'acts_as_bookable'
 
 class BookableMock
+  include ActiveModel::Validations
+  include ActiveRecord::Validations
   include ActsAsBookable
   acts_as_bookable
 

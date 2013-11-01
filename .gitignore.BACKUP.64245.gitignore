@@ -1,0 +1,38 @@
+<<<<<<< HEAD
+test/rails_app/log/*
+test/rails_app/tmp/*
+*~
+coverage/*
+*.sqlite3
+.bundle
+rdoc/*
+pkg
+log
+test/tmp/*
+=======
+.bundle
+.DS_Store
+.livereload
+.sass-cache/
+.yardoc/
+db/*.sqlite3
+db/schema.rb
+db/schema.sql
+log/*
+*.tmproj
+public/system/*
+public/test_system/*
+public/assets/*
+vendor/rails/*
+tmp/cache/*
+tmp/capybara/*
+tmp/data/*
+coverage
+biology14.sublime-project
+biology14.sublime-workspace
+rails
+
+# Ignore application configuration
+config/application.yml
+config/database.yml
+>>>>>>> staging

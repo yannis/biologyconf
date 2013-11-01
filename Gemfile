@@ -34,7 +34,6 @@ gem 'prawn'
 group :development do
   gem "capistrano"
   gem "guard-livereload"
-  gem 'guard-zeus'
   gem 'guard-rspec'
   gem 'guard-bundler'
   gem 'rb-inotify', require: false

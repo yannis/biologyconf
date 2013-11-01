@@ -175,9 +175,6 @@ GEM
     guard-rspec (2.5.4)
       guard (>= 1.1)
       rspec (~> 2.11)
-    guard-zeus (0.0.1)
-      guard
-      zeus
     haml (4.0.3)
       tilt
     haml-rails (0.4)
@@ -383,7 +380,6 @@ DEPENDENCIES
   guard-bundler
   guard-livereload
   guard-rspec
-  guard-zeus
   haml-rails
   honeypot-captcha
   html5-rails

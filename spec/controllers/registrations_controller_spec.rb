@@ -131,19 +131,28 @@ describe RegistrationsController do
       it {expect(assigns(:registration).errors.full_messages_for(:first_name).to_sentence).to eq "First name can't be blank"}
     end
 
-    describe "POST 'callback' with valid params" do
+    describe "POST 'callback' with valid params", :focus do
       let(:registration){create :registration}
-      before {
-        session[:registration_id_token] = registration.id_token
-        post :callback,
-        id: "#{registration.form_id}-#{registration.timestamp_id}",
-        mhash: Digest::MD5.hexdigest(registration.uni_id+ENV['BOOKING_SECRET_KEY'])
-      }
-      it {expect(registration.reload.paid).to be_true}
-      it {expect(flash[:success]).to eq "Payment successfull! We are looking forward to see you in Geneva soon."}
-      it {expect(response).to redirect_to root_path}
-      it {expect(session[:registration_id_token]).to be_nil}
+      # it {
+      #   registration.should_receive(:mark_as_paid)
+      #   post :callback,
+      #     id: "#{registration.form_id}-#{registration.timestamp_id}",
+      #     mhash: Digest::MD5.hexdigest(registration.uni_id+ENV['BOOKING_SECRET_KEY'])
+      # }
+      describe "registration is modified" do
+        before {
+          session[:registration_id_token] = registration.id_token
+          post :callback,
+            id: "#{registration.form_id}-#{registration.timestamp_id}",
+            mhash: Digest::MD5.hexdigest(registration.uni_id+ENV['BOOKING_SECRET_KEY'])
+        }
+        it {expect(registration.reload.paid).to be_true}
+        it {expect(flash[:success]).to eq "Payment successfull! We are looking forward to see you in Geneva soon."}
+        it {expect(response).to redirect_to root_path}
+        it {expect(session[:registration_id_token]).to be_nil}
+      end
     end
+
 
     describe "POST 'callback' with bad hash" do
       let(:registration){create :registration}

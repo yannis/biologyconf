@@ -1,7 +1,7 @@
 set :branch,                  "master"
 set :rails_env,               "production"
 set :deploy_to,               "/Users/yannis/railsapps/biology14_production"
-set :god_unicorn_config,      "/Users/yannis/railsapps/biology14/current/config/unicorn_production.god"
+set :god_unicorn_config,      "/Users/yannis/railsapps/biology14_production/current/config/unicorn_production.god"
 
 namespace :deploy do
   task :stop, :roles => :app, :except => { :no_release => true } do

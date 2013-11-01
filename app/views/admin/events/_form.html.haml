@@ -1,0 +1,10 @@
+= semantic_form_for [:admin, @event] do |f|
+  = f.inputs :event_details do
+    = f.input :title
+    = f.input :start, :as => :string, :input_html => {:class => "hasDatetimePicker"}
+    = f.input :end, :as => :string, :input_html => {:class => "hasDatetimePicker"}
+    = f.input :classes
+    = f.input :kind, :as => :select, :collection => Event::TYPE, include_blank: false
+  = f.actions do
+    = f.action :submit, :as => :button
+    = f.action :cancel, :as => :link

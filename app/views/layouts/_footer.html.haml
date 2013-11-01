@@ -1,0 +1,68 @@
+- cache "application-footer" do
+  %footer#footer
+    .container#logos
+      .row#logos-organizers
+        %h3.col-md-12 Conference organized by
+        .col-md-12
+          .col-md-3.col-sm-3.col-xs-6
+            = link_to "http://unige.ch", id: "logos-organizers-unige", target: '_blank', class: "logos-logo" do
+              %span.logos-log-title
+                University of Geneva
+          .col-md-3.col-sm-3.col-xs-6
+            = link_to "http://www.ville-ge.ch/", id: "logos-organizers-geneve", target: '_blank', class: "logos-logo" do
+              %span.logos-log-title
+                Ville de Genève
+          .col-md-3.col-sm-3.col-xs-6
+            = link_to "http://www.ville-ge.ch/mhng/", id: "logos-organizers-museum", target: '_blank', class: "logos-logo" do
+              %span.logos-log-title
+                Muséum d'histoire naturelle de la Ville de Genève
+          .col-md-3.col-sm-3.col-xs-6
+            = link_to "http://www.ville-ge.ch/cjb/", id: "logos-organizers-jardinbot", target: '_blank', class: "logos-logo" do
+              %span.logos-log-title
+                Conservatoire et Jardin botaniques de la Ville de Genève
+      .row#logos-sponsors
+        %h3.col-md-12 Supported by
+        .col-md-12
+          .col-md-3.col-sm-3.col-xs-6
+            = link_to 'http://ssz.scnatweb.ch/', id: "logos-sponsors-szs", target: '_blank', class: "logos-logo" do
+              %span.logos-log-title
+                Swiss Zoological Society
+          .col-md-3.col-sm-3.col-xs-6
+            = link_to 'http://www.swiss-systematics.ch/', id: "logos-sponsors-sss", target: '_blank', class: "logos-logo" do
+              %span.logos-log-title
+                Swiss Systematics Society
+          .col-md-5.col-sm-5.col-xs-7
+            = link_to 'http://www.botanica-helvetica.ch/', id: "logos-sponsors-sbs", target: '_blank', class: "logos-logo" do
+              %span.logos-log-title
+                Société Botanique Suisse
+                iGE3
+        .col-md-12
+          .col-md-4.col-sm-4.col-xs-5
+            = link_to 'http://ige3.unige.ch', id: "logos-sponsors-ige3", target: '_blank', class: "logos-logo" do
+              %span.logos-log-title
+          .col-md-3.col-sm-3.col-xs-6
+            = link_to 'http://www.fasteris.com/', id: "logos-sponsors-fasteris", target: '_blank', class: "logos-logo" do
+              %span.logos-log-title
+                Fasteris
+          .col-md-3.col-sm-3.col-xs-6
+            = link_to 'http://www.biolabo.com/', id: "logos-sponsors-biolabo", target: '_blank', class: "logos-logo" do
+              %span.logos-log-title
+                Biolabo
+    .container
+      #footer-copyright
+        .col-md-12
+          biology14
+          –
+          = link_to "University of Geneva", 'http://unige.ch/'
+          –
+          = link_to "Dpt of Genetics & Evolution", 'http://genev.unige.ch/'
+          – Copyright &copy;
+          = Date.today.year
+          –
+          = mail_to "biology14@unige.ch", "Contact us <span class='glyphicon glyphicon-envelope'></span>".html_safe, encode: "hex"
+        .col-md-12
+          website by
+          = mail_to "yannis.jaquet@unige.ch", "Yannis Jaquet", encode: "hex"
+          –
+          illustrations by
+          = mail_to "Slim.Chraiti@unige.ch", "Slim Chraïti", encode: "hex"

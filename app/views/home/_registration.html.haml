@@ -1,0 +1,104 @@
+%section#registration.home-section
+  .container
+    %h2 Registration
+    %p
+      = "Online registration will close on #{Registration::REGISTRATION_DEADLINE.to_date.to_s(:day_month_year)} at midnight. Registration will still be possible on site."
+    %p
+      = "Abstract submission will close on #{Registration::POSTER_DEADLINE.to_date.to_s(:day_month_year)} at midnight."
+    = form_for registration, url: (registration.new_record? ? registrations_path(anchor: "registration") : registration_path(registration, anchor: "registration")), html: {honeypot: true, role: 'form', class: 'form-horizontal', id: "registration-form"} do |f|
+      = render 'layouts/error_messages', target: registration
+      .row
+        .col-md-6
+          %fieldset.registration-form-details
+            %legend
+              Your details
+            = f.form_group :first_name do
+              = f.starred_label :first_name, nil, class: "col-md-3 control-label #{"has-error" if f.object.errors[:first_name].present?}"
+              .col-md-9
+                = f.text_field :first_name, class: "form-control", placeholder: "Enter first name"
+                = f.error_text :first_name
+            = f.form_group :last_name do
+              = f.starred_label :last_name, nil, class: "col-md-3 control-label"
+              .col-md-9
+                = f.text_field :last_name, class: "form-control", placeholder: "Enter last name"
+                = f.error_text :last_name
+            = f.form_group :email do
+              = f.starred_label :email, nil, class: "col-md-3 control-label"
+              .col-md-9
+                = f.email_field :email, class: "form-control", placeholder: "Enter email"
+                = f.error_text :email
+        .col-md-6
+          %fieldset.registration-form-affiliation
+            %legend
+              Affiliation
+            = f.form_group :institute do
+              = f.starred_label :institute, nil, class: "col-md-3 control-label"
+              .col-md-9
+                = f.text_field :institute, class: "form-control", placeholder: "Enter your institute name"
+                = f.error_text :institute
+            = f.form_group :address do
+              = f.starred_label :address, nil, class: "col-md-3 control-label"
+              .col-md-9
+                = f.text_field :address, class: "form-control", placeholder: "Enter your institute street name and number"
+                = f.error_text :address
+            = f.form_group :zip_code do
+              = f.starred_label :zip_code, nil, class: "col-md-3 control-label"
+              .col-md-9
+                = f.text_field :zip_code, class: "form-control", placeholder: "Enter your institute zip code"
+                = f.error_text :zip_code
+            = f.form_group :city do
+              = f.starred_label :city, nil, class: "col-md-3 control-label"
+              .col-md-9
+                = f.text_field :city, class: "form-control", placeholder: "Enter your institute city"
+                = f.error_text :city
+            = f.form_group :country do
+              = f.starred_label :country, nil, class: "col-md-3 control-label"
+              .col-md-9
+                = f.country_select :country, nil, {}, class: "form-control"
+                = f.error_text :country
+      .row
+        .col-md-6
+          %fieldset#registration-fees
+            %legend Registration fees
+            %h3 Conference
+            - for category in Registration.categories
+              .radio
+                %label
+                  = f.radio_button :category_name, category.name, id: "registration-category_name-#{category.name}", data: {fee: category.fee}
+                  %strong
+                    = category.fee
+                    CHF:
+                  =raw category.details
+            = f.error_text :category_name
+            %h3 Darwin's Dinner
+            .help-block
+              Registration to the Darwin's dinner is only possible online. Registration on site not possible.
+            = f.select :dinner_category_name, Registration.dinner_categories.map{|c| [c.details_and_price, c.name, {data: {fee: c.fee}}]}, { prompt: true }, class: "form-control"
+            = f.error_text :dinner_category_name
+            .checkbox
+              = f.check_box :vegetarian, id: "registration-vegetarian"
+              %label{for: "registration-vegetarian"}
+                =raw "Vegetarian meal"
+            = f.error_text :vegetarian
+
+            %h3 Student accommodation in a dormitory
+            .help-block
+              Students have the possibility to be housed in a fallout shelter (dormitory) for Thursday night, 13th of February (note that places are limited).
+            .checkbox
+              = f.check_box :dormitory, data: {fee: Registration::DORMITORY_FEE}, id: "registration-dormitory"
+              %label{for: "registration-dormitory"}
+                =raw "<strong>#{Registration::DORMITORY_FEE} CHF:</strong> per person per night"
+      .row
+        .col-md-6
+          #registration-fees-total
+            Total fees:
+            %span
+              = registration.fee
+            %strong
+              CHF
+      = render "home/registration_abstract", registration: registration, f: f
+      .row
+        .col-md-12
+          = f.submit "Submit your registration",  class: "btn btn-primary btn-lg"
+          .help-block
+            You'll be able to verify your data before going to the payment secure webpage

@@ -1,0 +1,11 @@
+- if target.errors.any?
+  .panel.panel-danger
+    .panel-heading
+      = pluralize(target.errors.count, "error")
+      prohibited this
+      = target.class.to_s.humanize.downcase
+      from being saved.
+    / %ul.list-group
+    /   -  target.errors.full_messages.each do |msg|
+    /     %li.list-group-item
+    /       = msg

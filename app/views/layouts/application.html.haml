@@ -1,0 +1,11 @@
+!!! 5
+- html_tag :class => 'no-js' do
+  = render 'head'
+  %body{class: "#{ controller.controller_name }"}
+    #wrap
+      = render 'chromeframe'
+      = render 'navigation'
+      = render 'flashes'
+      = yield
+      = render 'layouts/footer'
+    = render 'javascripts'

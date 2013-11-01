@@ -1,0 +1,20 @@
+- cache "home-speakers" do
+  %section#speakers.home-section
+    .container
+      %header
+        %h2 Keynote speakers
+      .row
+        - for speaker in speakers
+          .col-md-6.speaker
+            .thumbnail
+              .row
+                .col-md-8.col-md-offset-4.col-sm-8.col-sm-offset-4
+                  %h3= speaker.full_name
+              .row
+                .speaker-portrait.col-md-4.col-sm-4
+                  = image_tag speaker.portrait.url(:s300), class: 'speaker-portrait img-responsive', alt: speaker.full_name
+                  = link_to speaker.url, class: "btn btn-default speaker-website", target: '_blank' do
+                    %span.glyphicon.glyphicon-globe
+                    website
+                .speaker-caption.col-md-8.col-sm-8
+                  =raw speaker.description

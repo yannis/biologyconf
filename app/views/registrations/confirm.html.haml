@@ -1,0 +1,138 @@
+- @title = "Confirm your registration data"; title @title
+!!! 5
+- html_tag :class => 'no-js' do
+  = render 'head'
+  %body#registration-confirmation{class: "#{ controller.controller_name }"}
+    #wrap
+      = render 'chromeframe'
+      .container
+        = render 'flashes'
+        %h1.biology14
+          biology
+          %span 14
+        %h2= @title
+        = form_tag ENV['BOOKING_URL'] , role: 'form', class: 'form-horizontal' do
+          - @registration.params_hash.each do |k,v|
+            = hidden_field_tag k, v
+          %p.lead
+            =raw "You are registered as #{@registration.category.details}."
+          %h2 Your details
+          .row.row-high
+            .col-md-3.col-sm-3.col-xs-3
+              %strong First name
+            .col-md-9.col-sm-9.col-xs-9
+              = @registration.first_name
+          .row.row-high
+            .col-md-3.col-sm-3.col-xs-3
+              %strong Last name
+            .col-md-9.col-sm-9.col-xs-9
+              = @registration.last_name
+          .row.row-high
+            .col-md-3.col-sm-3.col-xs-3
+              %strong Email
+            .col-md-9.col-sm-9.col-xs-9
+              = @registration.email
+          %h2 Your address
+          .row.row-high
+            .col-md-3.col-sm-3.col-xs-3
+              %strong Institute
+            .col-md-9.col-sm-9.col-xs-9
+              = @registration.institute
+          .row.row-high
+            .col-md-3.col-sm-3.col-xs-3
+              %strong Address
+            .col-md-9.col-sm-9.col-xs-9
+              = @registration.address
+          .row.row-high
+            .col-md-3.col-sm-3.col-xs-3
+              %strong Zip code
+            .col-md-9.col-sm-9.col-xs-9
+              = @registration.zip_code
+          .row.row-high
+            .col-md-3.col-sm-3.col-xs-3
+              %strong City
+            .col-md-9.col-sm-9.col-xs-9
+              = @registration.city
+          .row.row-high
+            .col-md-3.col-sm-3.col-xs-3
+              %strong Country
+            .col-md-9.col-sm-9.col-xs-9
+              = @registration.country
+
+          %h2 Darwin's dinner
+          .row.row-high
+            .col-md-12
+              - if @registration.dinner_category
+                = "Your participating to Darwin's dinner as #{@registration.dinner_category.details}."
+                = @registration.vegetarian ? "You will have a vegetarian meal." : "You will not have a vegetarian meal."
+              - else
+                You're not taking part to Darwin's dinner
+
+          %h2 Dormitory
+          .row.row-high
+            .col-md-12
+              = @registration.dormitory ? "You are sleeping at the dormitory." : "You're not sleeping in the dormitory"
+
+          %h2 Abstract
+          - if @registration.abstract?
+            .row.row-high
+              .col-md-12
+                = "You have submitted an abstract for a #{@registration.talk? ? "talk" : "poster"}."
+                - if @registration.talk?
+                  - if @registration.poster_agreement?
+                    You will present a poster with the same abstract if your talk proposal is rejected.
+                  - else
+                    You will not present a poster if your talk proposal is rejected.
+                - else
+                  You have not submitted any poster or talk abstract.
+            .row.row-high
+              .col-md-3
+                %strong Title
+              .col-md-9= @registration.title
+            .row.row-high
+              .col-md-3
+                %strong Authors
+              .col-md-9= @registration.authors
+            .row.row-high
+              .col-md-3
+                %strong Body
+              .col-md-9= @registration.body.html_safe
+          %h2 Your registration fees
+          .row.row-high
+            .col-md-12.col-sm-12.col-xs-12
+              %table.registration-fees
+                %tbody
+                  %tr
+                    %td
+                      =raw "Conference fees as #{@registration.category.details}"
+                    %th
+                      = "#{@registration.category.fee} CHF"
+                  - if @registration.dinner_category
+                    %tr
+                      %td
+                        = "Darwin's dinner fees as #{@registration.dinner_category.details}"
+                      %th
+                        = "#{@registration.dinner_category.fee} CHF"
+                  - if @registration.dormitory
+                    %tr
+                      %td
+                        Dormitory fees
+                      %th
+                        = "#{Registration::DORMITORY_FEE} CHF"
+                  %tr.registration-fees-total
+                    %th Total
+                    %th
+                      = "#{@registration.fee} CHF"
+
+          .row.row-high
+            .col-md-4.col-sm-6.col-xs-6
+              = submit_tag "Pay your registration fees",  class: "btn btn-primary btn-lg"
+              .help-block
+                You're going to be redirected to a secured web page for payment
+              = image_tag "http://cms.unige.ch/webtools/static/booking/creditok.jpg"
+            .col-md-4.col-md-offset-4.col-sm-6.col-xs-6
+              = link_to "Modify your registration data", edit_registration_path(@registration, anchor: "registration"),  class: "btn btn-warning btn-lg"
+              .help-block
+                You'll go back to the registration form to modify your data
+    = render 'javascripts'
+

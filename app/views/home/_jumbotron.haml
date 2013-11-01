@@ -1,0 +1,65 @@
+- cache "home-header" do
+  %section#home-banner.jumbotron
+    .container
+      .row
+        .home-banner-header.col-md-6.col-sm-8
+          .row
+            .col-md-12
+              %p
+                %em
+                  13th & 14th February 2014, Geneva, Switzerland
+              %h1.biology14
+                biology
+                %span 14
+              %h2
+                the Swiss conference on organismic biology
+              %p.lead
+                The "biology" conference is the yearly joint congress of the Swiss Zoological Society, the Swiss Botanical Society, and the Swiss Systematics Society
+            - if Time.now < Registration::REGISTRATION_DEADLINE
+              .col-lg-12.col-md-12
+                = link_to "#registration", class: "btn btn-primary pull-right btn-lg home-banner-registration-link", data: {target: '#registration'} do
+                  %span.glyphicon.glyphicon-check
+                  Register
+        .home-banner-carousel.carousel.slide.col-md-6.col-sm-4
+          .carousel-inner
+            #carousel-item-1.item.active
+              = image_tag "carousel/full_tree.png"
+            #carousel-item-2.item
+              = image_tag "carousel/algae.png"
+            #carousel-item-3.item
+              = image_tag "carousel/monkey.png"
+            #carousel-item-4.item
+              = image_tag "carousel/foram.png"
+            #carousel-item-5.item
+              = image_tag "carousel/truc.png"
+            #carousel-item-6.item
+              = image_tag "carousel/cell.png"
+
+      .row.home-banner-welcome
+        .col-md-6
+          %p
+            %small
+              One expected output of the meeting is to demonstrate the enthusiasm of researchers in Switzerland, and neighboring countries, for research activities in fields as diverse as evolutionary biology, systematics, biodiversity, ecology, evo-devo, and many more…
+          %p
+            %small
+              The conference provides the opportunity for young scientists from Swiss universities and research institutions to present their work in organismic biology.
+        .col-md-6
+          %p
+            %small
+              It is also open to students and scientists from foreign universities and to non-professional connoisseurs. There will be talks by invited keynote speakers as well as talks and posters presentation by young Swiss researchers.
+          %p
+            %small
+              We are looking forward to welcoming you in Geneva,
+          %p.comittee
+            %small
+              %em The organizing committee
+              %ul.comittee
+                %li Alice Cibois (Muséum GE)
+                %li Jean Mariaux (Muséum GE)
+                %li Daniel Jeanmonod (CJB GE)
+                %li Yamama Naciri (CJB GE)
+                %li Mathieu Perret (CJB GE)
+                %li Philippe Clerc (CJB GE)
+                %li Estella Poloni (Unige)
+                %li Mathias Currat (Unige)
+                %li Juan Montoya-Burgos (Unige)

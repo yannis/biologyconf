@@ -1,0 +1,22 @@
+%nav#application-navigation.navbar.navbar-default.navbar-fixed-top{role: "navigation"}
+  .navbar-header
+    %button.navbar-toggle{type: "button", data: {toggle: "collapse", target: ".navbar-ex1-collapse"}}
+      %span.sr-only Toggle navigation
+      %span.icon-bar
+      %span.icon-bar
+      %span.icon-bar, data: {target: '#program'}
+    = link_to "#home-banner", class: "navbar-brand biology14", data: {target: '#home-banner'} do
+      b
+      %span 14
+  .collapse.navbar-collapse.navbar-ex1-collapse
+    %ul.nav.navbar-nav
+      %li.navigation-program
+        = link_to "Programme", "#program", data: {target: '#program'}
+      %li.navigation-speakers
+        = link_to "Speakers", "#speakers", data: {target: '#speakers'}
+      %li.navigation-venue
+        = link_to "Venue", "#venue", data: {target: '#venue'}
+      %li.navigation-registration
+        = link_to "Registration", "#registration", data: {target: '#registration'}
+      %li.navigation-pace14
+        = link_to "Pace14", "#pace14", data: {target: '#pace14'}

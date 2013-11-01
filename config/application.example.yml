@@ -1,0 +1,21 @@
+# encoding: UTF-8
+SECRET_TOKEN: "secret_token"
+development:
+  MAILER_HOST: "mailer.host"
+  BOOKING_REMOTE: "127.0.0.1"
+test:
+  MAILER_HOST: "mailer.host"
+  BOOKING_REMOTE: "127.0.0.1"
+staging:
+  MAILER_HOST: "mailer.host"
+  BOOKING_REMOTE: "127.0.0.1"
+production:
+  MAILER_HOST: "mailer.host"
+  BOOKING_REMOTE: "127.0.0.1"
+
+BOOKING_KEY: "booking_key"
+BOOKING_SECRET_KEY: "booking_secret_key"
+BOOKING_FORM_ID: "226"
+BOOKING_URL: "booking_url"
+BOOKING_NO_FONDS: "booking_no_fonds"
+BOOKING_CENTRE_COUTS: "booking_centre_couts"

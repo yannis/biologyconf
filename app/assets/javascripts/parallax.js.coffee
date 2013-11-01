@@ -22,7 +22,10 @@ bio14.parallax =
         if (scrollTop+windowHeight) > registrationOffset
           $("#registration").css("background-position", "0 #{-$(window).width()*0.7+(scrollTop+windowHeight-registrationOffset)/1.5}px")
         if (scrollTop+windowHeight) > pace14Offset
-          $("#pace14").css("background-position", "#{100-((scrollTop-pace14Offset)/10)}% #{windowHeight/2-(scrollTop-pace14Offset)}px")
+          # $("#pace14").css("background-position", "#{10+((scrollTop-pace14Offset)/10)}% #{-windowHeight/4+(scrollTop+windowHeight-pace14Offset)/3}px")
+
+
+          $("#pace14").css("background-position", "#{100+((scrollTop-pace14Offset)/10)}% #{-$(window).width()*0.4+(scrollTop+windowHeight*1.5-pace14Offset)/1.5}px")
 
 $ ->
   bio14.parallax.start() if $("html").hasClass("no-overflowscrolling")

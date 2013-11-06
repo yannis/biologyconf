@@ -1,3 +1,4 @@
+require 'acts_as_bookable'
 ActiveAdmin.register Registration do
   controller do
     def permitted_params
@@ -15,6 +16,8 @@ ActiveAdmin.register Registration do
   # filter :zip_code
   filter :country
   filter :talk
+  filter :poster_agreement
+  filter :paid
 
   index do
     column :full_name, sortable: :last_name
@@ -47,7 +50,7 @@ ActiveAdmin.register Registration do
       row :last_name
       row :email
       row :category_name do
-        registration.category.details.html_safe
+        registration.category.details.html_safe if registration.category
       end
       row :institute
       row :address
@@ -57,7 +60,7 @@ ActiveAdmin.register Registration do
       row :talk
       row :poster_agreement
       row :dinner_category_name do
-        registration.dinner_category.details
+        registration.dinner_category.details if registration.dinner_category
       end
       row :vegetarian
       row :talk
@@ -71,7 +74,7 @@ ActiveAdmin.register Registration do
         registration.paid ? "#{registration.paid_fee} CHF" : "no"
       end
       row "Booking datatrans id" do
-        "#{Booking.new(registration).uni_id} #{"(might not exist)" unless registration.paid}"
+        "#{registration.uni_id} #{"(might not exist)" unless registration.paid}"
       end
     end
     active_admin_comments

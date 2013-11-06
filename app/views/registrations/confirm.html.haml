@@ -63,10 +63,10 @@
           .row.row-high
             .col-md-12
               - if @registration.dinner_category
-                = "Your participating to Darwin's dinner as #{@registration.dinner_category.details}."
+                = "You are participating to the Darwin's dinner as #{@registration.dinner_category.details}."
                 = @registration.vegetarian ? "You will have a vegetarian meal." : "You will not have a vegetarian meal."
               - else
-                You're not taking part to Darwin's dinner
+                You are not taking part to Darwin's dinner
 
           %h2 Dormitory
           .row.row-high
@@ -82,7 +82,7 @@
                   - if @registration.poster_agreement?
                     You will present a poster with the same abstract if your talk proposal is rejected.
                   - else
-                    You will not present a poster if your talk proposal is rejected.
+                    You will not present a poster if your talk proposal is not selected.
                 - else
                   You have not submitted any poster or talk abstract.
             .row.row-high

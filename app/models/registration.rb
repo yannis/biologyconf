@@ -28,7 +28,7 @@ class Registration < ActiveRecord::Base
   validates_presence_of :body, if: Proc.new{|r| r.abstract?}
 
   before_validation :_sanitize_abstract_body
-  after_create :_set_id_token, :_set_timestamp_id
+  after_create :_set_id_token, :_set_timestamp_id, :register_to_mailing_list
 
   def self.categories
     CATEGORIES.map{|ch| Category.new ch}
@@ -84,5 +84,9 @@ class Registration < ActiveRecord::Base
 
     def _sanitize_abstract_body
       self.body = ActionController::Base.helpers.sanitize(self.body , tags: %w(i b h1 h2 p ul ol li), attributes: %w())
+    end
+
+    def register_to_mailing_list
+      MAILINGLIST.lists.subscribe({:id => ENV["MAILCHIMP_LIST_ID"], :email => {:email => self.email}, :merge_vars => {:FNAME => self.first_name, :LNAME => self.last_name}, :double_optin => false}) unless Rails.env.test?
     end
 end

@@ -30,6 +30,7 @@ gem 'formtastic',          github: 'justinfrench/formtastic'
 gem 'countries'
 gem 'country_select'
 gem 'prawn'
+gem "gibbon"
 
 group :development do
   gem "capistrano"

@@ -12,6 +12,14 @@
             The Darwin Dinner in honor of Charles Darwin will take place in the main hall of the Sciences II building. We will enjoy the fine cuisine of our Chef Christian Christensen and listen to the music of the Bazar Band. An invited international speaker will enrich this evening with an entertaining talk and there will also be ample opportunity for discussions with our invited keynote speakers.
           %p
             The night then continues in downtown Geneva.
+          = form_tag "http://unige.us3.list-manage.com/subscribe/post?u=b9cb9b44ec0b4d2d1f806d3e3&amp;id=#{ENV["MAILCHIMP_LIST_ID"]}", method: "post", class: "form form-inline" do
+            %fieldset
+              %legend Mailing list
+            .form-group
+              %p
+                Register to our mailing list to get the latest news and program announcements.
+              = email_field_tag "EMAIL", nil, placeholder: "Email address", class: "form-control inline"
+              = submit_tag "Subscribe", class: "btn btn-primary btn-sm"
       .row
         - events.each do |date, events|
           .col-md-6

@@ -29,6 +29,15 @@ class BookingCallback
   end
 
   private
+  def data
+      {
+        uni_id: uni_id,
+        bookable_timestamp_id: bookable_timestamp_id,
+        mhash: mhash,
+        remote_addr: remote_addr,
+        controle_md5: controle_md5
+      }
+    end
 
     def _validate_mhash
       if controle_md5 != mhash

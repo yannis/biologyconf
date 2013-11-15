@@ -2,10 +2,16 @@
   %section#pace14.home-section
     .container
       .row
-        .col-md-6.content
+        .col-md-12.content
           %h2 Pace14
+      .row
+        .col-md-6
           %p.lead
             Swiss conservation biologists and restoration ecologists are pleased to invite you to the fourth edition of PACE, the yearly Swiss symposium on Plant and Animal Conservation Ecology, that will take place on:
+        .col-md-6
+          = link_to image_tag("pace14.jpg"), "http://pace14.squarespace.com/"
+      .row
+        .col-md-6
           %h3
             Wednesday 12 February 2014
           %p
@@ -13,6 +19,6 @@
           %p
             This one day symposium offers young scientists from Swiss universities and high technical schools the opportunity to present work in applied organismal ecology that bears specific relevance for biodiversity conservation.
           %p
-            Further information will be available soon.
+            =raw "Further information is available on #{link_to "the PACE14 website", "http://pace14.squarespace.com/"}."
           %p
             Organized by the Swiss chapter of the Europe Section of the Society for Conservation Biology and the University of Geneva

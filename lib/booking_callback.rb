@@ -29,6 +29,7 @@ class BookingCallback
   end
 
   private
+
   def data
       {
         uni_id: uni_id,

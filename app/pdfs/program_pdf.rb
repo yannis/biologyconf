@@ -18,15 +18,18 @@ class ProgramPdf < Prawn::Document
     # text "This <i>includes <b>inline</b></i> <font size='24'>formatting</font>", :inline_format => true
     grouped_events = Event.order(:start).group_by{|e| e.start.to_date}
 
+    top = bounds.top
     grouped_events.each do |date, events|
-      leftb = date == grouped_events.keys.first ? 0 : 270
+      leftb = date == grouped_events.keys.first ? 0 : 280
 
-      bounding_box [bounds.left+leftb, bounds.top-100], width: 250 do
+      bounding_box [bounds.left+leftb, top-100], width: 265 do
         font_size 24
         text date.to_s(:day_month_year)
         data = events.map{|event| ["#{event.start.to_s(:time_only)} – #{event.end.to_s(:time_only)}", event.title] }
         table(data, :cell_style => { :inline_format => true, size: 10 }) do
           cells.borders = []
+          column(0).width = 75
+          column(0).font_style = :bold
           row(0..-1).borders = [:bottom]
           row(0..-1).border_width = 0.5
           row(-1).border_width = 0

@@ -123,7 +123,10 @@
                     %th Total
                     %th
                       = "#{@registration.fee} CHF"
-
+          .row.alert-danger.alert
+            %strong
+              For non-European residents:
+            Please ensure that you have all rights to enter the Swiss territory before proceeding to payment. The conference fees are not refundable if you cannot enter Switzerland to assist the conference.
           .row.row-high
             .col-md-4.col-sm-6.col-xs-6
               = submit_tag "Pay your registration fees",  class: "btn btn-primary btn-lg"

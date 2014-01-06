@@ -15,6 +15,7 @@ class RegistrationsController < ApplicationController
     else
       @speakers = Speaker.order(:last_name, :first_name)
       @grouped_events = Event.order(:start).group_by{|e| e.start.to_date}
+      @countries = (Country.find_all_countries_by_subregion('Northern America')+Country.find_all_countries_by_region('Europe')).uniq.sort_by(&:name)
       respond_with @registration do |format|
         format.html { render "home/show"}
       end

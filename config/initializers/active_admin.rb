@@ -149,10 +149,10 @@ ActiveAdmin.setup do |config|
   # == CSV options
   #
   # Set the CSV builder separator
-  # config.csv_options = { :col_sep => ';' }
+  config.csv_options = { :col_sep => '£' }
   #
   # Force the use of quotes
-  # config.csv_options = { :force_quotes => true }
+  config.csv_options = { :force_quotes => true }
 
 
   # == Menu System
@@ -200,7 +200,7 @@ ActiveAdmin.setup do |config|
   # Pagination is enabled by default for all resources.
   # You can control the default per page count for all resources here.
   #
-  # config.default_per_page = 30
+  config.default_per_page = 300
 
 
   # == Filters

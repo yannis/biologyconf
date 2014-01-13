@@ -1,8 +1,27 @@
 require 'acts_as_bookable'
 ActiveAdmin.register Registration do
+
   controller do
+
+    before_filter :only => :index do
+      @per_page = 1000 if request.format == 'application/pdf'
+    end
+
+
     def permitted_params
       params.permit(:registration => [:first_name, :last_name, :email, :category_name, :dinner_category_name, :dormitory, :institute, :address, :city, :zip_code, :country, :title, :authors, :body, :talk, :vegetarian, :poster_agreement])
+    end
+
+    def index
+      index! do |format|
+        format.pdf do
+          pdf = Admin::RegistrationsPdf.new(collection)
+          send_data pdf.render, filename: "registrations_#{Date.current.to_s}",
+                                type: "application/pdf",
+                                disposition: "inline",
+                                page_size: 'A4'
+        end
+      end
     end
   end
 
@@ -15,11 +34,14 @@ ActiveAdmin.register Registration do
   # filter :city
   # filter :zip_code
   filter :country
+  filter :title
+  filter :authors
+  filter :body
   filter :talk
   filter :poster_agreement
   filter :paid
 
-  index do
+  index download_links: [:csv, :xml, :json, :pdf] do
     column :full_name, sortable: :last_name
     column :email
     column :category_name

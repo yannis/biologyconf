@@ -66,6 +66,10 @@ class Registration < ActiveRecord::Base
     self.talk.present? || self.title.present? || self.authors.present? || self.body.present?
   end
 
+  def formatted_body
+    body.gsub("\n\n", "<br>").gsub("\n", "").gsub("&nbsp;", " ").gsub("<p>", "").gsub("</p>", "\n\n")
+  end
+
   protected
 
     def generate_personal_token

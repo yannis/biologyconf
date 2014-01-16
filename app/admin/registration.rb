@@ -28,18 +28,18 @@ ActiveAdmin.register Registration do
   filter :first_name
   filter :last_name
   filter :email
-  filter :category_name
+  filter :category_name, as: :select, multiple: true, collection: proc{ Registration.uniq.pluck :category_name }
   filter :institute
-  # filter :address
-  # filter :city
-  # filter :zip_code
   filter :country
   filter :title
   filter :authors
   filter :body
-  filter :talk
-  filter :poster_agreement
   filter :paid
+  filter :talk, as: :select, collection: [true,false]
+  filter :poster_agreement
+  filter :dormitory
+  filter :vegetarian
+  filter :dinner_category_name, as: :select, multiple: true, collection: proc{ Registration.uniq.pluck :dinner_category_name }
 
   index download_links: [:csv, :xml, :json, :pdf] do
     column :full_name, sortable: :last_name

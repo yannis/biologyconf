@@ -42,6 +42,10 @@ class Registration < ActiveRecord::Base
     where(paid: true, dormitory: true).count >= DORMITORY_CAPACITY
   end
 
+  def self.paid_and_talks
+    where(paid: true, talk: true).where("registrations.body IS NOT NULL")
+  end
+
   def full_name
     "#{first_name} #{last_name}"
   end

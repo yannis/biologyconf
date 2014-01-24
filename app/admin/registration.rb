@@ -90,7 +90,7 @@ ActiveAdmin.register Registration do
       row :title
       row :authors
       row :body do
-        registration.body.html_safe
+        registration.body.html_safe if registration.body
       end
       row :paid do
         registration.paid ? "#{registration.paid_fee} CHF" : "no"

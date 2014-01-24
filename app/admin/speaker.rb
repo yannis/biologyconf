@@ -14,11 +14,11 @@ ActiveAdmin.register Speaker do
     column :first_name
     column :last_name
     column :description do |speaker|
-      truncate(speaker.description, :length => 100)
+      truncate(speaker.description, :length => 100) if speaker.description
     end
     column :url
     column "Portrait" do |speaker|
-      image_tag(speaker.portrait.url(:thumb))
+      image_tag(speaker.portrait.url(:thumb)) if speaker.portrait
     end
     default_actions
   end
@@ -31,7 +31,7 @@ ActiveAdmin.register Speaker do
       row :description
       row :url
       row :portrait do
-        image_tag(speaker.portrait.url(:thumb))
+        image_tag(speaker.portrait.url(:thumb)) if speaker.portrait
       end
     end
     active_admin_comments

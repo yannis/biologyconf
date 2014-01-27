@@ -5,7 +5,7 @@ class ProgramPdf < Prawn::Document
 
     bounding_box [bounds.left-20,bounds.top+15], width: 150 do
       font_size 24
-      text "Program"
+      text "Programme"
     end
 
     bounding_box [bounds.right-130,bounds.top-20], width: 150 do

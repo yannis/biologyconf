@@ -26,6 +26,7 @@ class Registration < ActiveRecord::Base
   validates_presence_of :title, if: Proc.new{|r| r.abstract?}
   validates_presence_of :authors, if: Proc.new{|r| r.abstract?}
   validates_presence_of :body, if: Proc.new{|r| r.abstract?}
+  validates_uniqueness_of :poster_number, allow_nil: true
 
   before_validation :_sanitize_abstract_body
   after_create :_set_id_token, :_set_timestamp_id, :register_to_mailing_list

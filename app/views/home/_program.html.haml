@@ -37,7 +37,12 @@
                       –
                       = event.end.to_s(:time_only)
                     %td
-                      = event.title
+                      =raw event.title
+                    %td
+                      = event.speaker_name
+                    %td
+                      = event.speaker_affiliation
+
       .row
         .col-md-12
           = link_to "/pdf_program", class: "btn btn-default btn-lg pull-right" do

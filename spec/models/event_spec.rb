@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe Event do
   it {should validate_presence_of :title}
+  # it {should validate_presence_of(:speaker_affiliation).if()}
   it {should validate_presence_of :start}
   it {should validate_uniqueness_of :start}
 

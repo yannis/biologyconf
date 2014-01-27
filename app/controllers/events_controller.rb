@@ -6,7 +6,6 @@ class EventsController < ApplicationController
     pdf = ProgramPdf.new
     send_data pdf.render, filename: "biology14_program_#{Date.current.to_s}",
                           type: "application/pdf",
-                          disposition: "inline",
-                          page_size: 'A4'
+                          disposition: "inline"
   end
 end

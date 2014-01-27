@@ -9,7 +9,7 @@ ActiveAdmin.register Registration do
 
 
     def permitted_params
-      params.permit(:registration => [:first_name, :last_name, :email, :category_name, :dinner_category_name, :dormitory, :institute, :address, :city, :zip_code, :country, :title, :authors, :body, :talk, :vegetarian, :poster_agreement])
+      params.permit(:registration => [:first_name, :last_name, :email, :category_name, :dinner_category_name, :dormitory, :institute, :address, :city, :zip_code, :country, :title, :authors, :body, :talk, :selected_as_talk, :vegetarian, :poster_agreement, :poster_number])
     end
 
     def index
@@ -36,7 +36,9 @@ ActiveAdmin.register Registration do
   filter :body
   filter :paid
   filter :talk, as: :select, collection: [true,false]
+  filter :selected_as_talk, label: "Selected as tak by admin"
   filter :poster_agreement
+  filter :poster_number
   filter :dormitory
   filter :vegetarian
   filter :dinner_category_name, as: :select, multiple: true, collection: proc{ Registration.uniq.pluck :dinner_category_name }
@@ -46,15 +48,13 @@ ActiveAdmin.register Registration do
     column :email
     column :category_name
     column :institute
-    # column :address
-    # column :city
-    # column :zip_code
-    # column :country
     column :talk
+    column :selected_as_talk
     column :poster_agreement
     column "Abstract title", sortable: :title do |registration|
       registration.title
     end
+    column :poster_number
     column :dinner_category_name, sortable: :dinner_category_name do |registration|
       registration.dinner_category.details if registration.dinner_category
     end
@@ -80,14 +80,18 @@ ActiveAdmin.register Registration do
       row :city
       row :country
       row :talk
+      row :selected_as_talk
       row :poster_agreement
+      row :poster_number
       row :dinner_category_name do
         registration.dinner_category.details if registration.dinner_category
       end
       row :vegetarian
       row :talk
       row :poster_agreement
-      row :title
+      row :title do
+        registration.title.html_safe if registration.title
+      end
       row :authors
       row :body do
         registration.body.html_safe if registration.body
@@ -122,7 +126,9 @@ ActiveAdmin.register Registration do
 
     f.inputs "Abstract" do
       f.input :talk
+      f.input :selected_as_talk
       f.input :poster_agreement
+      f.input :poster_number, as: :select, collection: (1..60).to_a-Registration.select(:poster_number).map(&:poster_number), include_blank: true
       f.input :title
       f.input :authors
       f.input :body

@@ -3,11 +3,15 @@ require 'spec_helper'
 describe Registration do
   it_behaves_like "a bookable"
 
+  it {should respond_to :selected_as_talk}
+  it {should respond_to :poster_number}
+
   it {expect(Registration::POSTER_DEADLINE).to be_a Time}
   it {expect(Registration::REGISTRATION_DEADLINE).to be_a Time}
   # it {should validate_uniqueness_of(:last_name)}
   it {should validate_presence_of :institute}
   it {should validate_presence_of :category_name}
+  it {should validate_uniqueness_of :poster_number}
   it {should ensure_inclusion_of(:category_name).in_array(Registration.categories.map(&:name))}
 
   it {expect(Registration.categories.count).to eq 3}

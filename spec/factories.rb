@@ -9,6 +9,8 @@ FactoryGirl.define do
   end
   factory :event do
     title { 'student presentation' }
+    speaker_name { Faker::Name.name }
+    speaker_affiliation { Faker::Company.name }
     start { "2014-02-13 10:00"}
     self.end {|e| Time.parse(e.start)+15}
     kind { 'student presentation' }

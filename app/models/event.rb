@@ -5,6 +5,7 @@ class Event < ActiveRecord::Base
 
   validates_presence_of :title
   validates_presence_of :start
+  validates_presence_of :speaker_affiliation, if: Proc.new{|e| e.speaker_name.present?}
   validates_uniqueness_of :start
   validates_inclusion_of :kind, in: TYPE, allow_nil: true
 

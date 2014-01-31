@@ -3,6 +3,7 @@ require 'spec_helper'
 describe Registration do
   it_behaves_like "a bookable"
 
+  it {should have_one :event}
   it {should respond_to :selected_as_talk}
   it {should respond_to :poster_number}
 

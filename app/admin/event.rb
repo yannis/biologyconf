@@ -2,7 +2,7 @@ ActiveAdmin.register Event do
 
   controller do
     def permitted_params
-      params.permit(:event => [:title, :speaker_name, :speaker_affiliation, :start, :end, :classes, :kind])
+      params.permit(:event => [:title, :speaker_name, :speaker_affiliation, :start, :end, :classes, :kind, :registration_id])
     end
   end
 

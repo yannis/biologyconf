@@ -82,12 +82,63 @@ Bastiaan Ibelings is full Professor in Microbial Ecology at the Institute F.-A. 
 Pierre-Henri Gouyon is full Professor in Evolution, Genetics, Ecology and Ethics (among other) at the Muséum National d’Histoire Naturelle, at AgroParisTech and Sciences Politiques, Paris. His current research interest and projects include theoretical considerations about the mechanisms underlying and driving the main functions of living organisms (sex, mutation, dispersion, death, …), considering the forces that act at different levels of integration (genes, individuals, metapopulations, species), in order to decipher the role of chance, selection and historical contingency in evolutionary processes. His theoretical works are greatly complemented by experimental biology on plants."
   },
   {
-    identifier: "map",
+    identifier: "venue_room",
     title: "Map of the venue",
     title_size: 24,
     text: "Sciences II and III
     30 quai Ernest Ansermet
     Geneva"
+  },
+  {
+    identifier: "venue_restaurant",
+    title: "Darwin dinner",
+    title_size: 24,
+    text: "The traditional dinner in honor of Charles Darwin will be held at the restaurant “La Broche”. This restaurant is well known for his cuisine and for the rustic elegance of the place with a touch of design style.
+
+Restaurant La Broche
+36 rue du Stand
+1204 Geneva
+"
+  },
+  {
+    identifier: "info_lunch",
+    title: "Lunch",
+    title_size: 24,
+    text: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+  },
+  {
+    identifier: "info_internet",
+    title: "Internet",
+    title_size: 24,
+    text: "You may use your normal university log-in to connect to WLAN « …….. » using a vpn client.
+Go to …………………. for a manual. You should be able to open this site once you are connected with the unibas WLAN.
+http://www.unige.ch/lettres/infos/InformatiqueEtudiants/NouveautesInfos.html
+"
+  },
+  {
+    identifier: "info_poster",
+    title: "Poster sessions",
+    title_size: 24,
+    text: "Two poster sessions are organized in the main hall of the Sciences III building:
+∙ on Thursday during the afternoon coffee break: 15:00-15:45 for poster with even numbers
+∙ on Friday during the afternoon coffee break: 15:00-15:45 for posters with uneven numbers
+At least one author of the poster must present the poster during the assigned poster session and ideally during the two sessions.
+"
+  },
+  {
+    identifier: "info_prizes",
+    title: "Prizes for best talk and poster",
+    title_size: 24,
+    text: "The best talk by a junior researcher (master student, PhD student or first year post-doc) of a Swiss research institution will receive a prize sponsored by ……………….. .
+The best poster presentation by a junior researcher of a Swiss research institution will receive a prize sponsored by ……………….. .
+The prizes of the best oral and best poster presentations will be awarded by the organising committee."
+  },
+  {
+    identifier: "info_meeting",
+    title: "Meeting of the societies",
+    title_size: 24,
+    text: "A compléter
+Swiss Systematic Society (SSS) va effectivement profiter de Biology 14 pour réunir son comité ou une partie du comité."
   }
 ]
 

@@ -1,6 +1,8 @@
 require 'acts_as_bookable'
 class Registration < ActiveRecord::Base
 
+  has_one :event
+
   CATEGORIES = [
     {name: "non_member", details: "non-member (student or researcher)", fee: (Rails.env.production? ? 50 : 0.10)},
     {name: "student_member", details: "master or PhD student, member <a href='http://ssz.scnatweb.ch/en/' target='_blank'>SZS</a>, <a href='http://www.swiss-systematics.ch/' target='_blank'>SSS</a>, or <a href='http://www.botanica-helvetica.ch/index.fr.php' target='_blank'>SBS</a>", fee: 25},

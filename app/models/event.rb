@@ -1,5 +1,6 @@
 class Event < ActiveRecord::Base
 
+  belongs_to :registration
 
   TYPE = ['organisation', 'student presentation', 'keynote presentation', 'break']
 

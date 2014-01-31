@@ -72,23 +72,31 @@
                   =raw category.details
             = f.error_text :category_name
             %h3 Darwin's Dinner
-            .help-block
-              Registration to the Darwin's dinner is only possible online. Registration on site not possible.
-            = f.select :dinner_category_name, Registration.dinner_categories.map{|c| [c.details_and_price, c.name, {data: {fee: c.fee}}]}, { prompt: true }, class: "form-control"
-            = f.error_text :dinner_category_name
-            .checkbox
-              = f.check_box :vegetarian, id: "registration-vegetarian"
-              %label{for: "registration-vegetarian"}
-                =raw "Vegetarian meal"
-            = f.error_text :vegetarian
+            - if Registration.dinner_full?
+              %p
+                We are extremely sorry but the maximum number of participants to the Darwin Dinner has been reached before the online registration deadline. Unfortunately, no more places are available.
+            - else
+              .help-block
+                Registration to the Darwin's dinner is only possible online. Registration on site not possible.
+              = f.select :dinner_category_name, Registration.dinner_categories.map{|c| [c.details_and_price, c.name, {data: {fee: c.fee}}]}, { prompt: true }, class: "form-control"
+              = f.error_text :dinner_category_name
+              .checkbox
+                = f.check_box :vegetarian, id: "registration-vegetarian"
+                %label{for: "registration-vegetarian"}
+                  =raw "Vegetarian meal"
+              = f.error_text :vegetarian
 
             %h3 Student accommodation in a dormitory
-            .help-block
-              Students have the possibility to be housed in a fallout shelter (dormitory) for Thursday night, 13th of February (note that places are limited).
-            .checkbox
-              = f.check_box :dormitory, data: {fee: Registration::DORMITORY_FEE}, id: "registration-dormitory"
-              %label{for: "registration-dormitory"}
-                =raw "<strong>#{Registration::DORMITORY_FEE} CHF:</strong> per person per night"
+            - if Registration.dormitory_full?
+              %p
+                We are extremely sorry but all dormitory beds (50) have been booked.
+            - else
+              .help-block
+                Students have the possibility to be housed in a fallout shelter (dormitory) for Thursday night, 13th of February (note that places are limited).
+              .checkbox
+                = f.check_box :dormitory, data: {fee: Registration::DORMITORY_FEE}, id: "registration-dormitory"
+                %label{for: "registration-dormitory"}
+                  =raw "<strong>#{Registration::DORMITORY_FEE} CHF:</strong> per person per night"
       .row
         .col-md-6
           #registration-fees-total

@@ -96,6 +96,22 @@ describe "#dormitory_full" do
   end
 end
 
+describe "#dinner_full" do
+  context "with already 109 paid dinner registrations" do
+    before {
+      109.times do
+        create :registration, paid: true, dinner_category_name: 'student'
+      end
+    }
+    it {expect(Registration.dinner_full?).to be_false}
+
+    context "when one more paid dinner registration is created" do
+      before {create :registration, paid: true, dinner_category_name: 'student'}
+      it {expect(Registration.dinner_full?).to be_true}
+    end
+  end
+end
+
 describe "validation of last name" do
   context "if an unpaid registration with same last_name and first_name already exists" do
     let!(:registration){create :registration, paid: false}

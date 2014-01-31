@@ -131,14 +131,8 @@ describe RegistrationsController do
       it {expect(assigns(:registration).errors.full_messages_for(:first_name).to_sentence).to eq "First name can't be blank"}
     end
 
-    describe "POST 'callback' with valid params", :focus do
+    describe "POST 'callback' with valid params" do
       let(:registration){create :registration}
-      # it {
-      #   registration.should_receive(:mark_as_paid)
-      #   post :callback,
-      #     id: "#{registration.form_id}-#{registration.timestamp_id}",
-      #     mhash: Digest::MD5.hexdigest(registration.uni_id+ENV['BOOKING_SECRET_KEY'])
-      # }
       describe "registration is modified" do
         before {
           session[:registration_id_token] = registration.id_token
@@ -179,6 +173,8 @@ describe RegistrationsController do
     }
   end
 
+
+
   describe RegistrationsController::RegistrationParams do
     let(:registration_full_params) {
       {
@@ -216,6 +212,7 @@ describe RegistrationsController do
         expect(permitted_params).to eq registration_full_params.with_indifferent_access
       end
     end
+
     context "after reaching poster deadline" do
       before {
         Timecop.travel(Registration::POSTER_DEADLINE+10.minutes)
@@ -229,6 +226,7 @@ describe RegistrationsController do
         expect(permitted_params).to eq registration_full_params.delete_if{|key, value| [:authors, :body, :poster_agreement, :talk, :title].include?key }.with_indifferent_access
       end
     end
+
     context "after reaching registration deadline" do
       before {
         Timecop.travel(Registration::REGISTRATION_DEADLINE+10.minutes)
@@ -236,10 +234,40 @@ describe RegistrationsController do
       after {
         Timecop.return
       }
-      it "returns the full params" do
+      it "returns empty params" do
         params = ActionController::Parameters.new registration: {}.merge(registration_full_params)
         permitted_params = RegistrationsController::RegistrationParams.permit(params)
         expect(permitted_params).to be_empty
+      end
+    end
+
+    context "after reaching dormitory limit" do
+      before {
+        Timecop.travel(Registration::POSTER_DEADLINE-10.minutes)
+        50.times {create :registration, paid: true, dormitory: true}
+      }
+      after {
+        Timecop.return
+      }
+      it "returns the full params" do
+        params = ActionController::Parameters.new registration: {}.merge(registration_full_params)
+        permitted_params = RegistrationsController::RegistrationParams.permit(params)
+        expect(permitted_params).to eq registration_full_params.delete_if{|key, value| [:dormitory].include?(key) }.with_indifferent_access
+      end
+    end
+
+    context "after reaching dinner limit" do
+      before {
+        Timecop.travel(Registration::POSTER_DEADLINE-10.minutes)
+        110.times {create :registration, paid: true, dinner_category_name: 'student'}
+      }
+      after {
+        Timecop.return
+      }
+      it "returns the full params" do
+        params = ActionController::Parameters.new registration: {}.merge(registration_full_params)
+        permitted_params = RegistrationsController::RegistrationParams.permit(params)
+        expect(permitted_params).to eq registration_full_params.delete_if{|key, value| [:dinner_category_name, :vegetarian].include?(key) }.with_indifferent_access
       end
     end
   end

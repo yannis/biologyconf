@@ -29,7 +29,7 @@ gem 'activeadmin',         github: 'gregbell/active_admin'
 gem 'formtastic',          github: 'justinfrench/formtastic'
 gem 'countries'
 gem 'country_select'
-gem 'prawn'
+gem 'prawn',          github: 'prawnpdf/prawn'
 gem "gibbon"
 
 group :development do

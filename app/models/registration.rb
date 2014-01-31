@@ -16,6 +16,7 @@ class Registration < ActiveRecord::Base
 
   POSTER_DEADLINE = Time.parse("2014-01-14 23:59")
   DORMITORY_CAPACITY = 50
+  DINNER_CAPACITY = 110
   REGISTRATION_DEADLINE = Time.parse("2014-02-07 23:59")
 
   acts_as_bookable
@@ -41,6 +42,10 @@ class Registration < ActiveRecord::Base
 
   def self.dormitory_full?
     where(paid: true, dormitory: true).count >= DORMITORY_CAPACITY
+  end
+
+  def self.dinner_full?
+    where(paid: true, dinner_category_name: DINNER_CATEGORIES.map{|c| c.fetch(:name)}).count >= DINNER_CAPACITY
   end
 
   def self.paid_and_talks
@@ -72,7 +77,22 @@ class Registration < ActiveRecord::Base
   end
 
   def formatted_body
-    body.gsub("\n\n", "<br>").gsub("\n", "").gsub("&nbsp;", " ").gsub("<p>", "").gsub("</p>", "\n\n")
+    Registration.formatted body
+  end
+
+  def self.formatted(text)
+    text.
+      gsub("<b></b>", "").
+      gsub("<i></i>", "").
+      gsub("<b></b>", "").
+      gsub("\n\n", "<br>").
+      gsub("\n", "").
+      gsub("&nbsp;", " ").
+      gsub("<p>", "").
+      gsub("<li>", "·").
+      gsub("</p>", "\n\n").
+      gsub("</li>", "\n\n").
+      strip
   end
 
   protected

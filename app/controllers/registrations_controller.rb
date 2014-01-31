@@ -85,13 +85,14 @@ class RegistrationsController < ApplicationController
       end
     end
 
-
   class RegistrationParams
     def self.permit(params)
-      if Time.now < Registration::POSTER_DEADLINE
-        params.require(:registration).permit(:first_name, :last_name, :email, :category_name, :dinner_category_name, :dormitory, :institute, :address, :city, :zip_code, :country, :title, :authors, :body, :talk, :vegetarian, :poster_agreement)
-      elsif Time.now < Registration::REGISTRATION_DEADLINE
-        params.require(:registration).permit(:first_name, :last_name, :email, :category_name, :dinner_category_name, :dormitory, :institute, :address, :city, :zip_code, :country, :vegetarian)
+      parameters = [:first_name, :last_name, :email, :category_name, :institute, :address, :city, :zip_code, :country]
+      parameters += [:title, :authors, :body, :talk, :poster_agreement] if Time.now < Registration::POSTER_DEADLINE
+      parameters += [:dormitory] unless Registration.dormitory_full?
+      parameters += [:dinner_category_name, :vegetarian] unless Registration.dinner_full?
+      if Time.now < Registration::REGISTRATION_DEADLINE
+        params.require(:registration).permit(*parameters)
       else
         {}
       end

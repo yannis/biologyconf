@@ -16,6 +16,10 @@ ActiveAdmin.register BookletContent do
     default_actions
   end
 
+  action_item only: :index do
+    link_to("Booklet", booklet_admin_booklet_contents_path)
+  end
+
   show do |registration|
     attributes_table do
       row :identifier
@@ -26,4 +30,11 @@ ActiveAdmin.register BookletContent do
     active_admin_comments
   end
 
+  collection_action :booklet do
+    pdf = Admin::BookletPdf.new
+    send_data pdf.render, filename: "booklet_#{Date.current.to_s}",
+                          type: "application/pdf",
+                          disposition: "inline",
+                          page_size: 'A4'
+  end
 end

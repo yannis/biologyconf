@@ -21,6 +21,9 @@ ActiveAdmin.register Event do
     column :end
     column :classes
     column :kind
+    column :registration_id do |e|
+      e.registration.full_name if e.registration
+    end
     default_actions
   end
 

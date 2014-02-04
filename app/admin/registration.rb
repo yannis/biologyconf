@@ -43,10 +43,6 @@ ActiveAdmin.register Registration do
   filter :vegetarian
   filter :dinner_category_name, as: :select, multiple: true, collection: proc{ Registration.uniq.pluck :dinner_category_name }
 
-  action_item only: :index do
-    link_to("Booklet", booklet_admin_registrations_path)
-  end
-
   index download_links: [:csv, :xml, :json, :pdf] do
     column :full_name, sortable: :last_name
     column :email
@@ -138,13 +134,5 @@ ActiveAdmin.register Registration do
       f.input :body
     end
     f.actions
-  end
-
-  collection_action :booklet do
-    pdf = Admin::BookletPdf.new
-    send_data pdf.render, filename: "booklet_#{Date.current.to_s}",
-                          type: "application/pdf",
-                          disposition: "inline",
-                          page_size: 'A4'
   end
 end

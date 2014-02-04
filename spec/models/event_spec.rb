@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Event do
-  it {should belongs_to :registration}
+  it {should belong_to :registration}
   it {should validate_presence_of :title}
   # it {should validate_presence_of(:speaker_affiliation).if()}
   it {should validate_presence_of :start}

@@ -139,6 +139,82 @@ The prizes of the best oral and best poster presentations will be awarded by the
     title_size: 24,
     text: "A compléter
 Swiss Systematic Society (SSS) va effectivement profiter de Biology 14 pour réunir son comité ou une partie du comité."
+  },
+  {
+    identifier: "participants",
+    title: "List of participants",
+    title_size: 24,
+    text: "registered online"
+  },
+  {
+    identifier: "dosee",
+    title: "Things to do and see",
+    title_size: 24,
+    text: "<b>The Lake</b>
+Geneva ’s world famous lakefront is the centerpiece of the city and offers many opportunities for recreation and relaxation throughout the year. The Jet d’Eau spouting 140 meters into the air is the world’s tallest and symbolizes Geneva’s all over the world.
+
+<b>The Old Town</b>
+Geneva ’s ancient Old Town is a maze of sloping cobblestone streets and alleyways filled with cafes, boutiques and historical landmarks at every turn. The Bourg-de-Four is the oldest public square in Geneva and remains a hub of activity surrounded by bistros, terraces and bars. The 15th century Hotel De Ville located along Rue de l’Hotel-de-Ville still serves as the seat of government in Geneva and is the site of many political milestones including the founding of the League of Nations in 1920. The Treille Promenade on the south side of the Old Town was once an artillery post and today offers beautiful views of the city from atop the towns last remaining rampart wall.
+
+<b>Saint Peter’s Cathedral</b>
+Location: Cour Saint-Pierre, in the Old Town.
+Hours: 10:00-12:00, 14:00-17:00 Mon-Fri, 10:00-17:30 Saturdays, 12:00-17:30 Sundays Admission is free. The Cathedral was began in 1160 and took over 400 years to complete, suffering numerous makeovers and fires throughout the years. The north tower offers incredible panoramic views of the city (admission: 3.-), while the basement houses an Archaeological Museum chronicling the excavation of artifacts found beneath the Cathedral, some dating back as far as 350 AD.
+
+<b>Reformation Wall</b>
+Located in beautiful Bastions Park, this monument commemorates the major events and figures of the Protestant Reformation. Larger than life statues of Guillaume Farel, Jean Calvin, Théodore de Bèze and John Knox dominate the central part of the 100 meter wall, eternally guarding over their “City of Refuge.”
+
+<b>Place de Neuve</b>
+Bounded by the Conservatory of Music, the Grand Opera Theater, the Rath Museum and the nearby Victory Concert Hall, the square at Place Neuve represents the pinnacle of high culture in Geneva. A statue of the Swiss General Henri Dufour sits in the center of the square. High class cafes and restaurants are also on hand to cater to the theater crowds.
+
+<b>Botanical Garden</b>
+
+<b>Museum of Natural History</b>
+
+<b>Parks</b>
+Geneva is one of the greenest cities in Europe with more than 20 parks in the city center.
+
+<b>English Garden</b>
+Location: Quai Gustave-Ador
+Situated on the left bank near the Jet d’Eau, the English Garden is home to the famous “flower clock,” the largest of its kind in the world. Several statues of note inhabit the park including the ‘Monument National,’ and a sculpted bronze fountain.
+
+<b>Bastions Park</b>
+Location: Place de Neuve
+A former botanical garden and site of the first university in Geneva, tree lined Bastions Park is popular with students and abuzz with activity most hours of the day. A set of life size chess boards are located at the north end of the park. Finally, Reformation Wall built along the old rampart wall of the Old Town pays tribute to the founders of the Reformation.
+
+<b>La Perle-du-Lac and Parc Moynier</b>
+Location: Route du Lausanne
+The «Pearl of Lake» and adjoining Park Moynier is arguably the most beautiful area in Geneva with clear views of the Mont Blanc and the lake. The parks are flush with flowers with plenty of shady spots to wile away the afternoon. The History of Science Museum, is located in the center of Park Moynier."
+  },
+  {
+    identifier: "going_out",
+    title: "Going out",
+    title_size: 24,
+    text: "<b>Bars and Night Cafes</b>
+Close to the Sciences buildings, la Rue de l’Ecole-de-Médecine is the epicenter of Geneva’s student nightlife. Bars/Cafes recommended by our connaisseurs include (but are not limited to):
+
+  • L'Eléphant dans la Canette – When there’s something, there’s something! Offers the great Belgian beer Delirium Tremens draft.
+  • Café du Lys – Relaxed and refined, great for a coffee or some laid-back socializing over a pitcher.
+  • Le Kraken Bar – Active and alternative, the place to boost your energies.
+  • Restaurant la Ferblanterie – This cozy bar serves delicious quiches and empanadas.
+  • Café Le Bout de la Rue – Comfortable and new, great for bringing a group
+
+Additional places close to our venue for the Darwin Dinner:
+  • SANTA CRUZ BAR – An active bar with a Latin American music
+  • Le Bateau-lavoir – A small and cozy bar floating in the middle of the Rhône river.
+
+For bars that can offer a larger meal, there are Restaurant/Bars:
+  • Le Calamar (Blv. Carl-Vogt, close to the university buildings) – Great burgers in a great atmosphere
+  • Brasserie des Halles de l'Ile, (in the Rhône river, close to Lake Geneva and our venue for the Darwin Dinner) – Built on a small island in the Rhône river, this fine restaurant with an extensive bar is a favorite.
+
+For places with a music offer:
+  • Le Chat Noir
+  Location: Rue Vautier 13, Carouge; 022 343 4998
+  Web/email: www.chatnoir.ch
+  Le Chat Noir is the best jazz and blues club in Geneva and well worth the trip to neighboring Carouge. The upstairs bar is a hip hangout, while downstairs is all about the music. On tap is always an eclectic mix of the best jazz, blues and rock from both local and international artists. After midnight, the beat picks up with Dj’s spinning house and techno into the wee hours of the morning.
+  • L’Usine
+  Location: Place des Volontaires 4; 022 781 3490
+  Web/email: www.usine.ch
+  Geneva’s most experimental and adventurous venue, L’Usine is a multi-purpose arts center that hosts all manner of fringe music from “puke” metal to “electro-dark” techno. The atmosphere is shady, but always interesting."
   }
 ]
 

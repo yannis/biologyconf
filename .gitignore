@@ -15,6 +15,7 @@ vendor/rails/*
 tmp/cache/*
 tmp/capybara/*
 tmp/data/*
+lib/assets/fonts/*
 coverage
 biology14.sublime-project
 biology14.sublime-workspace

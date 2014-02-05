@@ -3,15 +3,14 @@ booklet_contents = [
     identifier: 'welcome',
     title: "Welcome",
     title_size: 24,
-    text: "The organising committee welcomes you to the biology14 conference !
+    text: "The organising committee welcomes you to the <i>biology14</i> conference!
 
 The “biology” conference is the annual joint congress of the Swiss Zoological Society (SZS), the Swiss Botanical Society (SBS), and the Swiss Systematics Society (SSS). After 2006, the conference is back in Geneva and is hosted by the Sciences campus of the University of Geneva.
 
 The conference provides the opportunity for young scientists from Swiss universities and research institutions to present their work in organismic biology.
-
 It is also open to students and scientists from universities of surrounding countries and to non-professional connoisseurs. There will be talks by invited keynote speakers as well as talks and posters presentation by young Swiss researchers.
 
-One important goal of the meeting is to demonstrate the enthusiasm of researchers in Switzerland, and neighboring countries for research activities in fields as diverse as evolutionary biology, systematics, biodiversity, ecology, evo-devo, and many more…
+One important goal of the meeting is to demonstrate the enthusiasm of researchers in Switzerland and neighboring countries for research activities in fields as diverse as evolutionary biology, systematics, biodiversity, ecology, evo-devo, and many more…
 
 The rich diversity of topics and questions that are tackled in this conference is made possible thanks to the many young scientists who submitted a contribution. The abstracts we received were of outstanding scientific quality, making the selection of oral presentations highly competitive and the poster communications of high standards.  We warmly acknowledge everyone.
 
@@ -90,55 +89,70 @@ Pierre-Henri Gouyon is full Professor in Evolution, Genetics, Ecology and Ethics
     Geneva"
   },
   {
-    identifier: "venue_restaurant",
-    title: "Darwin dinner",
-    title_size: 24,
-    text: "The traditional dinner in honor of Charles Darwin will be held at the restaurant “La Broche”. This restaurant is well known for his cuisine and for the rustic elegance of the place with a touch of design style.
-
-Restaurant La Broche
-36 rue du Stand
-1204 Geneva
-"
-  },
-  {
     identifier: "info_lunch",
     title: "Lunch",
     title_size: 24,
-    text: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+    text: "The easiest solution is to have lunch at the <b>cafeteria</b> of the Sciences II building, just outside of the conference auditorium. They have special prices for students (they may ask for your student card).
+
+If you like <i>Indian cuisine</i>, the Jaipur restaurant is located at the corner of the Boulevard d’Yvoy and the Avenue de Sainte-Clotilde, just at 40m to the left if you go out from the main door of the Sciences III building, where the posters are.
+
+If you like <b>large pizzas</b>, the pizzeria Sole Mio is located along the Boulevard Carl-Vogt, n°43, at about 80m straight ahead if you go out from the main door of the Sciences III building, where the posters are.
+
+Several good <b>take away food</b> shops (Italian, Thai,…) are found along the Boulevard Carl-Vogt, which you reach by walking about 80m straight ahead if you go out from the main door of the Sciences III building, where the posters are.
+<i>Bon appétit!</i>"
   },
   {
     identifier: "info_internet",
     title: "Internet",
     title_size: 24,
-    text: "You may use your normal university log-in to connect to WLAN « …….. » using a vpn client.
-Go to …………………. for a manual. You should be able to open this site once you are connected with the unibas WLAN.
-http://www.unige.ch/lettres/infos/InformatiqueEtudiants/NouveautesInfos.html
-"
+    text: "Connection to the Wi-Fi network:
+
+• Connect your mobile device to SSID “public-unige”.
+• Make sure your browser accepts pop-up and execution of javascript.
+• Make an HTTP / HTTPS request using your browser to any URL (e.g. http://www.unige.ch).
+• You will be redirected to the authentication portal.
+• Authenticate using the following login:
+  – username: biology14
+  – password: geneva
+• To use this service, you must read and accept the usage guidelines.
+• If your login is accepted, you will be automatically redirected to the website of the University.
+
+If you have a problem, please contact one of the organizers."
   },
   {
     identifier: "info_poster",
     title: "Poster sessions",
     title_size: 24,
     text: "Two poster sessions are organized in the main hall of the Sciences III building:
-∙ on Thursday during the afternoon coffee break: 15:00-15:45 for poster with even numbers
-∙ on Friday during the afternoon coffee break: 15:00-15:45 for posters with uneven numbers
-At least one author of the poster must present the poster during the assigned poster session and ideally during the two sessions.
-"
+
+• on Thursday during the afternoon coffee break: 15:00-15:45 <i>for poster with even numbers</i>
+• on Friday during the afternoon coffee break: 15:00-15:45 <i>for posters with uneven numbers</i>
+
+At least one author of the poster must be present during the assigned poster session and ideally during the two sessions."
   },
   {
     identifier: "info_prizes",
     title: "Prizes for best talk and poster",
     title_size: 24,
-    text: "The best talk by a junior researcher (master student, PhD student or first year post-doc) of a Swiss research institution will receive a prize sponsored by ……………….. .
-The best poster presentation by a junior researcher of a Swiss research institution will receive a prize sponsored by ……………….. .
-The prizes of the best oral and best poster presentations will be awarded by the organising committee."
+    text: "The best talk by a junior researcher (master student, PhD student or first year post-doc) of a Swiss research institution will receive a prize sponsored by Fasteris.
+
+The best poster presentation by a junior researcher of a Swiss research institution will receive a prize sponsored by LabGene/Biolabo.
+
+The prizes of the best oral and best poster presentations will be awarded by the organizing committee."
   },
   {
     identifier: "info_meeting",
     title: "Meeting of the societies",
     title_size: 24,
-    text: "A compléter
-Swiss Systematic Society (SSS) va effectivement profiter de Biology 14 pour réunir son comité ou une partie du comité."
+    text: "The Swiss Systematic Society (SSS) with have a board meeting on Thursday 13 (12h30-13h30) in room A50A."
+  },
+  {
+    identifier: "info_darwin",
+    title: "Darwin dinner",
+    title_size: 24,
+    text: "<b>Starting at 18h45 on Thursday 13</b>
+The traditional dinner in honor of Charles Darwin will be held at the restaurant “La Broche”. This restaurant is well known for his cuisine and for the rustic elegance of the place with a touch of design style.
+Venue: Restaurant La Broche, 36 rue du Stand, 1204 Geneva (it’s the B point on the map)"
   },
   {
     identifier: "participants",
@@ -150,30 +164,38 @@ Swiss Systematic Society (SSS) va effectivement profiter de Biology 14 pour réu
     identifier: "dosee",
     title: "Things to do and see",
     title_size: 24,
-    text: "<b>The Lake</b>
-Geneva ’s world famous lakefront is the centerpiece of the city and offers many opportunities for recreation and relaxation throughout the year. The Jet d’Eau spouting 140 meters into the air is the world’s tallest and symbolizes Geneva’s all over the world.
+    text: "<i>Modified from http://www.geneva.info/sights</i>
+
+<b>The Lake</b>
+Geneva ’s world famous lakefront is the centerpiece of the city and offers many opportunities for recreation and relaxation throughout the year. The <i>Jet d’Eau</i> spouting 140 meters into the air is the world’s tallest and symbolizes Geneva’s all over the world.
 
 <b>The Old Town</b>
-Geneva ’s ancient Old Town is a maze of sloping cobblestone streets and alleyways filled with cafes, boutiques and historical landmarks at every turn. The Bourg-de-Four is the oldest public square in Geneva and remains a hub of activity surrounded by bistros, terraces and bars. The 15th century Hotel De Ville located along Rue de l’Hotel-de-Ville still serves as the seat of government in Geneva and is the site of many political milestones including the founding of the League of Nations in 1920. The Treille Promenade on the south side of the Old Town was once an artillery post and today offers beautiful views of the city from atop the towns last remaining rampart wall.
+Geneva ’s ancient Old Town is a maze of sloping cobblestone streets and alleyways filled with cafes, boutiques and historical landmarks at every turn. The <i>Bourg-de-Four</i> is the oldest public square in Geneva and remains a hub of activity surrounded by bistros, terraces and bars. The 15th century <i>Hôtel De Ville</i> located along Rue de l’Hotel-de-Ville still serves as the seat of government in Geneva and is the site of many political milestones including the founding of the League of Nations in 1920. The <i>Treille Promenade</i> on the south side of the Old Town was once an artillery post and today offers beautiful views of the city from atop the towns last remaining rampart wall.
 
 <b>Saint Peter’s Cathedral</b>
 Location: Cour Saint-Pierre, in the Old Town.
 Hours: 10:00-12:00, 14:00-17:00 Mon-Fri, 10:00-17:30 Saturdays, 12:00-17:30 Sundays Admission is free. The Cathedral was began in 1160 and took over 400 years to complete, suffering numerous makeovers and fires throughout the years. The north tower offers incredible panoramic views of the city (admission: 3.-), while the basement houses an Archaeological Museum chronicling the excavation of artifacts found beneath the Cathedral, some dating back as far as 350 AD.
-
-<b>Reformation Wall</b>
+Reformation Wall
 Located in beautiful Bastions Park, this monument commemorates the major events and figures of the Protestant Reformation. Larger than life statues of Guillaume Farel, Jean Calvin, Théodore de Bèze and John Knox dominate the central part of the 100 meter wall, eternally guarding over their “City of Refuge.”
 
 <b>Place de Neuve</b>
 Bounded by the Conservatory of Music, the Grand Opera Theater, the Rath Museum and the nearby Victory Concert Hall, the square at Place Neuve represents the pinnacle of high culture in Geneva. A statue of the Swiss General Henri Dufour sits in the center of the square. High class cafes and restaurants are also on hand to cater to the theater crowds.
 
-<b>Botanical Garden</b>
+<b>The Botanical Garden of the Ville de Genève – a living Museum</b>
+Location: Chemin de l’Impératrice 1, along the lake-side in direction to Lausanne.
+Bus 1, 11, 25 or 28, stop Jardin botanique.
+The Botanical Garden, renowned for its Botanical Conservatory, also houses magnificent collections of living plants. It is the ideal setting for relaxing or walking as well as for the discovery of our sometimes threatened plant heritage.
+http://www.ville-ge.ch/cjb/index_en.php
 
-<b>Museum of Natural History</b>
+<b>Museum of Natural History of the Ville de Genève</b>
+Location: 1, route de Malagnou, in the center of Geneva
+Bus 5 or 25, stop Muséum; Bus 1 or 8, stop  Tranchées & Muséum
+Admission is free. The Museum of Natural History of the Ville de Genève is the largest one in Switzerland. An extraordinary exhibition named “Birds” in currently on display.
+http://www.ville-ge.ch/mhng/expo_oiseaux.php
 
 <b>Parks</b>
 Geneva is one of the greenest cities in Europe with more than 20 parks in the city center.
-
-<b>English Garden</b>
+English Garden
 Location: Quai Gustave-Ador
 Situated on the left bank near the Jet d’Eau, the English Garden is home to the famous “flower clock,” the largest of its kind in the world. Several statues of note inhabit the park including the ‘Monument National,’ and a sculpted bronze fountain.
 
@@ -183,7 +205,7 @@ A former botanical garden and site of the first university in Geneva, tree lined
 
 <b>La Perle-du-Lac and Parc Moynier</b>
 Location: Route du Lausanne
-The «Pearl of Lake» and adjoining Park Moynier is arguably the most beautiful area in Geneva with clear views of the Mont Blanc and the lake. The parks are flush with flowers with plenty of shady spots to wile away the afternoon. The History of Science Museum, is located in the center of Park Moynier."
+The ‘Pearl of Lake’ and adjoining Park Moynier is arguably the most beautiful area in Geneva with clear views of the Mont Blanc and the lake. The parks are flush with flowers with plenty of shady spots to wile away the afternoon. The History of Science Museum, is located in the center of Park Moynier."
   },
   {
     identifier: "going_out",
@@ -192,26 +214,30 @@ The «Pearl of Lake» and adjoining Park Moynier is arguably the most beautiful 
     text: "<b>Bars and Night Cafes</b>
 Close to the Sciences buildings, la Rue de l’Ecole-de-Médecine is the epicenter of Geneva’s student nightlife. Bars/Cafes recommended by our connaisseurs include (but are not limited to):
 
-  • L'Eléphant dans la Canette – When there’s something, there’s something! Offers the great Belgian beer Delirium Tremens draft.
-  • Café du Lys – Relaxed and refined, great for a coffee or some laid-back socializing over a pitcher.
-  • Le Kraken Bar – Active and alternative, the place to boost your energies.
-  • Restaurant la Ferblanterie – This cozy bar serves delicious quiches and empanadas.
-  • Café Le Bout de la Rue – Comfortable and new, great for bringing a group
+  • <i>L'Eléphant dans la Canette</i> – When there’s something, there’s something! Offers the great Belgian beer Delirium Tremens draft
+  • <i>Café du Lys</i> – Relaxed and refined, great for a coffee or some laid-back socializing over a pitcher
+  • <i>Le Kraken Bar</i> – Active and alternative, the place to boost your energies
+  • <i>Restaurant la Ferblanterie</i> – This cozy bar serves delicious quiches and empanadas
+  • <i>Café Le Bout de la Rue</i> – Comfortable and new, great for bringing a group
 
 Additional places close to our venue for the Darwin Dinner:
-  • SANTA CRUZ BAR – An active bar with a Latin American music
-  • Le Bateau-lavoir – A small and cozy bar floating in the middle of the Rhône river.
+
+  • <i>Santa Cruz Bar</i> (rue Du Stand, 40) – An active bar with a Latin American music
+  • <i>Le Bateau-Lavoir</i> (place de l'Ile, 1) – A small and cozy bar floating in the middle of the Rhône river
 
 For bars that can offer a larger meal, there are Restaurant/Bars:
-  • Le Calamar (Blv. Carl-Vogt, close to the university buildings) – Great burgers in a great atmosphere
-  • Brasserie des Halles de l'Ile, (in the Rhône river, close to Lake Geneva and our venue for the Darwin Dinner) – Built on a small island in the Rhône river, this fine restaurant with an extensive bar is a favorite.
+
+  • <i>Le Calamar</i> (Blv. Carl-Vogt, close to the university buildings) – Great burgers in a great atmosphere
+  • <i>Brasserie des Halles de l'Ile</i> (in the Rhône river, close to Lake Geneva and our venue for the Darwin Dinner) – Built on a small island in the Rhône river, this fine restaurant with an extensive bar is a favorite.
 
 For places with a music offer:
-  • Le Chat Noir
+
+  • <i>Le Chat Noir</i>
   Location: Rue Vautier 13, Carouge; 022 343 4998
   Web/email: www.chatnoir.ch
   Le Chat Noir is the best jazz and blues club in Geneva and well worth the trip to neighboring Carouge. The upstairs bar is a hip hangout, while downstairs is all about the music. On tap is always an eclectic mix of the best jazz, blues and rock from both local and international artists. After midnight, the beat picks up with Dj’s spinning house and techno into the wee hours of the morning.
-  • L’Usine
+
+  • <i>L’Usine</i>
   Location: Place des Volontaires 4; 022 781 3490
   Web/email: www.usine.ch
   Geneva’s most experimental and adventurous venue, L’Usine is a multi-purpose arts center that hosts all manner of fringe music from “puke” metal to “electro-dark” techno. The atmosphere is shady, but always interesting."

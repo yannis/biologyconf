@@ -133,6 +133,11 @@ ActiveAdmin.register Registration do
       f.input :authors
       f.input :body
     end
+
+    f.inputs "Payment" do
+      f.input :paid
+      f.input :paid_fee
+    end
     f.actions
   end
 end

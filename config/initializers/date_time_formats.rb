@@ -5,10 +5,11 @@ Time::DATE_FORMATS.merge!(
   :day_month_year => "%e %B %Y",
   :dotted_day_month_year => "%e %B %Y",
   :day_month_year_hour_minute => "%e %B %Y, %H:%M",
+  :day_month_hour_minute => "%e %b %H:%M",
   :db_zoned => '%m/%d/%Y %H:%M',
   :timezoned => '%Y-%m-%dT%H:%M:00Z'
 )
-Date::DATE_FORMATS.merge!( 
+Date::DATE_FORMATS.merge!(
   :month => '%B',
   :day_month_year => "%e %B %Y",
   :time_only => '%H:%M'

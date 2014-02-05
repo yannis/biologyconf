@@ -128,7 +128,7 @@ ActiveAdmin.register Registration do
       f.input :talk
       f.input :selected_as_talk
       f.input :poster_agreement
-      f.input :poster_number, as: :select, collection: (1..60).to_a-Registration.select(:poster_number).map(&:poster_number), include_blank: true
+      f.input :poster_number, as: :select, collection: (1..60).to_a-Registration.select(:poster_number).map{|r| [r.poster_number, r.poster_number]}, include_blank: true
       f.input :title
       f.input :authors
       f.input :body

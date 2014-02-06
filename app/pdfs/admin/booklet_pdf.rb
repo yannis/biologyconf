@@ -14,7 +14,9 @@ class Admin::BookletPdf < Prawn::Document
     font_families.update(
       "Domus" => {
         normal: "#{ENV["FONT_PATH"]}/DomusTitling-Regular.ttf",
-        bold: "#{ENV["FONT_PATH"]}/DomusTitling-Bold.ttf"
+        bold: "#{ENV["FONT_PATH"]}/DomusTitling-Bold.ttf",
+        medium: "#{ENV["FONT_PATH"]}/DomusTitling-Medium.ttf",
+        extrabold: "#{ENV["FONT_PATH"]}/DomusTitling-Extrabold.ttf"
       },
       "HelveticaNeue" => {
         normal: "#{ENV["FONT_PATH"]}/HelveticaNeue.ttf",
@@ -34,11 +36,11 @@ class Admin::BookletPdf < Prawn::Document
     # self.keynote_speakers2
     self.talk_abstracts
     self.poster_abstracts
-    # self.participants
-    # self.dosee
-    # self.going_out
+    self.participants
+    self.dosee
+    self.going_out
 
-    # self.toc
+    self.toc
 
     page_count.times do |i|
 
@@ -49,12 +51,12 @@ class Admin::BookletPdf < Prawn::Document
 
       # header
       bounding_box [(even ? bounds.left+30 : bounds.right-130), bounds.top-20], width: 100 do
-        logo = "#{Rails.root}/app/assets/images/pdf_banner.png"
+        logo = "#{Rails.root}/app/assets/images/pdf_banner_nb.png"
         image logo, at: [0,0], width: 100
       end
 
       # footer
-      bounding_box [(even ? bounds.left+20 : bounds.right-40), bounds.bottom+30], width: 20 do
+      bounding_box [(even ? bounds.left+30 : bounds.right-50), bounds.bottom+30], width: 20 do
         font FONT_HEADING
         text "#{i+1}", align: (even ? :left : :right)
       end
@@ -103,6 +105,70 @@ class Admin::BookletPdf < Prawn::Document
     end
   end
 
+  # def program
+  #   start_new_page
+  #   self.program_page = page_count
+  #   events = Event.where("events.start < DATE('2014-02-14')").order(:start)
+  #   oriented_bounding_box [nil, bounds.top-70] do
+  #     title "13 February program"
+  #     move_down font_size
+  #     font "Helvetica"
+  #     font_size FONT_BODY_SIZE
+  #     data = events.map do|event|
+  #       details = "<b>#{event.title}</b>"
+  #       details += "\n#{event.speaker_name} – #{event.speaker_affiliation}" if event.speaker_name
+  #       ["<font size='12'>#{event.start.to_s(:time_only)}</font>", details]
+  #     end
+  #     table(data, cell_style: { inline_format: true, size: 9 }) do
+  #       cells.borders = []
+  #       cells.padding = 0
+  #       cells.padding_top = 3
+  #       cells.padding_bottom = 5
+  #       column(0).width = 40
+  #       column(0).font = FONT_HEADING
+  #       column(0).font_style = :medium
+  #       row(0..-1).borders = [:bottom]
+  #       row(0..-1).border_color = "b3b3b3"
+  #       row(0..-1).border_width = 0.5
+  #       row(-1).border_width = 0
+  #       column(0).border_width = 0
+  #       column(0).padding = 0
+  #     end
+  #   end
+  # end
+
+  # def program2
+  #   start_new_page
+  #   self.program_page = page_count
+  #   events = Event.where("events.start > DATE('2014-02-14')").order(:start)
+  #   oriented_bounding_box [nil, bounds.top-70] do
+  #     title "14 February program"
+  #     move_down font_size
+  #     font "Helvetica"
+  #     font_size FONT_BODY_SIZE
+  #     data = events.map do|event|
+  #       details = "<b>#{event.title}</b>"
+  #       details += "\n#{event.speaker_name} – #{event.speaker_affiliation}" if event.speaker_name
+  #       ["<font size='12'>#{event.start.to_s(:time_only)}</font>", details]
+  #     end
+  #     table(data, cell_style: { inline_format: true, size: 9 }) do
+  #       cells.borders = []
+  #       cells.padding = 0
+  #       cells.padding_top = 3
+  #       cells.padding_bottom = 5
+  #       column(0).width = 40
+  #       column(0).font = FONT_HEADING
+  #       column(0).font_style = :medium
+  #       row(0..-1).borders = [:bottom]
+  #       row(0..-1).border_color = "b3b3b3"
+  #       row(0..-1).border_width = 0.5
+  #       row(-1).border_width = 0
+  #       column(0).border_width = 0
+  #       column(0).padding = 0
+  #     end
+  #   end
+  # end
+
   def program
     start_new_page
     self.program_page = page_count
@@ -136,7 +202,6 @@ class Admin::BookletPdf < Prawn::Document
         end
       end
     end
-
   end
 
   def welcome
@@ -157,14 +222,14 @@ class Admin::BookletPdf < Prawn::Document
     map = BookletContent.where(identifier: 'venue_room').first
     start_new_page
     self.venue_room_page = page_count
-    oriented_bounding_box [nil, bounds.top-80] do
+    oriented_bounding_box [nil, bounds.top-130] do
       self.title map.title
       move_down font_size
       font FONT_BODY
       font_size FONT_BODY_SIZE
       text map.text
-      map = "#{Rails.root}/app/assets/images/venue_room.jpg"
-      image map, at: [30,y-680], width: 400
+      map = "#{Rails.root}/app/assets/images/venue_room_nb.png"
+      image map, at: [30,y-660], width: 400
     end
   end
 
@@ -260,7 +325,7 @@ class Admin::BookletPdf < Prawn::Document
       font_size FONT_BODY_SIZE
       font FONT_BODY, style: :light
       text posters.text, inline_format: true
-      map = "#{Rails.root}/app/assets/images/venue_poster.jpg"
+      map = "#{Rails.root}/app/assets/images/venue_poster_300_nb.png"
       image map, at: [0,y-590], width: 460
     end
     oriented_bounding_box [nil, bounds.top-580] do
@@ -283,7 +348,7 @@ class Admin::BookletPdf < Prawn::Document
       font_size FONT_BODY_SIZE
       font FONT_BODY, style: :light
       text darwin.text, inline_format: true
-      map = "#{Rails.root}/app/assets/images/venue_restaurant.jpg"
+      map = "#{Rails.root}/app/assets/images/venue_restaurant_nb.png"
       image map, at: [0,y-650], width: 460
     end
   end
@@ -296,8 +361,8 @@ class Admin::BookletPdf < Prawn::Document
 
   def poster_abstracts
     self.poster_abstract_page = page_count+1
-    poster_registrations = Registration.where(paid: true).where("registrations.poster_number IS NOT NULL").order(:poster_number)
-    abstracts_vert poster_registrations, "Poster abstracts"
+    poster_registrations = Registration.where("registrations.poster_number IS NOT NULL").order(:poster_number)
+    abstracts poster_registrations, "Poster abstracts"
   end
 
   def abstracts(registrations, atitle="A title")
@@ -308,43 +373,96 @@ class Admin::BookletPdf < Prawn::Document
 
     registrations.each_slice(2).with_index do |(a,b), i|
       start_new_page unless i==0
-      tb = (i==0 ? 100 : 50)
-      oriented_bounding_box [nil, bounds.top-tb] do
-        [a,b].each_with_index do |registration, i|
-          if registration
-            if i == 1
-              stroke do
-                stroke_color "7f7f7f"
-                stroke_horizontal_rule
-              end
-              move_down font_size
-            end
-            move_down font_size
-            font_size 10
-            font FONT_BODY
-            if registration.poster_number.present?
-              text "Poster #{registration.poster_number}"
-            else
-              text("<i>#{registration.event.start.to_s(:day_month_hour_minute)} – #{registration.event.end.to_s(:time_only)}</i>", inline_format: true) if registration.event
-            end
-            move_down font_size
-            font FONT_HEADING
-            font_size 12
-            text registration.title, style: :bold
-            move_down font_size
-            font FONT_BODY
-            text registration.authors
-            font_size 10
-            text "#{registration.institute}, #{registration.city}", style: :italic
-            move_down font_size
-            font FONT_BODY, style: :light
-            text registration.formatted_body, inline_format: true
-            move_down font_size*2 if i==0
-          end
+      [a,b].each_with_index do |registration, j|
+        if [a.title.length, a.authors.length, a.formatted_body.length, b.title.length, b.authors.length, b.formatted_body.length].sum > 4200 && j == 1
+          start_new_page
+          abstract registration, 1, 0
+        else
+          abstract registration, i, j
         end
       end
     end
   end
+
+  def abstract(registration, i, j)
+    if registration
+      if i == 0 && j == 0
+        tb = font_size
+      elsif j == 0
+        tb = 80
+      else
+        tb = font_size
+      end
+      oriented_bounding_box [nil, y-tb] do
+        font FONT_HEADING
+        font_size 12
+        if j == 1
+          stroke do
+            stroke_color "7f7f7f"
+            stroke_horizontal_rule
+          end
+          move_down font_size
+        end
+        if registration.poster_number.present?
+          text "poster n° #{registration.poster_number}"
+        else
+          text("#{registration.event.start.to_s(:day_month_hour_minute)} – #{registration.event.end.to_s(:time_only)}", inline_format: true) if registration.event
+        end
+        text registration.title, style: :bold, inline_format: true
+        move_down font_size
+        font FONT_BODY
+        text registration.authors
+        font_size 10
+        text registration.institute, style: :italic
+        move_down font_size
+        font FONT_BODY, style: :light
+        text registration.formatted_body, inline_format: true
+      end
+    end
+  end
+  # def abstracts(registrations, atitle="A title")
+  #   start_new_page
+  #   oriented_bounding_box [nil, bounds.top-80] do
+  #     title atitle
+  #   end
+
+  #   registrations.each_slice(2).with_index do |(a,b), i|
+  #     start_new_page unless i==0
+  #     tb = (i==0 ? 100 : 50)
+  #     oriented_bounding_box [nil, bounds.top-tb], height: 700 do
+  #       [a,b].each_with_index do |registration, i|
+  #         if registration
+  #           if i == 1
+  #             stroke do
+  #               stroke_color "7f7f7f"
+  #               stroke_horizontal_rule
+  #             end
+  #             move_down font_size
+  #           end
+  #           move_down font_size
+  #           font FONT_HEADING
+  #             font_size 12
+  #           if registration.poster_number.present?
+  #             text registration.poster_number.to_s
+  #           else
+  #             text("#{registration.event.start.to_s(:day_month_hour_minute)} – #{registration.event.end.to_s(:time_only)}", inline_format: true) if registration.event
+  #           end
+  #           # move_down font_size/2
+  #           text registration.title, style: :bold
+  #           move_down font_size
+  #           font FONT_BODY
+  #           text registration.authors
+  #           font_size 10
+  #           text "#{registration.institute}, #{registration.city}", style: :italic
+  #           move_down font_size
+  #           font FONT_BODY, style: :light
+  #           text registration.formatted_body, inline_format: true
+  #           move_down font_size*2 if i==0
+  #         end
+  #       end
+  #     end
+  #   end
+  # end
 
   def abstracts_vert(registrations, atitle="A title")
     start_new_page
@@ -392,14 +510,28 @@ class Admin::BookletPdf < Prawn::Document
     start_new_page
     self.participants_page = page_count
     oriented_bounding_box [nil, bounds.top-80], height: 100 do
-      title map.title
+      font FONT_HEADING
+      font_size FONT_HEADING_SIZE
+      text map.title, style: :bold
+      move_up font_size/2
+      font FONT_BODY
+      font_size FONT_BODY_SIZE
+      text map.text, style: :light
+      move_down font_size
+      stroke do
+        stroke_color "7f7f7f"
+        stroke_horizontal_rule
+      end
     end
     registrations.each_slice(28).with_index do |regs, i|
-      if i!=0
+      tb = 130
+      if i==0
+        tb = 150
+      else
         start_new_page
       end
       data = regs.map{|registration| [registration.full_name, registration.institute, registration.email]}
-      oriented_bounding_box [nil, bounds.top-130], height: 670 do
+      oriented_bounding_box [nil, bounds.top-tb], height: 670 do
         font FONT_BODY, style: :light
         font_size FONT_BODY_SIZE
         table(data, cell_style: { inline_format: true, size: 10 }) do
@@ -450,8 +582,21 @@ class Admin::BookletPdf < Prawn::Document
     start_new_page
     dosee = BookletContent.where(identifier: 'dosee').first
     self.dosee_page = page_count
-    oriented_bounding_box [nil, bounds.top-100], height: 600 do
-      title dosee.title
+    oriented_bounding_box [nil, bounds.top-80], height: 100 do
+      font FONT_HEADING
+      font_size FONT_HEADING_SIZE
+      text dosee.title, style: :bold
+      move_up font_size/2
+      font FONT_BODY
+      font_size FONT_BODY_SIZE
+      text "Modified from http://www.geneva.info/sights", style: :light
+      move_down font_size
+      stroke do
+        stroke_color "7f7f7f"
+        stroke_horizontal_rule
+      end
+    end
+    oriented_bounding_box [nil, bounds.top-140], height: 600 do
       move_down font_size
       font FONT_BODY, style: :light
       font_size FONT_BODY_SIZE
@@ -493,10 +638,10 @@ class Admin::BookletPdf < Prawn::Document
 
   def set_toc(text, number, total=62)
     text "#{text}"
-    ts = (text.length > 10 ? 90 : 95)
+    ts = 95-(text.length/2)-(text.length/1.3)
     float do
       move_up font_size+2
-      text( ("  "+number.to_s).rjust(ts-text.length, "."), align: :right)
+      text( ("  "+number.to_s).rjust(ts, "."), align: :right)
     end
   end
 

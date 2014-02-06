@@ -84,9 +84,7 @@ Pierre-Henri Gouyon is full Professor in Evolution, Genetics, Ecology and Ethics
     identifier: "venue_room",
     title: "Map of the venue",
     title_size: 24,
-    text: "Sciences II and III
-    30 quai Ernest Ansermet
-    Geneva"
+    text: "Sciences II and III, 30 quai Ernest Ansermet, Geneva"
   },
   {
     identifier: "info_lunch",
@@ -127,6 +125,7 @@ If you have a problem, please contact one of the organizers."
 
 • on Thursday during the afternoon coffee break: 15:00-15:45 <i>for poster with even numbers</i>
 • on Friday during the afternoon coffee break: 15:00-15:45 <i>for posters with uneven numbers</i>
+Poster numbers are given in the section “Poster abstracts” of this booklet.
 
 At least one author of the poster must be present during the assigned poster session and ideally during the two sessions."
   },
@@ -158,15 +157,13 @@ Venue: Restaurant La Broche, 36 rue du Stand, 1204 Geneva (it’s the B point on
     identifier: "participants",
     title: "List of participants",
     title_size: 24,
-    text: "registered online"
+    text: "corresponding to the online registrations received before February 6th 2014"
   },
   {
     identifier: "dosee",
     title: "Things to do and see",
     title_size: 24,
-    text: "<i>Modified from http://www.geneva.info/sights</i>
-
-<b>The Lake</b>
+    text: "<b>The Lake</b>
 Geneva ’s world famous lakefront is the centerpiece of the city and offers many opportunities for recreation and relaxation throughout the year. The <i>Jet d’Eau</i> spouting 140 meters into the air is the world’s tallest and symbolizes Geneva’s all over the world.
 
 <b>The Old Town</b>
@@ -225,12 +222,12 @@ Additional places close to our venue for the Darwin Dinner:
   • <i>Santa Cruz Bar</i> (rue Du Stand, 40) – An active bar with a Latin American music
   • <i>Le Bateau-Lavoir</i> (place de l'Ile, 1) – A small and cozy bar floating in the middle of the Rhône river
 
-For bars that can offer a larger meal, there are Restaurant/Bars:
+<b>Restaurant/Bars that can offer a larger meal</b>
 
   • <i>Le Calamar</i> (Blv. Carl-Vogt, close to the university buildings) – Great burgers in a great atmosphere
   • <i>Brasserie des Halles de l'Ile</i> (in the Rhône river, close to Lake Geneva and our venue for the Darwin Dinner) – Built on a small island in the Rhône river, this fine restaurant with an extensive bar is a favorite.
 
-For places with a music offer:
+<b>For places with a music offer</b>
 
   • <i>Le Chat Noir</i>
   Location: Rue Vautier 13, Carouge; 022 343 4998

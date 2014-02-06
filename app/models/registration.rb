@@ -88,12 +88,13 @@ class Registration < ActiveRecord::Base
       gsub("<i></i>", "").
       gsub("<b></b>", "").
       gsub("\n\n", "<br>").
-      gsub("\n", "").
+      gsub("\n", " ").
       gsub("&nbsp;", " ").
       gsub("<p>", "").
       gsub("<li>", "·").
       gsub("</p>", "\n\n").
       gsub("</li>", "\n\n").
+      gsub("  ", " ").
       strip
   end
 

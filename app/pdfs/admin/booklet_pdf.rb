@@ -9,7 +9,9 @@ class Admin::BookletPdf < Prawn::Document
   FONT_SANSERIF = "HelveticaNeue"
 
 
-  def initialize
+  def initialize(options={})
+    add_cover = options.fetch(:add_cover, false)
+    save_it = options.fetch(:save_it, false)
     super(page_layout: :portrait, margin: 0, page_size: 'A4')
     font_families.update(
       "Domus" => {
@@ -51,7 +53,7 @@ class Admin::BookletPdf < Prawn::Document
 
       # header
       bounding_box [(even ? bounds.left+30 : bounds.right-130), bounds.top-20], width: 100 do
-        logo = "#{Rails.root}/app/assets/images/pdf_banner_nb.png"
+        logo = "#{Rails.root}/app/assets/images/booklet/pdf_banner_nb.png"
         image logo, at: [0,0], width: 100
       end
 
@@ -61,17 +63,22 @@ class Admin::BookletPdf < Prawn::Document
         text "#{i+1}", align: (even ? :left : :right)
       end
     end
-    # self.concat "#{Rails.root}/lib/assets/bookletCover.pdf"
-
-    # self.cover
+    if add_cover
+      self.cover
+    end
   end
 
   def cover
+    start_new_page
+    bounding_box [bounds.left, bounds.top], width: 595.28 do
+      cover = "#{Rails.root}/app/assets/images/booklet/back.jpg"
+      image cover, at: [0,0], width: 595.28
+    end
     go_to_page 0
-    start_new_page size: 'A3', layout: :landscape
-    bounding_box [bounds.left, bounds.top], width: 1190.55 do
-      cover = "#{Rails.root}/lib/assets/bookletCover.png"
-      image cover, at: [0,0], width: 1190.55
+    start_new_page
+    bounding_box [bounds.left, bounds.top], width: 595.28 do
+      cover = "#{Rails.root}/app/assets/images/booklet/front.jpg"
+      image cover, at: [0,0], width: 595.28
     end
   end
 
@@ -228,7 +235,7 @@ class Admin::BookletPdf < Prawn::Document
       font FONT_BODY
       font_size FONT_BODY_SIZE
       text map.text
-      map = "#{Rails.root}/app/assets/images/venue_room_nb.png"
+      map = "#{Rails.root}/app/assets/images/booklet/venue_room_nb.png"
       image map, at: [30,y-660], width: 400
     end
   end
@@ -243,7 +250,7 @@ class Admin::BookletPdf < Prawn::Document
   #     font FONT_BODY
   #     font_size FONT_BODY_SIZE
   #     text map.text
-  #     map = "#{Rails.root}/app/assets/images/venue_restaurant.png"
+  #     map = "#{Rails.root}/app/assets/images/booklet/venue_restaurant.png"
   #     image map, at: [0,y-480], width: 500
   #   end
   # end
@@ -325,7 +332,7 @@ class Admin::BookletPdf < Prawn::Document
       font_size FONT_BODY_SIZE
       font FONT_BODY, style: :light
       text posters.text, inline_format: true
-      map = "#{Rails.root}/app/assets/images/venue_poster_300_nb.png"
+      map = "#{Rails.root}/app/assets/images/booklet/venue_poster_300_nb.png"
       image map, at: [0,y-590], width: 460
     end
     oriented_bounding_box [nil, bounds.top-580] do
@@ -348,7 +355,7 @@ class Admin::BookletPdf < Prawn::Document
       font_size FONT_BODY_SIZE
       font FONT_BODY, style: :light
       text darwin.text, inline_format: true
-      map = "#{Rails.root}/app/assets/images/venue_restaurant_nb.png"
+      map = "#{Rails.root}/app/assets/images/booklet/venue_restaurant_nb.png"
       image map, at: [0,y-650], width: 460
     end
   end

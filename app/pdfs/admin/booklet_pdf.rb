@@ -28,12 +28,12 @@ class Admin::BookletPdf < Prawn::Document
     )
     font FONT_BODY
 
-    # self.program
-    # self.welcome
-    # self.venue_room
-    # self.info
-    # self.keynote_speakers
-    # self.keynote_speakers2
+    self.program
+    self.welcome
+    self.venue_room
+    self.info
+    self.keynote_speakers
+    self.keynote_speakers2
     self.talk_abstracts
     self.poster_abstracts
     self.participants

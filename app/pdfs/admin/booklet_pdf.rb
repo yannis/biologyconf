@@ -523,7 +523,7 @@ class Admin::BookletPdf < Prawn::Document
         stroke_horizontal_rule
       end
     end
-    registrations.each_slice(28).with_index do |regs, i|
+    registrations.each_slice(27).with_index do |regs, i|
       tb = 130
       if i==0
         tb = 150

@@ -107,7 +107,7 @@ Several good <b>take away food</b> shops (Italian, Thai,…) are found along the
 
 • Connect your mobile device to SSID “public-unige”.
 • Make sure your browser accepts pop-up and execution of javascript.
-• Make an HTTP / HTTPS request using your browser to any URL (e.g. http://www.unige.ch).
+• Make an HTTP / HTTPS request using your browser to any URL (e.g. <i>http://www.unige.ch</i>).
 • You will be redirected to the authentication portal.
 • Authenticate using the following login:
   – username: biology14
@@ -182,13 +182,13 @@ Bounded by the Conservatory of Music, the Grand Opera Theater, the Rath Museum a
 Location: Chemin de l’Impératrice 1, along the lake-side in direction to Lausanne.
 Bus 1, 11, 25 or 28, stop Jardin botanique.
 The Botanical Garden, renowned for its Botanical Conservatory, also houses magnificent collections of living plants. It is the ideal setting for relaxing or walking as well as for the discovery of our sometimes threatened plant heritage.
-http://www.ville-ge.ch/cjb/index_en.php
+<i>http://www.ville-ge.ch/cjb/index_en.php</i>
 
 <b>Museum of Natural History of the Ville de Genève</b>
 Location: 1, route de Malagnou, in the center of Geneva
 Bus 5 or 25, stop Muséum; Bus 1 or 8, stop  Tranchées & Muséum
 Admission is free. The Museum of Natural History of the Ville de Genève is the largest one in Switzerland. An extraordinary exhibition named “Birds” in currently on display.
-http://www.ville-ge.ch/mhng/expo_oiseaux.php
+<i>http://www.ville-ge.ch/mhng/expo_oiseaux.php</i>
 
 <b>Parks</b>
 Geneva is one of the greenest cities in Europe with more than 20 parks in the city center.

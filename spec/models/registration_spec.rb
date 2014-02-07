@@ -100,7 +100,7 @@ end
 describe "#dinner_full" do
   context "with already 109 paid dinner registrations" do
     before {
-      109.times do
+      (Registration::DINNER_CAPACITY-1).times do
         create :registration, paid: true, dinner_category_name: 'student'
       end
     }

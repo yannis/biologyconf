@@ -18,7 +18,7 @@ class Registration < ActiveRecord::Base
 
   POSTER_DEADLINE = Time.parse("2014-01-14 23:59")
   DORMITORY_CAPACITY = 50
-  DINNER_CAPACITY = 110
+  DINNER_CAPACITY = 115
   REGISTRATION_DEADLINE = Time.parse("2014-02-07 23:59")
 
   acts_as_bookable

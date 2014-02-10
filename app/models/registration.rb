@@ -95,7 +95,7 @@ class Registration < ActiveRecord::Base
       gsub("</p>", "\n\n").
       gsub("</li>", "\n\n").
       gsub("  ", " ").
-      strip
+      strip if text
   end
 
   protected

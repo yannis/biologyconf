@@ -259,7 +259,7 @@ describe RegistrationsController do
     context "after reaching dinner limit" do
       before {
         Timecop.travel(Registration::POSTER_DEADLINE-10.minutes)
-        110.times {create :registration, paid: true, dinner_category_name: 'student'}
+        Registration::DINNER_CAPACITY.times {create :registration, paid: true, dinner_category_name: 'student'}
       }
       after {
         Timecop.return

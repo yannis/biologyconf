@@ -19,7 +19,7 @@ class Admin::RegistrationsPdf < Prawn::Document
         text "<em>Abstract submitted by</em> #{registration.full_name} (#{registration.institute})", inline_format: true
         font_size 18
         move_down font.height
-        text registration.title
+        text registration.title, inline_format: true
         move_down font.height
         font_size 12
         text "<i>#{registration.authors}</i>", inline_format: true
